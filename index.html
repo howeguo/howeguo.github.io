@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a>
 					</div>
 				</section>
 				
@@ -192,7 +192,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/">关于UITableView上的Button不能立即响应高亮的问题以及解决办法</a>
+      <a class="article-title" href="/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/">iOS7/8 UITableView/UIScrollView上UIButton不能立即响应高亮的原因及解决办法</a>
     </h1>
   
 
@@ -201,116 +201,73 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
+        <p>如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，<br>这是因为iOS系统会默认会延迟大150ms的时间去检查当前该事件是否能够出发UITableView的滑动，<br>如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。</p>
+<p><strong>1、将UIButton所有属于UIScrollView的父视图的delaysContentTouches属性设置成为NO。</strong><br><strong>2、继承UIScrollView或UITableView，并重写- (BOOL)touchesShouldCancelInContentView:(UIView*)view方法，让其响应拖动方法</strong></p>
+<p>废话不多说，直接上代码 以下是UITableView的例子</p>
+<pre><code><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span>    </span>
+<span class="class"><span class="keyword">@interface</span> <span class="title">TUNoDelayHighlightTableView</span> : <span class="title">UITableView</span></span>
+<span class="keyword">@end</span>
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+<span class="preprocessor">#import <span class="title">"TUNoDelayHighlightTableView.h"</span></span>
 
+<span class="class"><span class="keyword">@implementation</span> <span class="title">TUNoDelayHighlightTableView</span></span>
 
+- (<span class="keyword">id</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder
+{
+    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithCoder:aDecoder];
+    <span class="keyword">if</span> (<span class="keyword">self</span>)
+    {
+        [<span class="keyword">self</span> reWriteSetting];
+    }
+    <span class="keyword">return</span> <span class="keyword">self</span>;
+}
 
+- (<span class="keyword">id</span>) initWithFrame:(<span class="built_in">CGRect</span>)frame style:(<span class="built_in">UITableViewStyle</span>)style
+{
+    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame style:style]) {
+        [<span class="keyword">self</span> reWriteSetting];
+    }
+       <span class="keyword">return</span> <span class="keyword">self</span>;
+}
 
+- (<span class="keyword">id</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame 
+{
+    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame]) {
+            [<span class="keyword">self</span> reWriteSetting];
+    }
+    <span class="keyword">return</span> <span class="keyword">self</span>;
+}
 
+- (<span class="keyword">void</span>) reWriteSetting
+{
+    <span class="keyword">self</span><span class="variable">.delaysContentTouches</span> = <span class="literal">NO</span>;
+    <span class="keyword">for</span> (<span class="keyword">id</span> view <span class="keyword">in</span> <span class="keyword">self</span><span class="variable">.subviews</span>)
+    {
+        <span class="comment">// looking for a UITableViewWrapperView</span>
+        <span class="keyword">if</span> ([<span class="built_in">NSStringFromClass</span>([view class]) isEqualToString:<span class="string">@"UITableViewWrapperView"</span>])
+        {
+            <span class="comment">// this test is necessary for safety and because a "UITableViewWrapperView" is NOT a UIScrollView in iOS7</span>
+            <span class="keyword">if</span>([view isKindOfClass:[<span class="built_in">UIScrollView</span> class]])
+            {
+                <span class="comment">// turn OFF delaysContentTouches in the hidden subview</span>
+                <span class="built_in">UIScrollView</span> *scroll = (<span class="built_in">UIScrollView</span> *) view;
+                scroll<span class="variable">.delaysContentTouches</span> = <span class="literal">NO</span>;
+            }
+            <span class="keyword">break</span>;
+        }
+    }
 
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/24/hello-world/" class="article-date">
-  	<time datetime="2015-08-24T15:56:30.000Z" itemprop="datePublished">2015-08-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/24/hello-world/">Hello Hexo</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-ios-2015-08-24" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/24/ios-2015-08-24/" class="article-date">
-  	<time datetime="2015-08-24T15:54:00.000Z" itemprop="datePublished">2015-08-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/24/ios-2015-08-24/">第一篇文章</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>很多时候，自己做过的事情都没有记录下来</p>
+}
+- (<span class="built_in">BOOL</span>)touchesShouldCancelInContentView:(<span class="built_in">UIView</span> *)view
+{
+    <span class="keyword">if</span> ([view isKindOfClass:[<span class="built_in">UIButton</span> class]] || [view isKindOfClass:[<span class="built_in">UIImageView</span> class]])
+    {
+        <span class="keyword">return</span> <span class="literal">YES</span>;
+    }
+    <span class="keyword">return</span> [<span class="keyword">super</span> touchesShouldCancelInContentView:view];
+}
+<span class="keyword">@end</span>
+</code></pre><p>我在项目中遇到了这些问题并已解决，希望可以帮到你，Best wishes</p>
 
       
     </div>
@@ -318,6 +275,10 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
       
 
       
@@ -361,8 +322,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>很多时候，自己做过的事情都没有记录下来</p>
-
+        <p>很多时候，自己做过的事情都没有记录下来，回头遇见相同的问题的时候，还是需要去Google，这个是一件非常痛苦的事情，其实写博客，不仅仅是对自己的经验的总结和积累，更是当你遇见的问题，别人也遇见的时候，你的经验的分享就会对别人起到非常大的帮助！更重要是<br>
       
     </div>
     
@@ -370,11 +330,69 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/假文艺/">假文艺</a></li></ul>
 	</div>
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/24/first-post/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/22/hello-world/" class="article-date">
+  	<time datetime="2015-08-22T15:59:10.000Z" itemprop="datePublished">2015-08-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/22/hello-world/">Hello Hexo</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/22/hello-world/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
