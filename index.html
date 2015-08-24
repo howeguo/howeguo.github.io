@@ -203,72 +203,7 @@
       
         <p>如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，<br>这是因为iOS系统会默认会延迟大150ms的时间去检查当前该事件是否能够出发UITableView的滑动，<br>如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。</p>
 <p><strong>1、将UIButton所有属于UIScrollView的父视图的delaysContentTouches属性设置成为NO。</strong><br><strong>2、继承UIScrollView或UITableView，并重写- (BOOL)touchesShouldCancelInContentView:(UIView*)view方法，让其响应拖动方法</strong></p>
-<p>废话不多说，直接上代码 以下是UITableView的例子</p>
-<pre><code><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span>    </span>
-<span class="class"><span class="keyword">@interface</span> <span class="title">TUNoDelayHighlightTableView</span> : <span class="title">UITableView</span></span>
-<span class="keyword">@end</span>
-
-<span class="preprocessor">#import <span class="title">"TUNoDelayHighlightTableView.h"</span></span>
-
-<span class="class"><span class="keyword">@implementation</span> <span class="title">TUNoDelayHighlightTableView</span></span>
-
-- (<span class="keyword">id</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder
-{
-    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithCoder:aDecoder];
-    <span class="keyword">if</span> (<span class="keyword">self</span>)
-    {
-        [<span class="keyword">self</span> reWriteSetting];
-    }
-    <span class="keyword">return</span> <span class="keyword">self</span>;
-}
-
-- (<span class="keyword">id</span>) initWithFrame:(<span class="built_in">CGRect</span>)frame style:(<span class="built_in">UITableViewStyle</span>)style
-{
-    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame style:style]) {
-        [<span class="keyword">self</span> reWriteSetting];
-    }
-       <span class="keyword">return</span> <span class="keyword">self</span>;
-}
-
-- (<span class="keyword">id</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame 
-{
-    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame]) {
-            [<span class="keyword">self</span> reWriteSetting];
-    }
-    <span class="keyword">return</span> <span class="keyword">self</span>;
-}
-
-- (<span class="keyword">void</span>) reWriteSetting
-{
-    <span class="keyword">self</span><span class="variable">.delaysContentTouches</span> = <span class="literal">NO</span>;
-    <span class="keyword">for</span> (<span class="keyword">id</span> view <span class="keyword">in</span> <span class="keyword">self</span><span class="variable">.subviews</span>)
-    {
-        <span class="comment">// looking for a UITableViewWrapperView</span>
-        <span class="keyword">if</span> ([<span class="built_in">NSStringFromClass</span>([view class]) isEqualToString:<span class="string">@"UITableViewWrapperView"</span>])
-        {
-            <span class="comment">// this test is necessary for safety and because a "UITableViewWrapperView" is NOT a UIScrollView in iOS7</span>
-            <span class="keyword">if</span>([view isKindOfClass:[<span class="built_in">UIScrollView</span> class]])
-            {
-                <span class="comment">// turn OFF delaysContentTouches in the hidden subview</span>
-                <span class="built_in">UIScrollView</span> *scroll = (<span class="built_in">UIScrollView</span> *) view;
-                scroll<span class="variable">.delaysContentTouches</span> = <span class="literal">NO</span>;
-            }
-            <span class="keyword">break</span>;
-        }
-    }
-
-}
-- (<span class="built_in">BOOL</span>)touchesShouldCancelInContentView:(<span class="built_in">UIView</span> *)view
-{
-    <span class="keyword">if</span> ([view isKindOfClass:[<span class="built_in">UIButton</span> class]] || [view isKindOfClass:[<span class="built_in">UIImageView</span> class]])
-    {
-        <span class="keyword">return</span> <span class="literal">YES</span>;
-    }
-    <span class="keyword">return</span> [<span class="keyword">super</span> touchesShouldCancelInContentView:view];
-}
-<span class="keyword">@end</span>
-</code></pre><p>我在项目中遇到了这些问题并已解决，希望可以帮到你，Best wishes</p>
-
+<p>废话不多说，直接上代码 以下是UITableView的实现<br>
       
     </div>
     
@@ -281,6 +216,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
