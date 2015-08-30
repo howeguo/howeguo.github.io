@@ -3,21 +3,36 @@
 <head>
   <meta charset="utf-8">
   
-  <title>iOS7/8 UITableView/UIScrollView上UIButton不能立即响应高亮的原因及解决办法 | Howeguo Blog</title>
+  <title>ios-draw-gradient-colors | Howeguo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，这是因为iOS系统会默认会延迟150ms的时间去检查当前该事件是否能够出发UITableView的滑动，如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。
-1、将UIButton所有属于UIScrollView的父视图的delays">
+  <meta name="description" content="UIView 实现颜色的渐变的两种方式
+1.inserSubLayers
+CAGradientLayer *gradientLayer = [CAGradientLayer layer];  // 设置渐变效果
+gradientLayer.bounds = self.bounds;
+gradientLayer.borderWidth = 0;
+
+gradientLayer.frame = self">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS7/8 UITableView/UIScrollView上UIButton不能立即响应高亮的原因及解决办法">
-<meta property="og:url" content="http://yoursite.com/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/index.html">
+<meta property="og:title" content="ios-draw-gradient-colors">
+<meta property="og:url" content="http://yoursite.com/2015/08/30/ios-draw-gradient-colors/index.html">
 <meta property="og:site_name" content="Howeguo Blog">
-<meta property="og:description" content="如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，这是因为iOS系统会默认会延迟150ms的时间去检查当前该事件是否能够出发UITableView的滑动，如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。
-1、将UIButton所有属于UIScrollView的父视图的delays">
-<meta property="og:updated_time" content="2015-08-25T16:31:08.000Z">
+<meta property="og:description" content="UIView 实现颜色的渐变的两种方式
+1.inserSubLayers
+CAGradientLayer *gradientLayer = [CAGradientLayer layer];  // 设置渐变效果
+gradientLayer.bounds = self.bounds;
+gradientLayer.borderWidth = 0;
+
+gradientLayer.frame = self">
+<meta property="og:updated_time" content="2015-08-30T14:45:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS7/8 UITableView/UIScrollView上UIButton不能立即响应高亮的原因及解决办法">
-<meta name="twitter:description" content="如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，这是因为iOS系统会默认会延迟150ms的时间去检查当前该事件是否能够出发UITableView的滑动，如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。
-1、将UIButton所有属于UIScrollView的父视图的delays">
+<meta name="twitter:title" content="ios-draw-gradient-colors">
+<meta name="twitter:description" content="UIView 实现颜色的渐变的两种方式
+1.inserSubLayers
+CAGradientLayer *gradientLayer = [CAGradientLayer layer];  // 设置渐变效果
+gradientLayer.bounds = self.bounds;
+gradientLayer.borderWidth = 0;
+
+gradientLayer.frame = self">
   
     <link rel="alternative" href="/atom.xml" title="Howeguo Blog" type="application/atom+xml">
   
@@ -177,11 +192,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-ios-UIButton-Highlight-issue-in-UITableView" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ios-draw-gradient-colors" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/" class="article-date">
-  	<time datetime="2015-08-24T15:59:50.000Z" itemprop="datePublished">2015-08-24</time>
+      <a href="/2015/08/30/ios-draw-gradient-colors/" class="article-date">
+  	<time datetime="2015-08-30T13:52:21.000Z" itemprop="datePublished">2015-08-30</time>
 </a>
     </div>
   
@@ -194,7 +209,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      iOS7/8 UITableView/UIScrollView上UIButton不能立即响应高亮的原因及解决办法
+      ios-draw-gradient-colors
     </h1>
   
 
@@ -203,7 +218,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小知识/">小知识</a></li></ul>
 	</div>
 
         
@@ -214,73 +229,58 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，这是因为iOS系统会默认会延迟150ms的时间去检查当前该事件是否能够出发UITableView的滑动，如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。</p>
-<p><strong>1、将UIButton所有属于UIScrollView的父视图的delaysContentTouches属性设置成为NO。</strong><br><strong>2、继承UIScrollView或UITableView，并重写- (BOOL)touchesShouldCancelInContentView:(UIView*)view方法，让其响应拖动方法</strong></p>
-<p>废话不多说，直接上代码 以下是UITableView的实现<br><a id="more"></a></p>
-<pre><code><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span>    </span>
-<span class="class"><span class="keyword">@interface</span> <span class="title">TUNoDelayHighlightTableView</span> : <span class="title">UITableView</span></span>
-<span class="keyword">@end</span>
+        <p>UIView 实现颜色的渐变的两种方式</p>
+<p><strong>1.inserSubLayers</strong></p>
+<pre><code><span class="built_in">CAGradientLayer</span> *gradientLayer = [<span class="built_in">CAGradientLayer</span> layer];  <span class="comment">// 设置渐变效果</span>
+gradientLayer<span class="variable">.bounds</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
+gradientLayer<span class="variable">.borderWidth</span> = <span class="number">0</span>;
 
-<span class="preprocessor">#import <span class="title">"TUNoDelayHighlightTableView.h"</span></span>
+gradientLayer<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
+gradientLayer<span class="variable">.colors</span> = [<span class="built_in">NSArray</span> arrayWithObjects:
+                        (<span class="keyword">id</span>)[[<span class="built_in">UIColor</span> redColor] <span class="built_in">CGColor</span>],
+                        (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>, <span class="literal">nil</span>];
+<span class="comment">//垂直渐变</span>
+gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">1.0</span>, <span class="number">0.5</span>);
+gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0.0</span>);
 
-<span class="class"><span class="keyword">@implementation</span> <span class="title">TUNoDelayHighlightTableView</span></span>
+<span class="comment">//水平渐变</span>
+gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, <span class="number">0.5</span>);
+gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1.0</span>);
 
-- (<span class="keyword">id</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder
-{
-    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithCoder:aDecoder];
-    <span class="keyword">if</span> (<span class="keyword">self</span>)
-    {
-        [<span class="keyword">self</span> reWriteSetting];
+[<span class="keyword">self</span><span class="variable">.layer</span> insertSublayer:gradientLayer atIndex:<span class="number">0</span>];
+</code></pre><p><strong>2.通过drawRect</strong><br><a id="more"></a></p>
+<pre><code>- (<span class="keyword">void</span>)drawRect:(<span class="built_in">CGRect</span>)rect {
+<span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();
+<span class="built_in">CGContextSaveGState</span>(context);
+<span class="built_in">CGContextRestoreGState</span>(context);
+<span class="built_in">CGContextClip</span>(context);
+
+<span class="built_in">CGColorSpaceRef</span> colorSpace = <span class="built_in">CGColorSpaceCreateDeviceRGB</span>();
+
+<span class="keyword">int</span> numComponents = <span class="number">5</span>;    
+<span class="built_in">NSArray</span> *gradientColors = @[[<span class="built_in">UIColor</span> redColor],[<span class="built_in">UIColor</span> orangeColor],[<span class="built_in">UIColor</span> blueColor],    [<span class="built_in">UIColor</span> greenColor],[<span class="built_in">UIColor</span> purpleColor]];
+<span class="built_in">CGFloat</span> colors[[gradientColors count] * numComponents];
+<span class="keyword">const</span> <span class="built_in">CGFloat</span> *components[[gradientColors count]];
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; [gradientColors count]; i++) {
+    components[i] = <span class="built_in">CGColorGetComponents</span>(((<span class="built_in">UIColor</span> *)[gradientColors objectAtIndex:i])<span class="variable">.CGColor</span>);
+    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; numComponents; j++) {
+        colors[i * numComponents + j] = components[i][j];
     }
-    <span class="keyword">return</span> <span class="keyword">self</span>;
 }
-
-- (<span class="keyword">id</span>) initWithFrame:(<span class="built_in">CGRect</span>)frame style:(<span class="built_in">UITableViewStyle</span>)style
-{
-    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame style:style]) {
-        [<span class="keyword">self</span> reWriteSetting];
-    }
-       <span class="keyword">return</span> <span class="keyword">self</span>;
+<span class="built_in">CGGradientRef</span> gradient = <span class="built_in">CGGradientCreateWithColorComponents</span> (colorSpace, colors, <span class="literal">NULL</span>, [gradientColors count]);
+<span class="built_in">CGPoint</span> startPoint;
+<span class="built_in">CGPoint</span> endPoint;
+<span class="comment">//水平渐变</span>
+startPoint = <span class="built_in">CGPointMake</span>(rect<span class="variable">.origin</span><span class="variable">.x</span>, <span class="number">0</span>);
+endPoint = <span class="built_in">CGPointMake</span>(rect<span class="variable">.size</span><span class="variable">.width</span>, <span class="number">0</span>);
+<span class="comment">//垂直渐变</span>
+startPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, rect<span class="variable">.origin</span><span class="variable">.y</span>);
+endPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, rect<span class="variable">.size</span><span class="variable">.hight</span>);
+<span class="built_in">CGContextDrawLinearGradient</span>(context, gradient, startPoint, endPoint, <span class="number">0</span>);
+<span class="built_in">CGColorSpaceRelease</span>(colorSpace);
+<span class="built_in">CGGradientRelease</span>(gradient);
 }
-
-- (<span class="keyword">id</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame 
-{
-    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame]) {
-            [<span class="keyword">self</span> reWriteSetting];
-    }
-    <span class="keyword">return</span> <span class="keyword">self</span>;
-}
-
-- (<span class="keyword">void</span>) reWriteSetting
-{
-    <span class="keyword">self</span><span class="variable">.delaysContentTouches</span> = <span class="literal">NO</span>;
-    <span class="keyword">for</span> (<span class="keyword">id</span> view <span class="keyword">in</span> <span class="keyword">self</span><span class="variable">.subviews</span>)
-    {
-        <span class="comment">// looking for a UITableViewWrapperView</span>
-        <span class="keyword">if</span> ([<span class="built_in">NSStringFromClass</span>([view class]) isEqualToString:<span class="string">@"UITableViewWrapperView"</span>])
-        {
-            <span class="comment">// this test is necessary for safety and because a "UITableViewWrapperView" is NOT a UIScrollView in iOS7</span>
-            <span class="keyword">if</span>([view isKindOfClass:[<span class="built_in">UIScrollView</span> class]])
-            {
-                <span class="comment">// turn OFF delaysContentTouches in the hidden subview</span>
-                <span class="built_in">UIScrollView</span> *scroll = (<span class="built_in">UIScrollView</span> *) view;
-                scroll<span class="variable">.delaysContentTouches</span> = <span class="literal">NO</span>;
-            }
-            <span class="keyword">break</span>;
-        }
-    }
-
-}
-- (<span class="built_in">BOOL</span>)touchesShouldCancelInContentView:(<span class="built_in">UIView</span> *)view
-{
-    <span class="keyword">if</span> ([view isKindOfClass:[<span class="built_in">UIButton</span> class]] || [view isKindOfClass:[<span class="built_in">UIImageView</span> class]])
-    {
-        <span class="keyword">return</span> <span class="literal">YES</span>;
-    }
-    <span class="keyword">return</span> [<span class="keyword">super</span> touchesShouldCancelInContentView:view];
-}
-<span class="keyword">@end</span>
-</code></pre><p>我在项目中遇到了这些问题并已解决，希望可以帮到你，Best wishes</p>
+</code></pre><p>希望可以在你需要的时候帮到你，Best wishes！</p>
 
       
     </div>
@@ -290,18 +290,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/08/28/ios-read-userContacts/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          ios-read-userContacts
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/08/24/first-post/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">第一篇文章</div>
+    <a href="/2015/08/28/ios-read-userContacts/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ios-read-userContacts</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -330,7 +321,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ios-UIButton-Highlight-issue-in-UITableView" data-title="iOS7/8 UITableView/UIScrollView上UIButton不能立即响应高亮的原因及解决办法" data-url="http://yoursite.com/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/"></div>
+	<div class="ds-thread" data-thread-key="ios-draw-gradient-colors" data-title="ios-draw-gradient-colors" data-url="http://yoursite.com/2015/08/30/ios-draw-gradient-colors/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

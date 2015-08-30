@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a>
+						<a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a>
 					</div>
 				</section>
 				
@@ -174,6 +174,146 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-ios-draw-gradient-colors" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/30/ios-draw-gradient-colors/" class="article-date">
+  	<time datetime="2015-08-30T13:52:21.000Z" itemprop="datePublished">2015-08-30</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/30/ios-draw-gradient-colors/">ios-draw-gradient-colors</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>UIView 实现颜色的渐变的两种方式</p>
+<p><strong>1.inserSubLayers</strong></p>
+<pre><code><span class="built_in">CAGradientLayer</span> *gradientLayer = [<span class="built_in">CAGradientLayer</span> layer];  <span class="comment">// 设置渐变效果</span>
+gradientLayer<span class="variable">.bounds</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
+gradientLayer<span class="variable">.borderWidth</span> = <span class="number">0</span>;
+
+gradientLayer<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
+gradientLayer<span class="variable">.colors</span> = [<span class="built_in">NSArray</span> arrayWithObjects:
+                        (<span class="keyword">id</span>)[[<span class="built_in">UIColor</span> redColor] <span class="built_in">CGColor</span>],
+                        (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>, <span class="literal">nil</span>];
+<span class="comment">//垂直渐变</span>
+gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">1.0</span>, <span class="number">0.5</span>);
+gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0.0</span>);
+
+<span class="comment">//水平渐变</span>
+gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, <span class="number">0.5</span>);
+gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1.0</span>);
+
+[<span class="keyword">self</span><span class="variable">.layer</span> insertSublayer:gradientLayer atIndex:<span class="number">0</span>];
+</code></pre><p><strong>2.通过drawRect</strong><br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小知识/">小知识</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/30/ios-draw-gradient-colors/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-ios-read-userContacts" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/28/ios-read-userContacts/" class="article-date">
+  	<time datetime="2015-08-28T15:32:55.000Z" itemprop="datePublished">2015-08-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/28/ios-read-userContacts/">ios-read-userContacts</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>读取用户通讯录的联系人信息</p>
+<p>最近项目中用到上传用户通讯录的功能，做的过程中也遇到了一些问题，包括授权、中英文首字母排序、中英文输入字母搜索匹配等。<br>这里读取包括读取联系人的邮箱、公司、职位、备注、家乡。</p>
+<p>排序和搜索的话，我会写一个demo放进来。</p>
+<p><strong>1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在系统设置里修改。</strong></p>
+<p><strong>2.做的过程中还发现其实如果你的读取通讯录的功能做在app内部的网页里，是可以不经用户授权直接跨过系统权限读取，也是可以成功的，H5页面跟app客户端进行交互，调用Native code(网页跟客户端的交互，如果有时间也是想单独总结出一篇，总之就是精力不够啊😂)</strong></p>
+<p>前面好像讲了一堆废话，好吧，还是直接上代码吧。<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/28/ios-read-userContacts/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-ios-UIButton-Highlight-issue-in-UITableView" class="article article-type-post" itemscope itemprop="blogPost">
   
