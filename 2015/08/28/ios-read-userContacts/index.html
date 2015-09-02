@@ -7,26 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="读取用户通讯录的联系人信息
 最近项目中用到上传用户通讯录的功能，做的过程中也遇到了一些问题，包括授权、中英文首字母排序、中英文输入字母搜索匹配等。这里读取包括读取联系人的邮箱、公司、职位、备注、家乡。
-中英文排序和搜索的，我写了一个demo
-1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在系统设置里修改。
-2.做的过">
+中英文排序和搜索如何实现，我写了一个demo放在了github上。
+1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ios-read-userContacts">
 <meta property="og:url" content="http://yoursite.com/2015/08/28/ios-read-userContacts/index.html">
 <meta property="og:site_name" content="Howeguo Blog">
 <meta property="og:description" content="读取用户通讯录的联系人信息
 最近项目中用到上传用户通讯录的功能，做的过程中也遇到了一些问题，包括授权、中英文首字母排序、中英文输入字母搜索匹配等。这里读取包括读取联系人的邮箱、公司、职位、备注、家乡。
-中英文排序和搜索的，我写了一个demo
-1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在系统设置里修改。
-2.做的过">
-<meta property="og:updated_time" content="2015-09-02T16:27:26.000Z">
+中英文排序和搜索如何实现，我写了一个demo放在了github上。
+1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在">
+<meta property="og:updated_time" content="2015-09-02T16:31:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios-read-userContacts">
 <meta name="twitter:description" content="读取用户通讯录的联系人信息
 最近项目中用到上传用户通讯录的功能，做的过程中也遇到了一些问题，包括授权、中英文首字母排序、中英文输入字母搜索匹配等。这里读取包括读取联系人的邮箱、公司、职位、备注、家乡。
-中英文排序和搜索的，我写了一个demo
-1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在系统设置里修改。
-2.做的过">
+中英文排序和搜索如何实现，我写了一个demo放在了github上。
+1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在">
   
     <link rel="alternative" href="/atom.xml" title="Howeguo Blog" type="application/atom+xml">
   
@@ -225,7 +222,7 @@
       
         <p>读取用户通讯录的联系人信息</p>
 <p>最近项目中用到上传用户通讯录的功能，做的过程中也遇到了一些问题，包括授权、中英文首字母排序、中英文输入字母搜索匹配等。<br>这里读取包括读取联系人的邮箱、公司、职位、备注、家乡。</p>
-<p>中英文排序和搜索的，我写了一个<a href="https://github.com/howeguo/ChineseOrderAndSearchByPinyin" target="_blank" rel="external">demo</a></p>
+<p>中英文排序和搜索如何实现，我写了一个<a href="https://github.com/howeguo/ChineseOrderAndSearchByPinyin" target="_blank" rel="external">demo放在了github上</a>。</p>
 <p><strong>1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在系统设置里修改。</strong></p>
 <p><strong>2.做的过程中还发现其实如果你的读取通讯录的功能做在app内部的网页里，是可以不经用户授权直接跨过系统权限读取，也是可以成功的，H5页面跟app客户端进行交互，调用Native code(网页跟客户端的交互，如果有时间也是想单独总结出一篇，总之就是精力不够啊😂)</strong></p>
 <p>前面好像讲了一堆废话，好吧，还是直接上代码吧。<br><a id="more"></a></p>
