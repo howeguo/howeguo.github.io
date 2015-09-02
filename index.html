@@ -118,7 +118,7 @@
 
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a>
+						<a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a>
 					</div>
 				</section>
 
@@ -183,6 +183,68 @@
 	</div>
 </nav>
       <div class="body-wrap">
+
+    <article id="post-ios-webview-call-nativeCode-or-native-call-jsCode" class="article article-type-post" itemscope itemprop="blogPost">
+
+    <div class="article-meta">
+      <a href="/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/" class="article-date">
+  	<time datetime="2015-09-02T17:12:18.000Z" itemprop="datePublished">2015-09-03</time>
+</a>
+    </div>
+
+  <div class="article-inner">
+
+      <input type="hidden" class="isFancy" />
+
+
+      <header class="article-header">
+
+
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/">ios-webview-call-nativeCode-or-native-call-jsCode</a>
+    </h1>
+
+
+      </header>
+
+
+    <div class="article-entry" itemprop="articleBody">
+
+        <p>UIWebView中 通过js去调用客户端的代码，客户端回调js代码。<br>最近因为项目中有一些页面使用H5实现(不得不说给客户端减少了不小压力啊😂😂)，但是有webview与客户端的交互，在使用过程当中遇到的问题做了一些总结。</p>
+<p><strong>我们模拟两个场景</strong><br>在webview中点击某一个用户的头像通过客户端NativeCode实现进入该用户的资料页<br> 网页代码<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span> = "<span class="attribute">tataufo:</span>//<span class="attribute">userprofile</span>"&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"avatarurl"</span>&gt;</span><span class="tag">&lt;/<span class="title">img</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="actionscript"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reloadKey</span><span class="params">(key)</span></span>&#123;</span><br><span class="line">    <span class="comment">//reload html</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p> 1.当用户点击头像的时候，会发送请求 tataufo://userprofile 这是跟客户端之前约定好的一个格式，不需要回调<br> tataufo 是个AppScheme，userprofile你可以认为你提供给网页的接口，当然你可以传递参数<br> 格式如下：tataufo://userprofile#{‘userid’:3}(这里使用的是json形式的参数)</p>
+<p> 2.当webview需要调用Native的share，会发送请求 tataufo://share#{‘callback’:’reloadKey’} ,客户端处理完之后会回调reloadKey这个函数</p>
+<p>实现如下：<br>
+
+    </div>
+
+    <div class="article-info article-info-index">
+
+
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webView/">webView</a></li></ul>
+	</div>
+
+
+
+
+        <p class="article-more-link">
+          <a  href="/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/#more">more >></a>
+        </p>
+
+      <div class="clearfix"></div>
+    </div>
+
+  </div>
+
+</article>
+
+
+
+
+
+
+
 
     <article id="post-ios-draw-gradient-colors" class="article article-type-post" itemscope itemprop="blogPost">
 
