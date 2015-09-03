@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Howeguo Blog]]></title>
+  
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://yoursite.com/"/>
+  <updated>2015-09-02T17:56:41.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name><![CDATA[Howeguo]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ios-webview-call-nativeCode-or-native-call-jsCode]]></title>
+    <link href="http://yoursite.com/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/"/>
+    <id>http://yoursite.com/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/</id>
+    <published>2015-09-02T17:12:18.000Z</published>
+    <updated>2015-09-02T17:56:41.000Z</updated>
+    <content type="html"><![CDATA[<p>UIWebView中 通过js去调用客户端的代码，客户端回调js代码。<br>最近因为项目中有一些页面使用H5实现(不得不说给客户端减少了不小压力啊😂😂)，但是有webview与客户端的交互，在使用过程当中遇到的问题做了一些总结。</p>
+<p><strong>我们模拟两个场景</strong><br>在webview中点击某一个用户的头像通过客户端NativeCode实现进入该用户的资料页<br> 网页代码<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span> = "<span class="attribute">tataufo:</span>//<span class="attribute">userprofile</span>"&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"avatarurl"</span>&gt;</span><span class="tag">&lt;/<span class="title">img</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="actionscript"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reloadKey</span><span class="params">(key)</span></span>&#123;</span><br><span class="line">    <span class="comment">//reload html</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p> 1.当用户点击头像的时候，会发送请求 tataufo://userprofile 这是跟客户端之前约定好的一个格式，不需要回调<br> tataufo 是个AppScheme，userprofile你可以认为你提供给网页的接口，当然你可以传递参数<br> 格式如下：tataufo://userprofile#{‘userid’:3}(这里使用的是json形式的参数)</p>
+<p> 2.当webview需要调用Native的share，会发送请求 tataufo://share#{‘callback’:’reloadKey’} ,客户端处理完之后会回调reloadKey这个函数</p>
+<p>实现如下：<br><a id="more"></a><br> 我们可以在WebView的代理<br> <figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">-<span class="params">(<span class="variable">BOOL</span>)</span>webView:<span class="params">(<span class="variable">UIWebView</span> *)</span>webView shouldStartLoadWithRequest:<span class="params">(<span class="variable">NSURLRequest</span> *)</span>request navigationType:<span class="params">(<span class="variable">UIWebViewNavigationType</span>)</span>navigationType</span></span><br></pre></td></tr></table></figure></p>
+<p> 拦截到所有的请求,并且可以控制要不要继续加载</p>
+<pre><code>-(<span class="built_in">BOOL</span>)webView:(<span class="built_in">UIWebView</span> *)webView shouldStartLoadWithRequest:(<span class="built_in">NSURLRequest</span> *)request navigationType:(<span class="built_in">UIWebViewNavigationType</span>)navigationType
+{
+  <span class="built_in">NSURL</span> *url=[request URL];
+  <span class="keyword">if</span> (url) {
+
+      <span class="keyword">return</span> <span class="literal">NO</span>;
+    }<span class="keyword">else</span>{
+          <span class="built_in">NSString</span> *myAppScheme = <span class="string">@"tataufo"</span>;
+          <span class="keyword">if</span> (![request<span class="variable">.URL</span><span class="variable">.scheme</span> isEqualToString:myAppScheme]) {
+              <span class="keyword">return</span> <span class="literal">YES</span>;
+          }
+          <span class="built_in">NSArray</span> *turnTypes = @[<span class="string">@"profile"</span>,<span class="string">@"share"</span>]
+          <span class="built_in">NSString</span> *actionType = request<span class="variable">.URL</span><span class="variable">.host</span>;
+          <span class="keyword">if</span> ([turnTypes containsObject:actionType]) {
+              <span class="built_in">NSString</span> *jsonDictString = [<span class="keyword">self</span> decodeString:request<span class="variable">.URL</span><span class="variable">.fragment</span>];
+              [request<span class="variable">.URL</span><span class="variable">.fragment</span> stringByReplacingPercentEscapesUsingEncoding:<span class="built_in">NSASCIIStringEncoding</span>];
+              DDLogDebug(jsonDictString);
+              <span class="built_in">NSDictionary</span> *resultDic = [jsonDictString objectFromJSO<span class="built_in">NString</span>];
+              [<span class="keyword">self</span> processTurnType:actionType params:resultDic];
+              <span class="keyword">return</span> <span class="literal">NO</span>;
+          }
+        }
+  }
+  <span class="keyword">return</span> <span class="literal">YES</span>;
+}
+
+-(<span class="built_in">NSString</span> *)decodeString:(<span class="built_in">NSString</span>*)encodedString
+{
+    <span class="comment">//NSString *decodedString = [encodedString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding ];</span>
+
+    <span class="built_in">NSString</span> *decodedString  = (<span class="built_in">NSString</span> *)<span class="built_in">CFURLCreateStringByReplacingPercentEscapesUsingEncoding</span>(<span class="literal">NULL</span>,
+                                                                                                                     (__bridge <span class="built_in">CFStringRef</span>)encodedString,
+                                                                                                                     <span class="built_in">CFSTR</span>(<span class="string">""</span>),
+                                                                                                                     <span class="built_in">CFStringConvertNSStringEncodingToEncoding</span>(<span class="built_in">NSUTF8StringEncoding</span>));
+    <span class="keyword">return</span> decodedString;
+}
+
+
+<span class="comment">// 目前已有的类型actionType</span>
+- (<span class="keyword">void</span>) processTurnType:(<span class="built_in">NSString</span> *) type params:(<span class="built_in">NSDictionary</span> *) dict
+{
+    <span class="keyword">if</span> ([type isEqualToString:<span class="string">@"profile"</span>]){
+        <span class="keyword">if</span> (dict<span class="variable">.count</span> == <span class="number">0</span>) {
+            <span class="keyword">return</span>;
+        }
+        <span class="built_in">NSInteger</span> userid = [[dict objectForKey:<span class="string">@"userid"</span>]integerValue];
+        TUPersonalCenterSelfViewController *personCenter = [[TUPersonalCenterSelfViewController alloc] init];
+        personCenter<span class="variable">.userid</span> = userid;
+        [<span class="keyword">self</span><span class="variable">.navigationController</span> pushViewController:personCenter animated:<span class="literal">YES</span>];
+    }<span class="keyword">else</span> <span class="keyword">if</span> ([type isEqualToString:<span class="string">@"share"</span>]){
+        <span class="keyword">if</span> (dict<span class="variable">.count</span> == <span class="number">0</span>) {
+            <span class="keyword">return</span>;
+        }
+        <span class="built_in">NSString</span> *callback = [dict objectForKey:<span class="string">@"callback"</span>];
+        [[TUNetworkManager sharedInstance] shareSuccess:^(<span class="built_in">NSMutableDictionary</span> *dict) {
+            <span class="built_in">NSString</span> *key = [dict objectForKey:<span class="string">@"key"</span>];
+            <span class="built_in">NSString</span> *jsFunction = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@('%@')"</span>,callback,key];
+            <span class="comment">//执行网页已经存在的js函数</span>
+            [yourWebview stringByEvaluatingJavaScriptFromString:jsFunction];
+        } failure:^(<span class="built_in">NSError</span> *error) {
+
+        }];
+    }
+}
+</code></pre><p>希望可帮到你，Best wishes</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>UIWebView中 通过js去调用客户端的代码，客户端回调js代码。<br>最近因为项目中有一些页面使用H5实现(不得不说给客户端减少了不小压力啊😂😂)，但是有webview与客户端的交互，在使用过程当中遇到的问题做了一些总结。</p>
+<p><strong>我们模拟两个场景</strong><br>在webview中点击某一个用户的头像通过客户端NativeCode实现进入该用户的资料页<br> 网页代码<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span> = "<span class="attribute">tataufo:</span>//<span class="attribute">userprofile</span>"&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"avatarurl"</span>&gt;</span><span class="tag">&lt;/<span class="title">img</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="actionscript"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reloadKey</span><span class="params">(key)</span></span>&#123;</span><br><span class="line">    <span class="comment">//reload html</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p> 1.当用户点击头像的时候，会发送请求 tataufo://userprofile 这是跟客户端之前约定好的一个格式，不需要回调<br> tataufo 是个AppScheme，userprofile你可以认为你提供给网页的接口，当然你可以传递参数<br> 格式如下：tataufo://userprofile#{‘userid’:3}(这里使用的是json形式的参数)</p>
+<p> 2.当webview需要调用Native的share，会发送请求 tataufo://share#{‘callback’:’reloadKey’} ,客户端处理完之后会回调reloadKey这个函数</p>
+<p>实现如下：<br>]]>
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="webView" scheme="http://yoursite.com/tags/webView/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ios-draw-gradient-colors]]></title>
+    <link href="http://yoursite.com/2015/08/30/ios-draw-gradient-colors/"/>
+    <id>http://yoursite.com/2015/08/30/ios-draw-gradient-colors/</id>
+    <published>2015-08-30T13:52:21.000Z</published>
+    <updated>2015-08-30T14:45:51.000Z</updated>
+    <content type="html"><![CDATA[<p>UIView 实现颜色的渐变的两种方式</p>
+<p><strong>1.inserSubLayers</strong></p>
+<pre><code><span class="built_in">CAGradientLayer</span> *gradientLayer = [<span class="built_in">CAGradientLayer</span> layer];  <span class="comment">// 设置渐变效果</span>
+gradientLayer<span class="variable">.bounds</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
+gradientLayer<span class="variable">.borderWidth</span> = <span class="number">0</span>;
+
+gradientLayer<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
+gradientLayer<span class="variable">.colors</span> = [<span class="built_in">NSArray</span> arrayWithObjects:
+                        (<span class="keyword">id</span>)[[<span class="built_in">UIColor</span> redColor] <span class="built_in">CGColor</span>],
+                        (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>, <span class="literal">nil</span>];
+<span class="comment">//垂直渐变</span>
+gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">1.0</span>, <span class="number">0.5</span>);
+gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0.0</span>);
+
+<span class="comment">//水平渐变</span>
+gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, <span class="number">0.5</span>);
+gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1.0</span>);
+
+[<span class="keyword">self</span><span class="variable">.layer</span> insertSublayer:gradientLayer atIndex:<span class="number">0</span>];
+</code></pre><p><strong>2.通过drawRect</strong><br><a id="more"></a></p>
+<pre><code>- (<span class="keyword">void</span>)drawRect:(<span class="built_in">CGRect</span>)rect {
+<span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();
+<span class="built_in">CGContextSaveGState</span>(context);
+<span class="built_in">CGContextRestoreGState</span>(context);
+<span class="built_in">CGContextClip</span>(context);
+
+<span class="built_in">CGColorSpaceRef</span> colorSpace = <span class="built_in">CGColorSpaceCreateDeviceRGB</span>();
+
+<span class="keyword">int</span> numComponents = <span class="number">5</span>;    
+<span class="built_in">NSArray</span> *gradientColors = @[[<span class="built_in">UIColor</span> redColor],[<span class="built_in">UIColor</span> orangeColor],[<span class="built_in">UIColor</span> blueColor],    [<span class="built_in">UIColor</span> greenColor],[<span class="built_in">UIColor</span> purpleColor]];
+<span class="built_in">CGFloat</span> colors[[gradientColors count] * numComponents];
+<span class="keyword">const</span> <span class="built_in">CGFloat</span> *components[[gradientColors count]];
+<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; [gradientColors count]; i++) {
+    components[i] = <span class="built_in">CGColorGetComponents</span>(((<span class="built_in">UIColor</span> *)[gradientColors objectAtIndex:i])<span class="variable">.CGColor</span>);
+    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; numComponents; j++) {
+        colors[i * numComponents + j] = components[i][j];
+    }
+}
+<span class="built_in">CGGradientRef</span> gradient = <span class="built_in">CGGradientCreateWithColorComponents</span> (colorSpace, colors, <span class="literal">NULL</span>, [gradientColors count]);
+<span class="built_in">CGPoint</span> startPoint;
+<span class="built_in">CGPoint</span> endPoint;
+<span class="comment">//水平渐变</span>
+startPoint = <span class="built_in">CGPointMake</span>(rect<span class="variable">.origin</span><span class="variable">.x</span>, <span class="number">0</span>);
+endPoint = <span class="built_in">CGPointMake</span>(rect<span class="variable">.size</span><span class="variable">.width</span>, <span class="number">0</span>);
+<span class="comment">//垂直渐变</span>
+startPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, rect<span class="variable">.origin</span><span class="variable">.y</span>);
+endPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, rect<span class="variable">.size</span><span class="variable">.hight</span>);
+<span class="built_in">CGContextDrawLinearGradient</span>(context, gradient, startPoint, endPoint, <span class="number">0</span>);
+<span class="built_in">CGColorSpaceRelease</span>(colorSpace);
+<span class="built_in">CGGradientRelease</span>(gradient);
+}
+</code></pre><p>希望可以在你需要的时候帮到你，Best wishes！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>UIView 实现颜色的渐变的两种方式</p>
+<p><strong>1.inserSubLayers</strong></p>
+<pre><code><span class="built_in">CAGradientLayer</span> *gradientLayer = [<span class="built_in">CAGradientLayer</span> layer];  <span class="comment">// 设置渐变效果</span>
+gradientLayer<span class="variable">.bounds</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
+gradientLayer<span class="variable">.borderWidth</span> = <span class="number">0</span>;
+
+gradientLayer<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
+gradientLayer<span class="variable">.colors</span> = [<span class="built_in">NSArray</span> arrayWithObjects:
+                        (<span class="keyword">id</span>)[[<span class="built_in">UIColor</span> redColor] <span class="built_in">CGColor</span>],
+                        (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>, <span class="literal">nil</span>];
+<span class="comment">//垂直渐变</span>
+gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">1.0</span>, <span class="number">0.5</span>);
+gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0.0</span>);
+
+<span class="comment">//水平渐变</span>
+gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, <span class="number">0.5</span>);
+gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1.0</span>);
+
+[<span class="keyword">self</span><span class="variable">.layer</span> insertSublayer:gradientLayer atIndex:<span class="number">0</span>];
+</code></pre><p><strong>2.通过drawRect</strong><br>]]>
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="小知识" scheme="http://yoursite.com/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ios-read-userContacts]]></title>
+    <link href="http://yoursite.com/2015/08/28/ios-read-userContacts/"/>
+    <id>http://yoursite.com/2015/08/28/ios-read-userContacts/</id>
+    <published>2015-08-28T15:32:55.000Z</published>
+    <updated>2015-09-02T16:31:30.000Z</updated>
+    <content type="html"><![CDATA[<p>读取用户通讯录的联系人信息</p>
+<p>最近项目中用到上传用户通讯录的功能，做的过程中也遇到了一些问题，包括授权、中英文首字母排序、中英文输入字母搜索匹配等。<br>这里读取包括读取联系人的邮箱、公司、职位、备注、家乡。</p>
+<p>中英文排序和搜索如何实现，我写了一个<a href="https://github.com/howeguo/ChineseOrderAndSearchByPinyin" target="_blank" rel="external">demo放在了github上</a>。</p>
+<p><strong>1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在系统设置里修改。</strong></p>
+<p><strong>2.做的过程中还发现其实如果你的读取通讯录的功能做在app内部的网页里，是可以不经用户授权直接跨过系统权限读取，也是可以成功的，H5页面跟app客户端进行交互，调用Native code(网页跟客户端的交互，如果有时间也是想单独总结出一篇，总之就是精力不够啊😂)</strong></p>
+<p>前面好像讲了一堆废话，好吧，还是直接上代码吧。<br><a id="more"></a></p>
+<pre><code>self.dataArrayDic = <span class="comment">[NSMutableArray arrayWithCapacity:0]</span>;
+ABAddressBookRef addressBook ;
+
+addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)                                                     {
+    dispatch_semaphore_signal(sema);
+});
+dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+//取得本地所有联系人记录
+CFArrayRef results = ABAddressBookCopyArrayOfAllPeople(addressBook);
+for(int i = 0; i &lt; CFArrayGetCount(results); i++)
+{
+    NSMutableDictionary *dicInfoLocal = <span class="comment">[NSMutableDictionary dictionaryWithCapacity:0]</span>;
+    ABRecordRef <span class="keyword">person</span> = CFArrayGetValueAtIndex(results, i);
+    ABMultiValueRef tmlphone =  ABRecordCopyValue(<span class="keyword">person</span>, kABPersonPhoneProperty);
+    NSArray *telphone = (__bridge NSArray*)ABMultiValueCopyArrayOfAllValues(tmlphone);
+    if (telphone == nil) {
+        telphone = @<span class="comment">[]</span>;
+    }
+    <span class="comment">[dicInfoLocal setObject:telphone forKey:@"telephone"]</span>;
+    CFRelease(tmlphone);
+
+    NSString *last = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonLastNameProperty);
+    if (last == nil) {
+        last = @<span class="string">" "</span>;
+    }
+    <span class="comment">[dicInfoLocal setObject:last forKey:@"last"]</span>;
+
+    //读取firstname
+    NSString *first = (__bridge NSString*)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonFirstNameProperty);
+    if (first == nil || <span class="comment">[first isEqualToString:@""]</span>) {
+        first = @<span class="string">" "</span>;
+    }
+    if (<span class="comment">[first isEqualToString:@" "]</span> &amp;&amp; <span class="comment">[last isEqualToString:@" "]</span> ) {
+        if (telphone.count &gt; 0) {
+            first = telphone<span class="comment">[0]</span>;
+        }
+    }
+    <span class="comment">[dicInfoLocal setObject:first forKey:@"first"]</span>;
+
+    NSString *nickname = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonNicknameProperty);
+    if (nickname == nil) {
+        nickname = @<span class="string">""</span>;
+    }
+    NSMutableDictionary *extra = <span class="comment">[NSMutableDictionary dictionary]</span>;
+    <span class="comment">[extra setObject:nickname forKey:@"nickname"]</span>;
+
+    NSString *middlename = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonMiddleNamePhoneticProperty);
+    if (middlename == nil) {
+        middlename = @<span class="string">""</span>;
+    }
+    <span class="comment">[extra setObject:middlename forKey:@"middlename"]</span>;
+
+    NSString *organization = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonOrganizationProperty);
+    if (organization == nil) {
+        organization = @<span class="string">""</span>;
+    }
+    <span class="comment">[extra setObject:organization forKey:@"organization"]</span>;
+
+    NSString *jobTitle = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonJobTitleProperty);
+    if (jobTitle == nil) {
+        jobTitle = @<span class="string">""</span>;
+    }
+    <span class="comment">[extra setObject:jobTitle forKey:@"jobTitle"]</span>;
+
+    <span class="comment">[dicInfoLocal setObject:extra forKey:@"extra"]</span>;
+
+    NSString *department = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonDepartmentProperty);
+    if (department == nil) {
+        department = @<span class="string">""</span>;
+    }
+    <span class="comment">[extra setObject:department forKey:@"department"]</span>;
+
+    ABMultiValueRef emailTmp =  ABRecordCopyValue(<span class="keyword">person</span>, kABPersonEmailProperty);
+    NSArray *emails = (__bridge NSArray*)ABMultiValueCopyArrayOfAllValues(emailTmp);
+    if (emails == nil) {
+        emails = @<span class="comment">[]</span>;
+    }
+    CFRelease(emailTmp);
+
+    <span class="comment">[extra setObject:emails forKey:@"email"]</span>;
+
+    NSString *birthday = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonBirthdayProperty);
+    if (birthday == nil) {
+        birthday = @<span class="string">""</span>;
+    }
+    <span class="comment">[extra setObject:birthday forKey:@"birthday"]</span>;
+
+    NSString *note = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonNoteProperty);
+    if (note == nil) {
+        note = @<span class="string">""</span>;
+    }
+    <span class="comment">[extra setObject:note forKey:@"note"]</span>;
+
+    NSString *personCreationDate = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonCreationDateProperty);
+    if (personCreationDate == nil) {
+        personCreationDate = @<span class="string">""</span>;
+    }
+    <span class="comment">[extra setObject:personCreationDate forKey:@"personCreationDate"]</span>;
+
+    NSString *personModifyDate = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonModificationDateProperty);
+    if (personModifyDate == nil) {
+        personModifyDate = @<span class="string">""</span>;
+    }
+    <span class="comment">[extra setObject:personModifyDate forKey:@"personModifyDate"]</span>;
+
+    ABMultiValueRef streetTmp =  ABRecordCopyValue(<span class="keyword">person</span>, kABPersonAddressProperty);
+    NSArray *street = (__bridge NSArray*)ABMultiValueCopyArrayOfAllValues(streetTmp);
+    if (street == nil) {
+        street = @<span class="comment">[]</span>;
+    }
+    CFRelease(streetTmp);
+
+    <span class="comment">[extra setObject:street forKey:@"street"]</span>;
+
+    if (<span class="comment">[first isEqualToString:@" "]</span> == NO || <span class="comment">[last isEqualToString:@" "]</span> || (telphone.count &gt; 0)) {
+        <span class="comment">[self.dataArrayDic addObject:dicInfoLocal]</span>;
+    }
+}
+CFRelease(results);//new
+CFRelease(addressBook);//new
+</code></pre><p>  希望帮到你，Best wishes！</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>读取用户通讯录的联系人信息</p>
+<p>最近项目中用到上传用户通讯录的功能，做的过程中也遇到了一些问题，包括授权、中英文首字母排序、中英文输入字母搜索匹配等。<br>这里读取包括读取联系人的邮箱、公司、职位、备注、家乡。</p>
+<p>中英文排序和搜索如何实现，我写了一个<a href="https://github.com/howeguo/ChineseOrderAndSearchByPinyin">demo放在了github上</a>。</p>
+<p><strong>1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在系统设置里修改。</strong></p>
+<p><strong>2.做的过程中还发现其实如果你的读取通讯录的功能做在app内部的网页里，是可以不经用户授权直接跨过系统权限读取，也是可以成功的，H5页面跟app客户端进行交互，调用Native code(网页跟客户端的交互，如果有时间也是想单独总结出一篇，总之就是精力不够啊😂)</strong></p>
+<p>前面好像讲了一堆废话，好吧，还是直接上代码吧。<br>]]>
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[iOS7/8 UITableView/UIScrollView上UIButton不能立即响应高亮的原因及解决办法]]></title>
+    <link href="http://yoursite.com/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/"/>
+    <id>http://yoursite.com/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/</id>
+    <published>2015-08-24T15:59:50.000Z</published>
+    <updated>2015-08-30T15:25:44.000Z</updated>
+    <content type="html"><![CDATA[<p>如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，这是因为iOS系统会默认会延迟150ms的时间去检查当前该事件是否能够出发UITableView的滑动，如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。</p>
+<p><strong>1、将UIButton所有属于UIScrollView的父视图的delaysContentTouches属性设置成为NO。</strong><br><strong>2、继承UIScrollView或UITableView，并重写- (BOOL)touchesShouldCancelInContentView:(UIView*)view方法，让其响应拖动方法</strong></p>
+<p>废话不多说，直接上代码 以下是UITableView的实现<br><a id="more"></a></p>
+<pre><code><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span></span>
+<span class="class"><span class="keyword">@interface</span> <span class="title">TUNoDelayHighlightTableView</span> : <span class="title">UITableView</span></span>
+<span class="keyword">@end</span>
+
+<span class="preprocessor">#import <span class="title">"TUNoDelayHighlightTableView.h"</span></span>
+
+<span class="class"><span class="keyword">@implementation</span> <span class="title">TUNoDelayHighlightTableView</span></span>
+
+- (<span class="keyword">id</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder
+{
+    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithCoder:aDecoder];
+    <span class="keyword">if</span> (<span class="keyword">self</span>)
+    {
+        [<span class="keyword">self</span> reWriteSetting];
+    }
+    <span class="keyword">return</span> <span class="keyword">self</span>;
+}
+
+- (<span class="keyword">id</span>) initWithFrame:(<span class="built_in">CGRect</span>)frame style:(<span class="built_in">UITableViewStyle</span>)style
+{
+    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame style:style]) {
+        [<span class="keyword">self</span> reWriteSetting];
+    }
+       <span class="keyword">return</span> <span class="keyword">self</span>;
+}
+
+- (<span class="keyword">id</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame
+{
+    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame]) {
+            [<span class="keyword">self</span> reWriteSetting];
+    }
+    <span class="keyword">return</span> <span class="keyword">self</span>;
+}
+
+- (<span class="keyword">void</span>) reWriteSetting
+{
+    <span class="keyword">self</span><span class="variable">.delaysContentTouches</span> = <span class="literal">NO</span>;
+    <span class="keyword">for</span> (<span class="keyword">id</span> view <span class="keyword">in</span> <span class="keyword">self</span><span class="variable">.subviews</span>)
+    {
+        <span class="comment">// looking for a UITableViewWrapperView</span>
+        <span class="keyword">if</span> ([<span class="built_in">NSStringFromClass</span>([view class]) isEqualToString:<span class="string">@"UITableViewWrapperView"</span>])
+        {
+            <span class="comment">// this test is necessary for safety and because a "UITableViewWrapperView" is NOT a UIScrollView in iOS7</span>
+            <span class="keyword">if</span>([view isKindOfClass:[<span class="built_in">UIScrollView</span> class]])
+            {
+                <span class="comment">// turn OFF delaysContentTouches in the hidden subview</span>
+                <span class="built_in">UIScrollView</span> *scroll = (<span class="built_in">UIScrollView</span> *) view;
+                scroll<span class="variable">.delaysContentTouches</span> = <span class="literal">NO</span>;
+            }
+            <span class="keyword">break</span>;
+        }
+    }
+
+}
+- (<span class="built_in">BOOL</span>)touchesShouldCancelInContentView:(<span class="built_in">UIView</span> *)view
+{
+    <span class="keyword">if</span> ([view isKindOfClass:[<span class="built_in">UIButton</span> class]] || [view isKindOfClass:[<span class="built_in">UIImageView</span> class]])
+    {
+        <span class="keyword">return</span> <span class="literal">YES</span>;
+    }
+    <span class="keyword">return</span> [<span class="keyword">super</span> touchesShouldCancelInContentView:view];
+}
+<span class="keyword">@end</span>
+</code></pre><p>我在项目中遇到了这些问题并已解决，希望可以帮到你，Best wishes</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，这是因为iOS系统会默认会延迟150ms的时间去检查当前该事件是否能够出发UITableView的滑动，如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。</p>
+<p><strong>1、将UIButton所有属于UIScrollView的父视图的delaysContentTouches属性设置成为NO。</strong><br><strong>2、继承UIScrollView或UITableView，并重写- (BOOL)touchesShouldCancelInContentView:(UIView*)view方法，让其响应拖动方法</strong></p>
+<p>废话不多说，直接上代码 以下是UITableView的实现<br>]]>
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[第一篇文章]]></title>
+    <link href="http://yoursite.com/2015/08/24/first-post/"/>
+    <id>http://yoursite.com/2015/08/24/first-post/</id>
+    <published>2015-08-24T15:54:00.000Z</published>
+    <updated>2015-08-24T17:08:34.000Z</updated>
+    <content type="html"><![CDATA[<p>很多时候，自己做过的事情都没有记录下来，回头遇见相同的问题的时候，还是需要去Google，这个是一件非常痛苦的事情，其实写博客，不仅仅是对自己的经验的总结和积累，更是当你遇见的问题，别人也遇见的时候，你的经验的分享就会对别人起到非常大的帮助！更重要是<br><a id="more"></a><br>很早之前就说要写博客，但是一直给自己找了无数的借口，最终还是说服自己，毕竟也老大不小，至今单身，暂不总(疯)结(狂)就老了，也得给我的后人留下点什么😂！<br>我也想看看到底自己可以坚持到什么时候！好了，今天就到这吧，我先睡觉😫。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>很多时候，自己做过的事情都没有记录下来，回头遇见相同的问题的时候，还是需要去Google，这个是一件非常痛苦的事情，其实写博客，不仅仅是对自己的经验的总结和积累，更是当你遇见的问题，别人也遇见的时候，你的经验的分享就会对别人起到非常大的帮助！更重要是<br>]]>
+    
+    </summary>
+    
+      <category term="假文艺" scheme="http://yoursite.com/tags/%E5%81%87%E6%96%87%E8%89%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[Hello Hexo]]></title>
+    <link href="http://yoursite.com/2015/08/22/hello-world/"/>
+    <id>http://yoursite.com/2015/08/22/hello-world/</id>
+    <published>2015-08-22T15:59:10.000Z</published>
+    <updated>2015-08-24T16:56:24.000Z</updated>
+    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p>
+<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>]]>
+    
+    </summary>
+    
+  </entry>
+  
+</feed>
