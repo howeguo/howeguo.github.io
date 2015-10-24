@@ -3,36 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>ios-draw-gradient-colors | Howeguo Blog</title>
+  <title>ios-dynamic-blur-for-custom-navigation | Howeguo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="UIView 实现颜色的渐变的两种方式
-1.inserSubLayers
-CAGradientLayer *gradientLayer = [CAGradientLayer layer];  // 设置渐变效果
-gradientLayer.bounds = self.bounds;
-gradientLayer.borderWidth = 0;
-
-gradientLayer.frame = self">
+  <meta name="description" content="好久没写博客了，今天抽个空写了一个在项目中用到的一个功能。主要需求是列表头部有一个cover图，然后在cover的上方的导航栏实现实时模糊，我写了一个demo放在了github上。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ios-draw-gradient-colors">
-<meta property="og:url" content="http://yoursite.com/2015/08/30/ios-draw-gradient-colors/index.html">
+<meta property="og:title" content="ios-dynamic-blur-for-custom-navigation">
+<meta property="og:url" content="http://yoursite.com/2015/10/24/ios-dynamic-blur-for-custom-navigation/index.html">
 <meta property="og:site_name" content="Howeguo Blog">
-<meta property="og:description" content="UIView 实现颜色的渐变的两种方式
-1.inserSubLayers
-CAGradientLayer *gradientLayer = [CAGradientLayer layer];  // 设置渐变效果
-gradientLayer.bounds = self.bounds;
-gradientLayer.borderWidth = 0;
-
-gradientLayer.frame = self">
-<meta property="og:updated_time" content="2015-10-24T09:30:43.000Z">
+<meta property="og:description" content="好久没写博客了，今天抽个空写了一个在项目中用到的一个功能。主要需求是列表头部有一个cover图，然后在cover的上方的导航栏实现实时模糊，我写了一个demo放在了github上。">
+<meta property="og:image" content="https://raw.githubusercontent.com/howeguo/CustomDynamicBlurNavigation/master/1.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/howeguo/CustomDynamicBlurNavigation/master/2.gif">
+<meta property="og:updated_time" content="2015-10-24T09:33:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ios-draw-gradient-colors">
-<meta name="twitter:description" content="UIView 实现颜色的渐变的两种方式
-1.inserSubLayers
-CAGradientLayer *gradientLayer = [CAGradientLayer layer];  // 设置渐变效果
-gradientLayer.bounds = self.bounds;
-gradientLayer.borderWidth = 0;
-
-gradientLayer.frame = self">
+<meta name="twitter:title" content="ios-dynamic-blur-for-custom-navigation">
+<meta name="twitter:description" content="好久没写博客了，今天抽个空写了一个在项目中用到的一个功能。主要需求是列表头部有一个cover图，然后在cover的上方的导航栏实现实时模糊，我写了一个demo放在了github上。">
   
     <link rel="alternative" href="/atom.xml" title="Howeguo Blog" type="application/atom+xml">
   
@@ -188,11 +172,11 @@ gradientLayer.frame = self">
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-ios-draw-gradient-colors" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ios-dynamic-blur-for-custom-navigation" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/08/30/ios-draw-gradient-colors/" class="article-date">
-  	<time datetime="2015-08-30T13:52:21.000Z" itemprop="datePublished">2015-08-30</time>
+      <a href="/2015/10/24/ios-dynamic-blur-for-custom-navigation/" class="article-date">
+  	<time datetime="2015-10-24T08:15:32.000Z" itemprop="datePublished">2015-10-24</time>
 </a>
     </div>
   
@@ -205,7 +189,7 @@ gradientLayer.frame = self">
         
   
     <h1 class="article-title" itemprop="name">
-      ios-draw-gradient-colors
+      ios-dynamic-blur-for-custom-navigation
     </h1>
   
 
@@ -214,7 +198,7 @@ gradientLayer.frame = self">
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小知识/">小知识</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blur/">blur</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小技巧/">小技巧</a></li></ul>
 	</div>
 
         
@@ -225,58 +209,8 @@ gradientLayer.frame = self">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>UIView 实现颜色的渐变的两种方式</p>
-<p><strong>1.inserSubLayers</strong></p>
-<pre><code><span class="built_in">CAGradientLayer</span> *gradientLayer = [<span class="built_in">CAGradientLayer</span> layer];  <span class="comment">// 设置渐变效果</span>
-gradientLayer<span class="variable">.bounds</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
-gradientLayer<span class="variable">.borderWidth</span> = <span class="number">0</span>;
-
-gradientLayer<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
-gradientLayer<span class="variable">.colors</span> = [<span class="built_in">NSArray</span> arrayWithObjects:
-                        (<span class="keyword">id</span>)[[<span class="built_in">UIColor</span> redColor] <span class="built_in">CGColor</span>],
-                        (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>, <span class="literal">nil</span>];
-<span class="comment">//垂直渐变</span>
-gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">1.0</span>, <span class="number">0.5</span>);
-gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0.0</span>);
-
-<span class="comment">//水平渐变</span>
-gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, <span class="number">0.5</span>);
-gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1.0</span>);
-
-[<span class="keyword">self</span><span class="variable">.layer</span> insertSublayer:gradientLayer atIndex:<span class="number">0</span>];
-</code></pre><p><strong>2.通过drawRect</strong><br><a id="more"></a></p>
-<pre><code>- (<span class="keyword">void</span>)drawRect:(<span class="built_in">CGRect</span>)rect {
-<span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();
-<span class="built_in">CGContextSaveGState</span>(context);
-<span class="built_in">CGContextRestoreGState</span>(context);
-<span class="built_in">CGContextClip</span>(context);
-
-<span class="built_in">CGColorSpaceRef</span> colorSpace = <span class="built_in">CGColorSpaceCreateDeviceRGB</span>();
-
-<span class="keyword">int</span> numComponents = <span class="number">5</span>;    
-<span class="built_in">NSArray</span> *gradientColors = @[[<span class="built_in">UIColor</span> redColor],[<span class="built_in">UIColor</span> orangeColor],[<span class="built_in">UIColor</span> blueColor],    [<span class="built_in">UIColor</span> greenColor],[<span class="built_in">UIColor</span> purpleColor]];
-<span class="built_in">CGFloat</span> colors[[gradientColors count] * numComponents];
-<span class="keyword">const</span> <span class="built_in">CGFloat</span> *components[[gradientColors count]];
-<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; [gradientColors count]; i++) {
-    components[i] = <span class="built_in">CGColorGetComponents</span>(((<span class="built_in">UIColor</span> *)[gradientColors objectAtIndex:i])<span class="variable">.CGColor</span>);
-    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; numComponents; j++) {
-        colors[i * numComponents + j] = components[i][j];
-    }
-}
-<span class="built_in">CGGradientRef</span> gradient = <span class="built_in">CGGradientCreateWithColorComponents</span> (colorSpace, colors, <span class="literal">NULL</span>, [gradientColors count]);
-<span class="built_in">CGPoint</span> startPoint;
-<span class="built_in">CGPoint</span> endPoint;
-<span class="comment">//水平渐变</span>
-startPoint = <span class="built_in">CGPointMake</span>(rect<span class="variable">.origin</span><span class="variable">.x</span>, <span class="number">0</span>);
-endPoint = <span class="built_in">CGPointMake</span>(rect<span class="variable">.size</span><span class="variable">.width</span>, <span class="number">0</span>);
-<span class="comment">//垂直渐变</span>
-startPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, rect<span class="variable">.origin</span><span class="variable">.y</span>);
-endPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, rect<span class="variable">.size</span><span class="variable">.hight</span>);
-<span class="built_in">CGContextDrawLinearGradient</span>(context, gradient, startPoint, endPoint, <span class="number">0</span>);
-<span class="built_in">CGColorSpaceRelease</span>(colorSpace);
-<span class="built_in">CGGradientRelease</span>(gradient);
-}
-</code></pre><p>希望可以在你需要的时候帮到你，Best wishes！</p>
+        <p>好久没写博客了，今天抽个空写了一个在项目中用到的一个功能。<br>主要需求是列表头部有一个cover图，然后在cover的上方的<strong>导航栏实现实时模糊</strong>，我写了一个<a href="https://github.com/howeguo/CustomDynamicBlurNavigation" target="_blank" rel="external">demo放在了github上</a>。</p>
+<p><img src="https://raw.githubusercontent.com/howeguo/CustomDynamicBlurNavigation/master/1.gif" alt="Aaron Swartz"><br><a id="more"></a><br><img src="https://raw.githubusercontent.com/howeguo/CustomDynamicBlurNavigation/master/2.gif" alt="Aaron Swartz"></p>
 
       
     </div>
@@ -286,18 +220,9 @@ endPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.0</s
     
 <nav id="article-nav">
   
-    <a href="/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          ios-webview-call-nativeCode-or-native-call-jsCode
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/08/28/ios-read-userContacts/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ios-read-userContacts</div>
+    <a href="/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ios-webview-call-nativeCode-or-native-call-jsCode</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -326,7 +251,7 @@ endPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.0</s
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ios-draw-gradient-colors" data-title="ios-draw-gradient-colors" data-url="http://yoursite.com/2015/08/30/ios-draw-gradient-colors/"></div>
+	<div class="ds-thread" data-thread-key="ios-dynamic-blur-for-custom-navigation" data-title="ios-dynamic-blur-for-custom-navigation" data-url="http://yoursite.com/2015/10/24/ios-dynamic-blur-for-custom-navigation/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
