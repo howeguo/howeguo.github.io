@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-10-24T09:38:00.000Z</updated>
+  <updated>2015-10-29T18:53:54.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[ios-latest-error-when-upload-new-version]]></title>
+    <link href="http://yoursite.com/2015/10/30/ios-latest-error-when-upload-new-version/"/>
+    <id>http://yoursite.com/2015/10/30/ios-latest-error-when-upload-new-version/</id>
+    <published>2015-10-29T18:44:12.000Z</published>
+    <updated>2015-10-29T18:53:54.000Z</updated>
+    <content type="html"><![CDATA[<p>fuck，感觉每次提交app到appStore都会遇见新的问题，今天果然也不例外！<br>错误代码为ERROR ITMS－90049<br><img src="http://img.blog.csdn.net/20151022191627756" alt="Aaron Swartz"></p>
+<p>解决问题方式：</p>
+<ol>
+<li>在xcode左下角搜索info.plist 找到第三方的info.plist文件，如友盟中腾讯Api文件夹下的info.plist文件；</li>
+<li>找到Bundle version字段 ，添加项目的build号</li>
+<li><strong>添加</strong>Bundle identifier 字段，并对应添加项目的BundleId号；</li>
+<li>找到Bundle versions string, short字段 添加项目的版本号</li>
+<li>然后进行提交。</li>
+</ol>
+<p>感谢原作者 附上原文地址：<br><a href="http://blog.csdn.net/u013950854/article/details/49337605" target="_blank" rel="external">http://blog.csdn.net/u013950854/article/details/49337605</a></p>
+<p>Best wishes</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>fuck，感觉每次提交app到appStore都会遇见新的问题，今天果然也不例外！<br>错误代码为ERROR ITMS－90049<br><img src="http://img.blog.csdn.net/20151022191627756" alt="Aaron Sw]]>
+    </summary>
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+      <category term="经验" scheme="http://yoursite.com/tags/%E7%BB%8F%E9%AA%8C/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[ios-dynamic-blur-for-custom-navigation]]></title>
