@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
+						<a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
 					</div>
 				</section>
 				
@@ -170,6 +170,74 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-mysql-came-issues" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/15/mysql-came-issues/" class="article-date">
+  	<time datetime="2015-11-14T16:09:09.000Z" itemprop="datePublished">2015-11-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/15/mysql-came-issues/">mysql-came-issues</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天突然碰见mysql服务挂掉的问题，就记录一下</p>
+<p><strong> 先是重启  </strong><br>    mysql service restart<br>    /etc/init.d/mysql: ERROR: The partition with /var/lib/mysql is too full!</p>
+<p><strong>这时候发现是硬盘存储空间不够了</strong><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">df</span> -lh</span><br></pre></td></tr></table></figure></p>
+<p><strong>发现/dev/xvda1 下可使用的几乎没有了</strong></p>
+<p><strong>但是并不知道如何把大文件找到，如下 </strong><br>    <figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">find</span> <span class="built_in">path</span> -<span class="built_in">type</span> f -size +<span class="number">100</span>M （大于<span class="number">100</span>M的文件）</span><br><span class="line"><span class="built_in">find</span> <span class="built_in">path</span> -<span class="built_in">type</span> f -size <span class="number">100</span>M （等于<span class="number">100</span>M的文件）</span><br><span class="line"><span class="built_in">find</span> <span class="built_in">path</span> -<span class="built_in">type</span> f -size -<span class="number">100</span>M （小<span class="number">100</span>M的文件）</span><br></pre></td></tr></table></figure></p>
+<p><strong>也可以把所有比较大的目录都会列出来</strong><br>  <figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh <span class="keyword">*</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>然后开删</strong><br>  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">rm</span> -rf</span><br></pre></td></tr></table></figure></p>
+<p><strong>但是发现即使把这些删除了，硬盘的内存好像没有变化，最后google后用到了这个(PS:执行完后果然立马内存释放了)</strong><br>  <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> clean</span><br></pre></td></tr></table></figure></p>
+<p><strong>然后就是接着启动</strong><br>  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mysql</span> service restart</span><br></pre></td></tr></table></figure></p>
+<p><strong>但是奇怪的是一直在starting 但是并没有日志,后来用</strong></p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysqld <span class="comment">--console</span></span><br><span class="line"></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">49</span>:<span class="number">56</span> [ERROR] Found <span class="number">8</span> prepared transactions! It means that mysqld was <span class="operator">not</span> shut down properly <span class="keyword">last</span> <span class="built_in">time</span> <span class="operator">and</span> critical recovery information (<span class="keyword">last</span> binlog <span class="operator">or</span> tc.<span class="built_in">log</span> <span class="built_in">file</span>) was manually deleted <span class="keyword">after</span> <span class="operator">a</span> crash. You have <span class="built_in">to</span> <span class="built_in">start</span> mysqld <span class="operator">with</span> <span class="comment">--tc-heuristic-recover switch to commit or rollback pending transactions.</span></span><br></pre></td></tr></table></figure>
+<p><strong>最后google后找到一个办法</strong><br>  <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --<span class="keyword">tc</span>-heuristic-<span class="keyword">recover</span>=ROLLBACK</span><br></pre></td></tr></table></figure></p>
+<p><strong>最后看了一下控制台，也可以用service mysql status </strong></p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysqld <span class="comment">--console</span></span><br><span class="line">151114 23:55:58 InnoDB: The InnoDB memory heap is disabled</span><br><span class="line">151114 23:55:58 InnoDB: Mutexes and rw_locks <span class="operator"><span class="keyword">use</span> GCC atomic builtins</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Compressed <span class="keyword">tables</span> <span class="keyword">use</span> zlib <span class="number">1.2</span><span class="number">.3</span><span class="number">.4</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: <span class="keyword">Using</span> Linux <span class="keyword">native</span> AIO</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Initializing buffer pool, <span class="keyword">size</span> = <span class="number">256.0</span><span class="keyword">M</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Completed initialization <span class="keyword">of</span> buffer pool</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: highest supported <span class="keyword">file</span> <span class="keyword">format</span> <span class="keyword">is</span> Barracuda.</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">59</span>  <span class="keyword">InnoDB</span>: Waiting <span class="keyword">for</span> the background threads <span class="keyword">to</span> <span class="keyword">start</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">56</span>:<span class="number">00</span> Percona XtraDB (<span class="keyword">http</span>://www.percona.com) <span class="number">5.5</span><span class="number">.41</span>-MariaDB-<span class="number">37.0</span> started;</span> log sequence number 2610000435</span><br><span class="line">151114 23:56:00 [Note] Plugin 'FEEDBACK' is disabled.</span><br><span class="line">151114 23:56:00 [Note] Server socket created on IP: '<span class="operator">0.<span class="number">0.0</span><span class="number">.0</span><span class="string">'.</span><br><span class="line">151114 23:56:00 [Note] Event Scheduler: Loaded 1 event</span><br><span class="line">151114 23:56:00 [Note] mysqld: ready for connections.</span><br><span class="line">Version: '</span><span class="number">5.5</span><span class="number">.42</span>-MariaDB-<span class="number">1</span>~precise-<span class="keyword">log</span><span class="string">'  socket: '</span>/<span class="keyword">var</span>/run/mysqld/mysqld.sock<span class="string">'  port: 3306  mariadb.org binary distribution</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-ios-latest-error-when-upload-new-version" class="article article-type-post" itemscope itemprop="blogPost">
   
