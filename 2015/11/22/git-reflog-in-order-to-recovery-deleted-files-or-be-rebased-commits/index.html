@@ -3,34 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>ios-latest-error-when-upload-new-version | Howeguo Blog</title>
+  <title>git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits | Howeguo Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="fuck，感觉每次提交app到appStore都会遇见新的问题，今天果然也不例外！错误代码为ERROR ITMS－90049
-解决问题方式：
-
-在xcode左下角搜索info.plist 找到第三方的info.plist文件，如友盟中腾讯Api文件夹下的info.plist文件；
-找到Bundle version字段 ，添加项目的build号
-添加Bundle identifier 字段，并对应添">
+  <meta name="description" content="git reflog  可以查看所有分支的所有操作记录（包括（包括commit和reset的操作），包括已经被删除的commit记录git log  则不能察看已经删除了的commit记录
+具体一个例子，假设有三个commit:commit3: add test3.ccommit2: add test2.ccommit1: add test1.c
+如果执行 git reset –hard HEAD">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ios-latest-error-when-upload-new-version">
-<meta property="og:url" content="http://yoursite.com/2015/10/30/ios-latest-error-when-upload-new-version/index.html">
+<meta property="og:title" content="git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits">
+<meta property="og:url" content="http://yoursite.com/2015/11/22/git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits/index.html">
 <meta property="og:site_name" content="Howeguo Blog">
-<meta property="og:description" content="fuck，感觉每次提交app到appStore都会遇见新的问题，今天果然也不例外！错误代码为ERROR ITMS－90049
-解决问题方式：
-
-在xcode左下角搜索info.plist 找到第三方的info.plist文件，如友盟中腾讯Api文件夹下的info.plist文件；
-找到Bundle version字段 ，添加项目的build号
-添加Bundle identifier 字段，并对应添">
-<meta property="og:image" content="http://img.blog.csdn.net/20151022191627756">
-<meta property="og:updated_time" content="2015-10-29T18:53:54.000Z">
+<meta property="og:description" content="git reflog  可以查看所有分支的所有操作记录（包括（包括commit和reset的操作），包括已经被删除的commit记录git log  则不能察看已经删除了的commit记录
+具体一个例子，假设有三个commit:commit3: add test3.ccommit2: add test2.ccommit1: add test1.c
+如果执行 git reset –hard HEAD">
+<meta property="og:updated_time" content="2015-11-24T16:34:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ios-latest-error-when-upload-new-version">
-<meta name="twitter:description" content="fuck，感觉每次提交app到appStore都会遇见新的问题，今天果然也不例外！错误代码为ERROR ITMS－90049
-解决问题方式：
-
-在xcode左下角搜索info.plist 找到第三方的info.plist文件，如友盟中腾讯Api文件夹下的info.plist文件；
-找到Bundle version字段 ，添加项目的build号
-添加Bundle identifier 字段，并对应添">
+<meta name="twitter:title" content="git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits">
+<meta name="twitter:description" content="git reflog  可以查看所有分支的所有操作记录（包括（包括commit和reset的操作），包括已经被删除的commit记录git log  则不能察看已经删除了的commit记录
+具体一个例子，假设有三个commit:commit3: add test3.ccommit2: add test2.ccommit1: add test1.c
+如果执行 git reset –hard HEAD">
   
     <link rel="alternative" href="/atom.xml" title="Howeguo Blog" type="application/atom+xml">
   
@@ -186,11 +176,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-ios-latest-error-when-upload-new-version" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/10/30/ios-latest-error-when-upload-new-version/" class="article-date">
-  	<time datetime="2015-10-29T18:44:12.000Z" itemprop="datePublished">2015-10-30</time>
+      <a href="/2015/11/22/git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits/" class="article-date">
+  	<time datetime="2015-11-22T15:49:53.000Z" itemprop="datePublished">2015-11-22</time>
 </a>
     </div>
   
@@ -203,7 +193,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ios-latest-error-when-upload-new-version
+      git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits
     </h1>
   
 
@@ -212,7 +202,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/经验/">经验</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reflog/">reflog</a></li></ul>
 	</div>
 
         
@@ -223,17 +213,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>fuck，感觉每次提交app到appStore都会遇见新的问题，今天果然也不例外！<br>错误代码为ERROR ITMS－90049<br><img src="http://img.blog.csdn.net/20151022191627756" alt="Aaron Swartz"></p>
-<p>解决问题方式：</p>
-<ol>
-<li>在xcode左下角搜索info.plist 找到第三方的info.plist文件，如友盟中腾讯Api文件夹下的info.plist文件；</li>
-<li>找到Bundle version字段 ，添加项目的build号</li>
-<li><strong>添加</strong>Bundle identifier 字段，并对应添加项目的BundleId号；</li>
-<li>找到Bundle versions string, short字段 添加项目的版本号</li>
-<li>然后进行提交。</li>
-</ol>
-<p>感谢原作者 附上原文地址：<br><a href="http://blog.csdn.net/u013950854/article/details/49337605" target="_blank" rel="external">http://blog.csdn.net/u013950854/article/details/49337605</a></p>
-<p>Best wishes</p>
+        <p><strong>git reflog </strong> 可以查看所有分支的所有操作记录（包括（包括commit和reset的操作），包括已经被删除的commit记录<br><strong>git log </strong> 则不能察看已经删除了的commit记录</p>
+<p>具体一个例子，假设有三个commit:<br>commit3: add test3.c<br>commit2: add test2.c<br>commit1: add test1.c</p>
+<p>如果执行 <strong>git reset –hard HEAD~1 </strong>则删除了commit3，如果发现删除错误了，需要恢复commit3，<br>或者是<strong>rebase</strong>的时候被rebase掉了，<br>这个时候就要使用 <strong>git reflog</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HEAD@&#123;<span class="number">0</span>&#125;: HEAD~<span class="number">1</span>: updating HEAD</span><br><span class="line"><span class="number">63</span>ee781 HEAD@&#123;<span class="number">1</span>&#125;: commit: test3:q</span><br></pre></td></tr></table></figure></p>
+<p>test3就是commit信息，然后拿到63ee781<br>可以运行<strong>git reset –hard 63ee781</strong>，则恢复了cmmit3，<br>运行 <strong>git log </strong>后可以看到：<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">commit3:</span> <span class="keyword">add</span> test3.c</span><br><span class="line"><span class="label">commit2:</span> <span class="keyword">add</span> test2.c</span><br><span class="line"><span class="label">commit1:</span> <span class="keyword">add</span> test1.c</span><br></pre></td></tr></table></figure></p>
+<p>这里也可以使用另外一种方法来实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick <span class="number">63</span>ee78</span><br></pre></td></tr></table></figure>
+<p>感谢原作者 <a href="http://blog.csdn.net/ibingow/article/details/7541402" target="_blank" rel="external">http://blog.csdn.net/ibingow/article/details/7541402</a><br>希望可帮到你，Best wishes</p>
 
       
     </div>
@@ -243,18 +229,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/11/15/mysql-came-issues/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/11/25/how-to-install-cocoapods/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          mysql-came-issues
+          how-to-install-cocoapods
         
       </div>
     </a>
   
   
-    <a href="/2015/10/24/ios-dynamic-blur-for-custom-navigation/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ios-dynamic-blur-for-custom-navigation</div>
+    <a href="/2015/11/20/git-tag-option/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git-tag-option</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -283,7 +269,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ios-latest-error-when-upload-new-version" data-title="ios-latest-error-when-upload-new-version" data-url="http://yoursite.com/2015/10/30/ios-latest-error-when-upload-new-version/"></div>
+	<div class="ds-thread" data-thread-key="git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits" data-title="git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits" data-url="http://yoursite.com/2015/11/22/git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

@@ -19,7 +19,7 @@
 这时候发现是硬盘存储空间不够了1df -lh
 发现/dev/xvda1 下可使用的几乎没有了
 但是并不知道如何把大文件找到，如下">
-<meta property="og:updated_time" content="2015-11-14T16:53:51.000Z">
+<meta property="og:updated_time" content="2015-11-14T16:59:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql-came-issues">
 <meta name="twitter:description" content="今天突然碰见mysql服务挂掉的问题，就记录一下
@@ -120,7 +120,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
+						<a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/cocoapods/" style="font-size: 10px;">cocoapods</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/reflog/" style="font-size: 10px;">reflog</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
 					</div>
 				</section>
 				
@@ -233,6 +233,7 @@
 <p><strong>最后google后找到一个办法</strong><br>  <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --<span class="keyword">tc</span>-heuristic-<span class="keyword">recover</span>=ROLLBACK</span><br></pre></td></tr></table></figure></p>
 <p><strong>最后看了一下控制台，也可以用service mysql status </strong></p>
   <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysqld <span class="comment">--console</span></span><br><span class="line">151114 23:55:58 InnoDB: The InnoDB memory heap is disabled</span><br><span class="line">151114 23:55:58 InnoDB: Mutexes and rw_locks <span class="operator"><span class="keyword">use</span> GCC atomic builtins</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Compressed <span class="keyword">tables</span> <span class="keyword">use</span> zlib <span class="number">1.2</span><span class="number">.3</span><span class="number">.4</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: <span class="keyword">Using</span> Linux <span class="keyword">native</span> AIO</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Initializing buffer pool, <span class="keyword">size</span> = <span class="number">256.0</span><span class="keyword">M</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Completed initialization <span class="keyword">of</span> buffer pool</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: highest supported <span class="keyword">file</span> <span class="keyword">format</span> <span class="keyword">is</span> Barracuda.</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">59</span>  <span class="keyword">InnoDB</span>: Waiting <span class="keyword">for</span> the background threads <span class="keyword">to</span> <span class="keyword">start</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">56</span>:<span class="number">00</span> Percona XtraDB (<span class="keyword">http</span>://www.percona.com) <span class="number">5.5</span><span class="number">.41</span>-MariaDB-<span class="number">37.0</span> started;</span> log sequence number 2610000435</span><br><span class="line">151114 23:56:00 [Note] Plugin 'FEEDBACK' is disabled.</span><br><span class="line">151114 23:56:00 [Note] Server socket created on IP: '<span class="operator">0.<span class="number">0.0</span><span class="number">.0</span><span class="string">'.</span><br><span class="line">151114 23:56:00 [Note] Event Scheduler: Loaded 1 event</span><br><span class="line">151114 23:56:00 [Note] mysqld: ready for connections.</span><br><span class="line">Version: '</span><span class="number">5.5</span><span class="number">.42</span>-MariaDB-<span class="number">1</span>~precise-<span class="keyword">log</span><span class="string">'  socket: '</span>/<span class="keyword">var</span>/run/mysqld/mysqld.sock<span class="string">'  port: 3306  mariadb.org binary distribution</span></span></span><br></pre></td></tr></table></figure>
+<p>希望可以帮到你，Best wishes</p>
 
       
     </div>
@@ -241,6 +242,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/11/15/how-to-compress-file-inclue-music-image-videos/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          how-to-compress-file-inclue(music-image-videos)
+        
+      </div>
+    </a>
   
   
     <a href="/2015/10/30/ios-latest-error-when-upload-new-version/" id="article-nav-older" class="article-nav-link-wrap">

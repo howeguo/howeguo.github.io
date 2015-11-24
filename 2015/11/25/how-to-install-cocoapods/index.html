@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>how-to-install-cocoapods | Howeguo Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CocoaPods安装和使用CocoaPods是iOS最常用的第三方类库管理工具，绝大部分有名的开源类库都支持CocoaPods。CocoaPods是用Ruby实现的，要想使用它首先需要有Ruby的环境。幸运的是OS X系统默认已经可以运行Ruby了，因此我们只需执行以下命令
+CocoaPods是用Ruby实现的，要想使用它首先需要有Ruby的环境。幸运的是OS X系统默认已经可以运行Ruby了，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="how-to-install-cocoapods">
+<meta property="og:url" content="http://yoursite.com/2015/11/25/how-to-install-cocoapods/index.html">
+<meta property="og:site_name" content="Howeguo Blog">
+<meta property="og:description" content="CocoaPods安装和使用CocoaPods是iOS最常用的第三方类库管理工具，绝大部分有名的开源类库都支持CocoaPods。CocoaPods是用Ruby实现的，要想使用它首先需要有Ruby的环境。幸运的是OS X系统默认已经可以运行Ruby了，因此我们只需执行以下命令
+CocoaPods是用Ruby实现的，要想使用它首先需要有Ruby的环境。幸运的是OS X系统默认已经可以运行Ruby了，">
+<meta property="og:updated_time" content="2015-11-24T16:34:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="how-to-install-cocoapods">
+<meta name="twitter:description" content="CocoaPods安装和使用CocoaPods是iOS最常用的第三方类库管理工具，绝大部分有名的开源类库都支持CocoaPods。CocoaPods是用Ruby实现的，要想使用它首先需要有Ruby的环境。幸运的是OS X系统默认已经可以运行Ruby了，因此我们只需执行以下命令
+CocoaPods是用Ruby实现的，要想使用它首先需要有Ruby的环境。幸运的是OS X系统默认已经可以运行Ruby了，">
+  
+    <link rel="alternative" href="/atom.xml" title="Howeguo Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://avatars0.githubusercontent.com/u/3302533?v=3&amp;s=460" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">howeguo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">nothing else</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/假文艺">假文艺</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/howeguo" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/cocoapods/" style="font-size: 10px;">cocoapods</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/reflog/" style="font-size: 10px;">reflog</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">iOS、python、php、product、Guitar</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">howeguo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://avatars0.githubusercontent.com/u/3302533?v=3&amp;s=460" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">howeguo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">nothing else</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/假文艺">假文艺</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/howeguo" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-how-to-install-cocoapods" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/25/how-to-install-cocoapods/" class="article-date">
+  	<time datetime="2015-11-24T16:22:58.000Z" itemprop="datePublished">2015-11-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      how-to-install-cocoapods
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cocoapods/">cocoapods</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>CocoaPods安装和使用</strong><br>CocoaPods是iOS最常用的第三方类库管理工具，绝大部分有名的开源类库都支持CocoaPods。<br>CocoaPods是用Ruby实现的，要想使用它首先需要有Ruby的环境。幸运的是OS X系统默认已经可以运行Ruby了，因此我们只需执行以下命令</p>
+<p>CocoaPods是用Ruby实现的，要想使用它首先需要有Ruby的环境。幸运的是OS X系统默认已经可以运行Ruby了，因此我们只需执行以下命令：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gem <span class="operator"><span class="keyword">install</span> cocoapods</span><br><span class="line">sudo gem <span class="keyword">install</span> -<span class="keyword">n</span> /usr/<span class="keyword">local</span>/<span class="keyword">bin</span> cocoapods</span></span><br></pre></td></tr></table></figure>
+<p>由于某些原因，执行时会出现下面的错误提示：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR:  Could <span class="operator">not</span> find <span class="operator">a</span> valid gem <span class="string">'cocoapods'</span> (&gt;= <span class="number">0</span>), here is why:</span><br><span class="line">          Unable <span class="built_in">to</span> download data <span class="built_in">from</span> <span class="keyword">https</span>://rubygems.org/ - Errno::EPIPE: Broken pipe - SSL_connect (<span class="keyword">https</span>://rubygems.org/latest_specs<span class="number">.4</span><span class="number">.8</span>.gz)</span><br></pre></td></tr></table></figure>
+<p>当你使用代理后如果还是很慢，可以用淘宝的RubyGems镜像来代替官方版本，</p>
+<p>#注意taobao的镜像地址已经都换成https了,好多博客如果没更新的话还是http<br>执行以下命令：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gem sources -l</span><br><span class="line"><span class="variable">$ </span>gem sources --remove <span class="symbol">https:</span>/<span class="regexp">/rubygems.org/</span></span><br><span class="line"><span class="variable">$ </span>gem sources -a <span class="symbol">https:</span>/<span class="regexp">/ruby.taobao.org/</span></span><br><span class="line"><span class="variable">$ </span>gem sources -l</span><br></pre></td></tr></table></figure></p>
+<p>安装成功后，接着执行命令：<br><a id="more"></a></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">pod</span> setup</span><br></pre></td></tr></table></figure>
+<p>如果Ruby环境不够新，可能需要更新以下：<br><figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem <span class="keyword">update</span> --<span class="built_in">system</span></span><br></pre></td></tr></table></figure></p>
+<p>至此安装就完成了，我们可以尝试搜索一个第三方类库：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">pod</span> search AFNetworking</span><br></pre></td></tr></table></figure>
+<p>使用CocoaPods的第一步，是在当前项目下，新建一个Podfile文件：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">touch</span> Podfile</span><br></pre></td></tr></table></figure></p>
+<p>然后利用vim打开Podfile文件编辑，加入你想要使用的类库，格式如下：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">platform </span>:ios</span><br><span class="line">pod <span class="string">'Reachability'</span>, <span class="string">'3.1.0'</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">platform</span>:ios, <span class="string">'6.0'</span></span><br><span class="line">pod <span class="string">'JSONKit'</span>,<span class="string">'1.4'</span></span><br><span class="line">pod <span class="string">'AFNetworking'</span>, <span class="string">'~&gt; 2.3.1'</span></span><br></pre></td></tr></table></figure></p>
+<p>如果是拷贝的别人的项目，或是一个很久没打开过的项目，可能需要先执行一下：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">pod</span> update</span><br></pre></td></tr></table></figure>
+<p>最后一步，执行命令：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
+<p>当终端出现类似下面的提示后，就代表成功了：</p>
+<p>[!] From now on use <code>Sample0814.xcworkspace</code>.<br>这个时候会看到项目文件夹下多了一个文件xxx.xcworkspace，以后要通过这个文件打开项目，老项目文件xxx.xcodeproj不再使用。<br>P.s.1 上面的每一步都有可能出现问题，但大部分问题都是因为大局域网的原因，用一个网速稳定的境外VPN可破。</p>
+<p>P.s.2 如果上面因为权限问题安装失败，必须每次都要删除</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf <span class="regexp">/Users/</span>loginnanme<span class="regexp">/Library/</span>Caches<span class="regexp">/CocoaPods/</span></span><br></pre></td></tr></table></figure>
+<p>因为这个缓存中会存下你的github的东西，造成每次都调用上次权限问题的缓存。</p>
+<p>P.s.3 关于Podfile文件编辑时，第三方库版本号的各种写法：</p>
+<p>复制代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pod ‘AFNetworking’      <span class="comment">//不显式指定依赖库版本，表示每次都获取最新版本</span></span><br><span class="line">pod ‘AFNetworking’,  ‘<span class="number">2.0</span>’     <span class="comment">//只使用2.0版本</span></span><br><span class="line">pod ‘AFNetworking’, ‘&gt;<span class="number">2.0</span>′     <span class="comment">//使用高于2.0的版本</span></span><br><span class="line">pod ‘AFNetworking’, ‘&gt;=<span class="number">2.0</span>′     <span class="comment">//使用大于或等于2.0的版本</span></span><br><span class="line">pod ‘AFNetworking’, ‘&lt;<span class="number">2.0</span>′     <span class="comment">//使用小于2.0的版本</span></span><br><span class="line">pod ‘AFNetworking’, ‘&lt;=<span class="number">2.0</span>′     <span class="comment">//使用小于或等于2.0的版本</span></span><br><span class="line">pod ‘AFNetworking’, ‘~&gt;<span class="number">0.1</span><span class="number">.2</span>′     <span class="comment">//使用大于等于0.1.2但小于0.2的版本，相当于&gt;=0.1.2并且&lt;0.2.0</span></span><br><span class="line">pod ‘AFNetworking’, ‘~&gt;<span class="number">0.1</span>′     <span class="comment">//使用大于等于0.1但小于1.0的版本</span></span><br><span class="line">pod ‘AFNetworking’, ‘~&gt;<span class="number">0</span>′     <span class="comment">//高于0的版本，写这个限制和什么都不写是一个效果，都表示使用最新版本</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/22/git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="how-to-install-cocoapods" data-title="how-to-install-cocoapods" data-url="http://yoursite.com/2015/11/25/how-to-install-cocoapods/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"howeguo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 Howeguo
+    	</div>
+      	<div class="footer-right">
+      		Thanks&nbsp<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

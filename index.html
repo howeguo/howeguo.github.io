@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
+						<a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/cocoapods/" style="font-size: 10px;">cocoapods</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/reflog/" style="font-size: 10px;">reflog</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
 					</div>
 				</section>
 				
@@ -171,6 +171,253 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-how-to-install-cocoapods" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/25/how-to-install-cocoapods/" class="article-date">
+  	<time datetime="2015-11-24T16:22:58.000Z" itemprop="datePublished">2015-11-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/25/how-to-install-cocoapods/">how-to-install-cocoapods</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>CocoaPods安装和使用</strong><br>CocoaPods是iOS最常用的第三方类库管理工具，绝大部分有名的开源类库都支持CocoaPods。<br>CocoaPods是用Ruby实现的，要想使用它首先需要有Ruby的环境。幸运的是OS X系统默认已经可以运行Ruby了，因此我们只需执行以下命令</p>
+<p>CocoaPods是用Ruby实现的，要想使用它首先需要有Ruby的环境。幸运的是OS X系统默认已经可以运行Ruby了，因此我们只需执行以下命令：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gem <span class="operator"><span class="keyword">install</span> cocoapods</span><br><span class="line">sudo gem <span class="keyword">install</span> -<span class="keyword">n</span> /usr/<span class="keyword">local</span>/<span class="keyword">bin</span> cocoapods</span></span><br></pre></td></tr></table></figure>
+<p>由于某些原因，执行时会出现下面的错误提示：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR:  Could <span class="operator">not</span> find <span class="operator">a</span> valid gem <span class="string">'cocoapods'</span> (&gt;= <span class="number">0</span>), here is why:</span><br><span class="line">          Unable <span class="built_in">to</span> download data <span class="built_in">from</span> <span class="keyword">https</span>://rubygems.org/ - Errno::EPIPE: Broken pipe - SSL_connect (<span class="keyword">https</span>://rubygems.org/latest_specs<span class="number">.4</span><span class="number">.8</span>.gz)</span><br></pre></td></tr></table></figure>
+<p>当你使用代理后如果还是很慢，可以用淘宝的RubyGems镜像来代替官方版本，</p>
+<p>#注意taobao的镜像地址已经都换成https了,好多博客如果没更新的话还是http<br>执行以下命令：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>gem sources -l</span><br><span class="line"><span class="variable">$ </span>gem sources --remove <span class="symbol">https:</span>/<span class="regexp">/rubygems.org/</span></span><br><span class="line"><span class="variable">$ </span>gem sources -a <span class="symbol">https:</span>/<span class="regexp">/ruby.taobao.org/</span></span><br><span class="line"><span class="variable">$ </span>gem sources -l</span><br></pre></td></tr></table></figure></p>
+<p>安装成功后，接着执行命令：<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cocoapods/">cocoapods</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/11/25/how-to-install-cocoapods/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/22/git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits/" class="article-date">
+  	<time datetime="2015-11-22T15:49:53.000Z" itemprop="datePublished">2015-11-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/22/git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits/">git-reflog-in-order-to-recovery-deleted-files-or-be-rebased-commits</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>git reflog </strong> 可以查看所有分支的所有操作记录（包括（包括commit和reset的操作），包括已经被删除的commit记录<br><strong>git log </strong> 则不能察看已经删除了的commit记录</p>
+<p>具体一个例子，假设有三个commit:<br>commit3: add test3.c<br>commit2: add test2.c<br>commit1: add test1.c</p>
+<p>如果执行 <strong>git reset –hard HEAD~1 </strong>则删除了commit3，如果发现删除错误了，需要恢复commit3，<br>或者是<strong>rebase</strong>的时候被rebase掉了，<br>这个时候就要使用 <strong>git reflog</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HEAD@&#123;<span class="number">0</span>&#125;: HEAD~<span class="number">1</span>: updating HEAD</span><br><span class="line"><span class="number">63</span>ee781 HEAD@&#123;<span class="number">1</span>&#125;: commit: test3:q</span><br></pre></td></tr></table></figure></p>
+<p>test3就是commit信息，然后拿到63ee781<br>可以运行<strong>git reset –hard 63ee781</strong>，则恢复了cmmit3，<br>运行 <strong>git log </strong>后可以看到：<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">commit3:</span> <span class="keyword">add</span> test3.c</span><br><span class="line"><span class="label">commit2:</span> <span class="keyword">add</span> test2.c</span><br><span class="line"><span class="label">commit1:</span> <span class="keyword">add</span> test1.c</span><br></pre></td></tr></table></figure></p>
+<p>这里也可以使用另外一种方法来实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick <span class="number">63</span>ee78</span><br></pre></td></tr></table></figure>
+<p>感谢原作者 <a href="http://blog.csdn.net/ibingow/article/details/7541402" target="_blank" rel="external">http://blog.csdn.net/ibingow/article/details/7541402</a><br>希望可帮到你，Best wishes</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reflog/">reflog</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-git-tag-option" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/20/git-tag-option/" class="article-date">
+  	<time datetime="2015-11-19T16:06:59.000Z" itemprop="datePublished">2015-11-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/20/git-tag-option/">git-tag-option</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>查看标签</strong><br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>git tag <span class="comment"># 在控制台打印出当前仓库的所有标签</span></span><br><span class="line"><span class="variable">$ </span>git tag -l ‘v<span class="number">0</span>.<span class="number">1</span>.*’ <span class="comment"># 搜索符合模式的标签</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>切换标签</strong><br>与切换分支命令相同，用git checkout [tagname]<br>切回去用 git checkout . 或者是 git checkout [当前开发的branch]<br>查看标签信息<br>用git show命令可以查看标签的版本信息：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git show v0<span class="number">.1</span><span class="number">.2</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>创建标签</strong><br>git标签分为两种类型：轻量标签和附注标签。轻量标签是指向提交对象的引用，附注标签则是仓库中的一个独立对象。建议使用附注标签。<br>创建轻量标签<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git tag v0<span class="number">.1</span><span class="number">.2</span>-light</span><br></pre></td></tr></table></figure></p>
+<p>创建附注标签<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git tag -a v0<span class="number">.1</span><span class="number">.2</span> -m <span class="string">"0.1.2版本"</span></span><br></pre></td></tr></table></figure></p>
+<p>创建轻量标签不需要传递参数，直接指定标签名称即可。<br>创建附注标签时，参数a即annotated的缩写，指定标签类型，后附标签名。参数m指定标签说明，说明信息会保存在标签对象中。</p>
+<p><strong>删除标签</strong></p>
+<p>误打或需要修改标签时，需要先将标签删除，再打新标签。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git tag -d v0<span class="number">.1</span><span class="number">.2</span> <span class="preprocessor"># 删除标签</span></span><br></pre></td></tr></table></figure></p>
+<p>参数d即delete的缩写，意为删除其后指定的标签。</p>
+<p>给指定的commit打标签<br>打标签不必要在head之上，也可在之前的版本上打，这需要你知道某个提交对象的校验和（通过git log获取）。<br>补打标签<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git tag -a v0<span class="number">.1</span><span class="number">.1</span> <span class="number">9f</span>bc3d0</span><br></pre></td></tr></table></figure></p>
+<p><strong>提交标签</strong><br>通常的git push不会将标签对象提交到git服务器，我们需要进行显式的操作：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin v0<span class="number">.1</span><span class="number">.2</span> <span class="preprocessor"># 将v0<span class="number">.1</span><span class="number">.2</span>标签提交到git服务器</span></span><br><span class="line">$ git push origin –tags <span class="preprocessor"># 将本地所有标签一次性提交到git服务器</span></span><br></pre></td></tr></table></figure></p>
+<p>注意：如果想看之前某个标签状态下的文件，可以这样操作<br>1.git tag   查看当前分支下的标签<br>2.git  checkout v0.21   此时会指向打v0.21标签时的代码状态，（但现在处于一个空的分支上）</p>
+<p>感谢原作者：<a href="http://blog.csdn.net/wangjia55/article/details/8793577" target="_blank" rel="external">http://blog.csdn.net/wangjia55/article/details/8793577</a><br>希望可帮到你，Best wishes</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tag/">tag</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-how-to-compress-file-inclue-music-image-videos" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/15/how-to-compress-file-inclue-music-image-videos/" class="article-date">
+  	<time datetime="2015-11-14T16:56:33.000Z" itemprop="datePublished">2015-11-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/15/how-to-compress-file-inclue-music-image-videos/">how-to-compress-file-inclue(music-image-videos)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近看了美剧硅谷，突然想自己也实现一个文件压缩，也正好项目里遇到了一些图片的压缩、日志文件太占用空间急需压缩的问题。<br>但是我还没想好怎么写，先mark一下，会不定期更新</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-mysql-came-issues" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -211,6 +458,7 @@
 <p><strong>最后google后找到一个办法</strong><br>  <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --<span class="keyword">tc</span>-heuristic-<span class="keyword">recover</span>=ROLLBACK</span><br></pre></td></tr></table></figure></p>
 <p><strong>最后看了一下控制台，也可以用service mysql status </strong></p>
   <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysqld <span class="comment">--console</span></span><br><span class="line">151114 23:55:58 InnoDB: The InnoDB memory heap is disabled</span><br><span class="line">151114 23:55:58 InnoDB: Mutexes and rw_locks <span class="operator"><span class="keyword">use</span> GCC atomic builtins</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Compressed <span class="keyword">tables</span> <span class="keyword">use</span> zlib <span class="number">1.2</span><span class="number">.3</span><span class="number">.4</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: <span class="keyword">Using</span> Linux <span class="keyword">native</span> AIO</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Initializing buffer pool, <span class="keyword">size</span> = <span class="number">256.0</span><span class="keyword">M</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Completed initialization <span class="keyword">of</span> buffer pool</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: highest supported <span class="keyword">file</span> <span class="keyword">format</span> <span class="keyword">is</span> Barracuda.</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">59</span>  <span class="keyword">InnoDB</span>: Waiting <span class="keyword">for</span> the background threads <span class="keyword">to</span> <span class="keyword">start</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">56</span>:<span class="number">00</span> Percona XtraDB (<span class="keyword">http</span>://www.percona.com) <span class="number">5.5</span><span class="number">.41</span>-MariaDB-<span class="number">37.0</span> started;</span> log sequence number 2610000435</span><br><span class="line">151114 23:56:00 [Note] Plugin 'FEEDBACK' is disabled.</span><br><span class="line">151114 23:56:00 [Note] Server socket created on IP: '<span class="operator">0.<span class="number">0.0</span><span class="number">.0</span><span class="string">'.</span><br><span class="line">151114 23:56:00 [Note] Event Scheduler: Loaded 1 event</span><br><span class="line">151114 23:56:00 [Note] mysqld: ready for connections.</span><br><span class="line">Version: '</span><span class="number">5.5</span><span class="number">.42</span>-MariaDB-<span class="number">1</span>~precise-<span class="keyword">log</span><span class="string">'  socket: '</span>/<span class="keyword">var</span>/run/mysqld/mysqld.sock<span class="string">'  port: 3306  mariadb.org binary distribution</span></span></span><br></pre></td></tr></table></figure>
+<p>希望可以帮到你，Best wishes</p>
 
       
     </div>
@@ -565,178 +813,10 @@ gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CG
 
 
   
-    <article id="post-ios-UIButton-Highlight-issue-in-UITableView" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/" class="article-date">
-  	<time datetime="2015-08-24T15:59:50.000Z" itemprop="datePublished">2015-08-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/">iOS7/8 UITableView/UIScrollView上UIButton不能立即响应高亮的原因及解决办法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，这是因为iOS系统会默认会延迟150ms的时间去检查当前该事件是否能够出发UITableView的滑动，如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。</p>
-<p><strong>1、将UIButton所有属于UIScrollView的父视图的delaysContentTouches属性设置成为NO。</strong><br><strong>2、继承UIScrollView或UITableView，并重写- (BOOL)touchesShouldCancelInContentView:(UIView*)view方法，让其响应拖动方法</strong></p>
-<p>废话不多说，直接上代码 以下是UITableView的实现<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-first-post" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/24/first-post/" class="article-date">
-  	<time datetime="2015-08-24T15:54:00.000Z" itemprop="datePublished">2015-08-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/24/first-post/">第一篇文章</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>很多时候，自己做过的事情都没有记录下来，回头遇见相同的问题的时候，还是需要去Google，这个是一件非常痛苦的事情，其实写博客，不仅仅是对自己的经验的总结和积累，更是当你遇见的问题，别人也遇见的时候，你的经验的分享就会对别人起到非常大的帮助！更重要是<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/假文艺/">假文艺</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/24/first-post/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/22/hello-world/" class="article-date">
-  	<time datetime="2015-08-22T15:59:10.000Z" itemprop="datePublished">2015-08-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/22/hello-world/">Hello Hexo</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/22/hello-world/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
