@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2016-01-14T04:29:15.000Z</updated>
+  <updated>2016-04-23T06:46:05.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,128 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[first-product]]></title>
+    <link href="http://yoursite.com/2016/04/23/first-product/"/>
+    <id>http://yoursite.com/2016/04/23/first-product/</id>
+    <published>2016-04-23T06:46:05.000Z</published>
+    <updated>2016-04-23T06:46:05.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="1" scheme="http://yoursite.com/tags/1/"/>
+    
+      <category term="2" scheme="http://yoursite.com/tags/2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ReactiveCocoa-UI-UITextField]]></title>
+    <link href="http://yoursite.com/2016/01/21/ReactiveCocoa-UI-UITextField/"/>
+    <id>http://yoursite.com/2016/01/21/ReactiveCocoa-UI-UITextField/</id>
+    <published>2016-01-21T07:17:56.000Z</published>
+    <updated>2016-01-21T07:23:03.000Z</updated>
+    <content type="html"><![CDATA[<p>今天遇见了UITextField的使用<br>1.监听输入的状态<br>    [[self.textField rac_signalForControlEvents:UIControlEventEditingDidBegin] subscribeNext:^(UITextField *sender) {<br>              @strongify(self);<br>              NSLog(@”tag is %@”,@(sender.tag));<br>        }];</p>
+<ol>
+<li>监控输入的内容<br> [self.textField.rac_textSignal subscribeNext:^(id x) {<pre><code><span class="function">NSLog</span>(<span class="at_rule">@<span class="string">"content is %@"</span>,x);</span>
+</code></pre> }];</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>今天遇见了UITextField的使用<br>1.监听输入的状态<br>    [[self.textField rac_signalForControlEvents:UIControlEventEditingDidBegin] subscribeNext:^(UIText]]>
+    </summary>
+    
+      <category term="ReactiveCocoa" scheme="http://yoursite.com/tags/ReactiveCocoa/"/>
+    
+      <category term="UIKit" scheme="http://yoursite.com/tags/UIKit/"/>
+    
+      <category term="UITextField" scheme="http://yoursite.com/tags/UITextField/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ReactiveCocoa-Observer]]></title>
+    <link href="http://yoursite.com/2016/01/21/ReactiveCocoa-Observer/"/>
+    <id>http://yoursite.com/2016/01/21/ReactiveCocoa-Observer/</id>
+    <published>2016-01-21T07:02:46.000Z</published>
+    <updated>2016-01-21T07:03:43.000Z</updated>
+    <content type="html"><![CDATA[<p>1.监听属性的变化</p>
+<p>TUHomeViewModel *model = [[TUHomeViewModel alloc] init];<br>[RACObserve(model, dataArray) subscribeNext:^(id x) {<br>    NSLog(@”haha is %@”,x);<br>}];</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>1.监听属性的变化</p>
+<p>TUHomeViewModel *model = [[TUHomeViewModel alloc] init];<br>[RACObserve(model, dataArray) subscribeNext:^(id x) {<br>   ]]>
+    </summary>
+    
+      <category term="Observer" scheme="http://yoursite.com/tags/Observer/"/>
+    
+      <category term="ReactiveCocoa" scheme="http://yoursite.com/tags/ReactiveCocoa/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ReactiveCocoa-UI-Button]]></title>
+    <link href="http://yoursite.com/2016/01/19/ReactiveCocoa-UI-Button/"/>
+    <id>http://yoursite.com/2016/01/19/ReactiveCocoa-UI-Button/</id>
+    <published>2016-01-19T12:16:53.000Z</published>
+    <updated>2016-01-21T07:18:40.000Z</updated>
+    <content type="html"><![CDATA[<p>新项目中使用了ReactiveCocoa框架，然后在使用过程中遇见的问题记录一下<br>今天遇见了UIButton的使用<br>传统的UIButton Target Action 方式</p>
+<p>之前我们使用UIButton的点击方法一般有两种。一种是直接从xib里面拖一个IBAction出来在里面写代码。</p>
+<p>另外一种是代码创建的 比如这样</p>
+<p>  UIButton *myButton = [[UIButton alloc] init…];<br>  [myButton addTarget:something action:@selector(myAction) forControlEvents:UIControlEventTouchUpInside];<br>然后在下面写一个myAction的方法来进行操作。</p>
+<p>这样对我来说存在两个问题：</p>
+<p>button对应的方法分开了。在阅读代码的时候，当我想知道这个button对应的方法或者反过来action方法对应的button。通常需要跳转一次以上才能知道。(也许是我的阅读代码习惯比较原始)<br>我在action方法里面如果需要引用一个变量的时候，无法使用局部变量。通常就需要把这个资源设计为一个property。尽管这个资源或者变量只是在action里面调用一次。(这个也许是我写代码的问题)<br>这两个可能在我遇见ReactiveCocoa都不能叫问题。但是在ReactiveCocoa里面我发现了更加优美的解决方法。好开心。</p>
+<p>ReactiveCocoa方式的UIButton</p>
+<p>由于ReactiveCocoa高深的知识点，我也弄不太清楚。下面我只是说明怎么用的hello world级别。更多内容请阅读github上的项目主页。</p>
+<p>如果使用xib。只需拖一个IBOutlet的property出来。比如这样</p>
+<p>  @property (weak, nonatomic) IBOutlet UIButton <em>xibButton;<br>  NSString </em>helloWorld = @”hello world!!!”;<br>  self.xibButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {<br>  NSLog(@”%@”, helloWorld);<br>  return [RACSignal empty];<br>  }];<br>如果是代码创建一切照旧</p>
+<p>NSString <em>helloWorld = @”hello world!!!”;<br>UIButton </em>myButton = [UIButton buttonWithType:UIButtonTypeSystem];<br>myButton.frame = CGRectMake(0, 0, 100, 50);<br>[myButton setTitle:@”Say” forState:UIControlStateNormal];<br>[self.view addSubview:myButton];<br>myButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {<br>  NSLog(@”%@”, helloWorld);<br>  return [RACSignal empty];<br>}];<br>这些代码我一般写在viewDidLoad方法里面。当然你可以在正确的地方使用他们。<br>运行试试。哇。魔法一般。完全解决我在传统的UIButton遇到的两个问题。</p>
+<p>Best Wishes</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>新项目中使用了ReactiveCocoa框架，然后在使用过程中遇见的问题记录一下<br>今天遇见了UIButton的使用<br>传统的UIButton Target Action 方式</p>
+<p>之前我们使用UIButton的点击方法一般有两种。一种是直接从xib里面拖]]>
+    </summary>
+    
+      <category term="ReactiveCocoa" scheme="http://yoursite.com/tags/ReactiveCocoa/"/>
+    
+      <category term="UIButton" scheme="http://yoursite.com/tags/UIButton/"/>
+    
+      <category term="UIKit" scheme="http://yoursite.com/tags/UIKit/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[ios-iBeacon-test]]></title>
+    <link href="http://yoursite.com/2016/01/14/ios-iBeacon-test/"/>
+    <id>http://yoursite.com/2016/01/14/ios-iBeacon-test/</id>
+    <published>2016-01-14T08:19:32.000Z</published>
+    <updated>2016-01-15T10:16:34.000Z</updated>
+    <content type="html"><![CDATA[<p>iBeacon是苹果公司在iOS7推出的新技术，但是发现国内这方面的app一直很少，今天抽时间也研究一下<br>传统的GPS最多可以定位10米左右的范围，但是iBeacon的范围是可以<br>iBeacon是苹果被允许能在后台运行的，不论你将应用退出到后台还是杀死，iBeacon都能激活应用不过只能激活10秒左右，但是这段时间足可以做很多事情了。</p>
+<p>iBeacon 硬件<br>当 Apple 在 iOS 7 中介绍 iBeacon 时，他们也宣布任何一个兼容的 iOS 设备都能作为一个 iBeacon 。然而，他们也表示硬件制造商同样也能制造单独的、低功耗的 iBeacon 。在本文发表前，距离 iOS 7 的推出已过去大约 6 个月，现在已有许多家公司宣布和推出了独立的硬件 iBeacon 发射器。</p>
+<p>iBeacon 使用 Bluetooth LE 技术，所以你必须要有一个内置有低功耗蓝牙的 iOS 设备以便与 iBeacon 协同工作。目前这个列表里包含如下一些设备：</p>
+<ol>
+<li>iPhone 4s 或更新的</li>
+<li>第三代 iPad 或更新的</li>
+<li>iPad mini 或更新的</li>
+<li>第五代iPod touch 或更新的</li>
+</ol>
+<p>注意的是：在iOS8中苹果改变了地位的开启方式（iBeacon的使用是基于蓝牙和定位的），首先要在工程里的info.plist增加字段NSLocationAlwaysUsageDescription（这个是允许一直在后台运行的）</p>
+<p>还是看下面的吧<br>推荐一些关于iBeacon的详细的说明和使用<br><a href="http://www.jianshu.com/p/7816b016ceac" target="_blank" rel="external">http://www.jianshu.com/p/7816b016ceac</a><br><a href="http://www.cctime.com/html/2014-11-4/201411411115005.htm" target="_blank" rel="external">http://www.cctime.com/html/2014-11-4/201411411115005.htm</a><br><a href="http://www.cocoachina.com/industry/20140512/8377.html" target="_blank" rel="external">http://www.cocoachina.com/industry/20140512/8377.html</a><br><a href="http://www.5icool.org/a/201402/a4653.html" target="_blank" rel="external">http://www.5icool.org/a/201402/a4653.html</a></p>
+<p>Best wishes</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>iBeacon是苹果公司在iOS7推出的新技术，但是发现国内这方面的app一直很少，今天抽时间也研究一下<br>传统的GPS最多可以定位10米左右的范围，但是iBeacon的范围是可以<br>iBeacon是苹果被允许能在后台运行的，不论你将应用退出到后台还是杀死，iBea]]>
+    </summary>
+    
+      <category term="iBeacon" scheme="http://yoursite.com/tags/iBeacon/"/>
+    
+      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[create-new-ios-app-process]]></title>

@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/cocoapods/" style="font-size: 10px;">cocoapods</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/reflog/" style="font-size: 10px;">reflog</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
+						<a href="/tags/1/" style="font-size: 10px;">1</a> <a href="/tags/2/" style="font-size: 10px;">2</a> <a href="/tags/Observer/" style="font-size: 10px;">Observer</a> <a href="/tags/ReactiveCocoa/" style="font-size: 16.67px;">ReactiveCocoa</a> <a href="/tags/UIButton/" style="font-size: 10px;">UIButton</a> <a href="/tags/UIKit/" style="font-size: 13.33px;">UIKit</a> <a href="/tags/UITextField/" style="font-size: 10px;">UITextField</a> <a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/cocoapods/" style="font-size: 10px;">cocoapods</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/iBeacon/" style="font-size: 10px;">iBeacon</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/reflog/" style="font-size: 10px;">reflog</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
 					</div>
 				</section>
 				
@@ -170,6 +170,307 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-first-product" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/23/first-product/" class="article-date">
+  	<time datetime="2016-04-23T06:46:05.000Z" itemprop="datePublished">2016-04-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/23/first-product/">first-product</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/1/">1</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2/">2</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-ReactiveCocoa-UI-UITextField" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/21/ReactiveCocoa-UI-UITextField/" class="article-date">
+  	<time datetime="2016-01-21T07:17:56.000Z" itemprop="datePublished">2016-01-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/21/ReactiveCocoa-UI-UITextField/">ReactiveCocoa-UI-UITextField</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天遇见了UITextField的使用<br>1.监听输入的状态<br>    [[self.textField rac_signalForControlEvents:UIControlEventEditingDidBegin] subscribeNext:^(UITextField *sender) {<br>              @strongify(self);<br>              NSLog(@”tag is %@”,@(sender.tag));<br>        }];</p>
+<ol>
+<li>监控输入的内容<br> [self.textField.rac_textSignal subscribeNext:^(id x) {<pre><code><span class="function">NSLog</span>(<span class="at_rule">@<span class="string">"content is %@"</span>,x);</span>
+</code></pre> }];</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactiveCocoa/">ReactiveCocoa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UIKit/">UIKit</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UITextField/">UITextField</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-ReactiveCocoa-Observer" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/21/ReactiveCocoa-Observer/" class="article-date">
+  	<time datetime="2016-01-21T07:02:46.000Z" itemprop="datePublished">2016-01-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/21/ReactiveCocoa-Observer/">ReactiveCocoa-Observer</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.监听属性的变化</p>
+<p>TUHomeViewModel *model = [[TUHomeViewModel alloc] init];<br>[RACObserve(model, dataArray) subscribeNext:^(id x) {<br>    NSLog(@”haha is %@”,x);<br>}];</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Observer/">Observer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactiveCocoa/">ReactiveCocoa</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-ReactiveCocoa-UI-Button" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/19/ReactiveCocoa-UI-Button/" class="article-date">
+  	<time datetime="2016-01-19T12:16:53.000Z" itemprop="datePublished">2016-01-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/19/ReactiveCocoa-UI-Button/">ReactiveCocoa-UI-Button</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>新项目中使用了ReactiveCocoa框架，然后在使用过程中遇见的问题记录一下<br>今天遇见了UIButton的使用<br>传统的UIButton Target Action 方式</p>
+<p>之前我们使用UIButton的点击方法一般有两种。一种是直接从xib里面拖一个IBAction出来在里面写代码。</p>
+<p>另外一种是代码创建的 比如这样</p>
+<p>  UIButton *myButton = [[UIButton alloc] init…];<br>  [myButton addTarget:something action:@selector(myAction) forControlEvents:UIControlEventTouchUpInside];<br>然后在下面写一个myAction的方法来进行操作。</p>
+<p>这样对我来说存在两个问题：</p>
+<p>button对应的方法分开了。在阅读代码的时候，当我想知道这个button对应的方法或者反过来action方法对应的button。通常需要跳转一次以上才能知道。(也许是我的阅读代码习惯比较原始)<br>我在action方法里面如果需要引用一个变量的时候，无法使用局部变量。通常就需要把这个资源设计为一个property。尽管这个资源或者变量只是在action里面调用一次。(这个也许是我写代码的问题)<br>这两个可能在我遇见ReactiveCocoa都不能叫问题。但是在ReactiveCocoa里面我发现了更加优美的解决方法。好开心。</p>
+<p>ReactiveCocoa方式的UIButton</p>
+<p>由于ReactiveCocoa高深的知识点，我也弄不太清楚。下面我只是说明怎么用的hello world级别。更多内容请阅读github上的项目主页。</p>
+<p>如果使用xib。只需拖一个IBOutlet的property出来。比如这样</p>
+<p>  @property (weak, nonatomic) IBOutlet UIButton <em>xibButton;<br>  NSString </em>helloWorld = @”hello world!!!”;<br>  self.xibButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {<br>  NSLog(@”%@”, helloWorld);<br>  return [RACSignal empty];<br>  }];<br>如果是代码创建一切照旧</p>
+<p>NSString <em>helloWorld = @”hello world!!!”;<br>UIButton </em>myButton = [UIButton buttonWithType:UIButtonTypeSystem];<br>myButton.frame = CGRectMake(0, 0, 100, 50);<br>[myButton setTitle:@”Say” forState:UIControlStateNormal];<br>[self.view addSubview:myButton];<br>myButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {<br>  NSLog(@”%@”, helloWorld);<br>  return [RACSignal empty];<br>}];<br>这些代码我一般写在viewDidLoad方法里面。当然你可以在正确的地方使用他们。<br>运行试试。哇。魔法一般。完全解决我在传统的UIButton遇到的两个问题。</p>
+<p>Best Wishes</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ReactiveCocoa/">ReactiveCocoa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UIButton/">UIButton</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UIKit/">UIKit</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-ios-iBeacon-test" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/14/ios-iBeacon-test/" class="article-date">
+  	<time datetime="2016-01-14T08:19:32.000Z" itemprop="datePublished">2016-01-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/14/ios-iBeacon-test/">ios-iBeacon-test</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>iBeacon是苹果公司在iOS7推出的新技术，但是发现国内这方面的app一直很少，今天抽时间也研究一下<br>传统的GPS最多可以定位10米左右的范围，但是iBeacon的范围是可以<br>iBeacon是苹果被允许能在后台运行的，不论你将应用退出到后台还是杀死，iBeacon都能激活应用不过只能激活10秒左右，但是这段时间足可以做很多事情了。</p>
+<p>iBeacon 硬件<br>当 Apple 在 iOS 7 中介绍 iBeacon 时，他们也宣布任何一个兼容的 iOS 设备都能作为一个 iBeacon 。然而，他们也表示硬件制造商同样也能制造单独的、低功耗的 iBeacon 。在本文发表前，距离 iOS 7 的推出已过去大约 6 个月，现在已有许多家公司宣布和推出了独立的硬件 iBeacon 发射器。</p>
+<p>iBeacon 使用 Bluetooth LE 技术，所以你必须要有一个内置有低功耗蓝牙的 iOS 设备以便与 iBeacon 协同工作。目前这个列表里包含如下一些设备：</p>
+<ol>
+<li>iPhone 4s 或更新的</li>
+<li>第三代 iPad 或更新的</li>
+<li>iPad mini 或更新的</li>
+<li>第五代iPod touch 或更新的</li>
+</ol>
+<p>注意的是：在iOS8中苹果改变了地位的开启方式（iBeacon的使用是基于蓝牙和定位的），首先要在工程里的info.plist增加字段NSLocationAlwaysUsageDescription（这个是允许一直在后台运行的）</p>
+<p>还是看下面的吧<br>推荐一些关于iBeacon的详细的说明和使用<br><a href="http://www.jianshu.com/p/7816b016ceac" target="_blank" rel="external">http://www.jianshu.com/p/7816b016ceac</a><br><a href="http://www.cctime.com/html/2014-11-4/201411411115005.htm" target="_blank" rel="external">http://www.cctime.com/html/2014-11-4/201411411115005.htm</a><br><a href="http://www.cocoachina.com/industry/20140512/8377.html" target="_blank" rel="external">http://www.cocoachina.com/industry/20140512/8377.html</a><br><a href="http://www.5icool.org/a/201402/a4653.html" target="_blank" rel="external">http://www.5icool.org/a/201402/a4653.html</a></p>
+<p>Best wishes</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iBeacon/">iBeacon</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-create-new-ios-app-process" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -462,338 +763,6 @@
 
       
 
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-mysql-came-issues" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/11/15/mysql-came-issues/" class="article-date">
-  	<time datetime="2015-11-14T16:09:09.000Z" itemprop="datePublished">2015-11-15</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/15/mysql-came-issues/">mysql-came-issues</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天突然碰见mysql服务挂掉的问题，就记录一下</p>
-<p><strong> 先是重启  </strong><br>    mysql service restart<br>    /etc/init.d/mysql: ERROR: The partition with /var/lib/mysql is too full!</p>
-<p><strong>这时候发现是硬盘存储空间不够了</strong><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">df</span> -lh</span><br></pre></td></tr></table></figure></p>
-<p><strong>发现/dev/xvda1 下可使用的几乎没有了</strong></p>
-<p><strong>但是并不知道如何把大文件找到，如下 </strong><br>    <figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">find</span> <span class="built_in">path</span> -<span class="built_in">type</span> f -size +<span class="number">100</span>M （大于<span class="number">100</span>M的文件）</span><br><span class="line"><span class="built_in">find</span> <span class="built_in">path</span> -<span class="built_in">type</span> f -size <span class="number">100</span>M （等于<span class="number">100</span>M的文件）</span><br><span class="line"><span class="built_in">find</span> <span class="built_in">path</span> -<span class="built_in">type</span> f -size -<span class="number">100</span>M （小<span class="number">100</span>M的文件）</span><br></pre></td></tr></table></figure></p>
-<p><strong>也可以把所有比较大的目录都会列出来</strong><br>  <figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -sh <span class="keyword">*</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>然后开删</strong><br>  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">rm</span> -rf</span><br></pre></td></tr></table></figure></p>
-<p><strong>但是发现即使把这些删除了，硬盘的内存好像没有变化，最后google后用到了这个(PS:执行完后果然立马内存释放了)</strong><br>  <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="keyword">get</span> clean</span><br></pre></td></tr></table></figure></p>
-<p><strong>然后就是接着启动</strong><br>  <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">mysql</span> service restart</span><br></pre></td></tr></table></figure></p>
-<p><strong>但是奇怪的是一直在starting 但是并没有日志,后来用</strong></p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysqld <span class="comment">--console</span></span><br><span class="line"></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">49</span>:<span class="number">56</span> [ERROR] Found <span class="number">8</span> prepared transactions! It means that mysqld was <span class="operator">not</span> shut down properly <span class="keyword">last</span> <span class="built_in">time</span> <span class="operator">and</span> critical recovery information (<span class="keyword">last</span> binlog <span class="operator">or</span> tc.<span class="built_in">log</span> <span class="built_in">file</span>) was manually deleted <span class="keyword">after</span> <span class="operator">a</span> crash. You have <span class="built_in">to</span> <span class="built_in">start</span> mysqld <span class="operator">with</span> <span class="comment">--tc-heuristic-recover switch to commit or rollback pending transactions.</span></span><br></pre></td></tr></table></figure>
-<p><strong>最后google后找到一个办法</strong><br>  <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --<span class="keyword">tc</span>-heuristic-<span class="keyword">recover</span>=ROLLBACK</span><br></pre></td></tr></table></figure></p>
-<p><strong>最后看了一下控制台，也可以用service mysql status </strong></p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysqld <span class="comment">--console</span></span><br><span class="line">151114 23:55:58 InnoDB: The InnoDB memory heap is disabled</span><br><span class="line">151114 23:55:58 InnoDB: Mutexes and rw_locks <span class="operator"><span class="keyword">use</span> GCC atomic builtins</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Compressed <span class="keyword">tables</span> <span class="keyword">use</span> zlib <span class="number">1.2</span><span class="number">.3</span><span class="number">.4</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: <span class="keyword">Using</span> Linux <span class="keyword">native</span> AIO</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Initializing buffer pool, <span class="keyword">size</span> = <span class="number">256.0</span><span class="keyword">M</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: Completed initialization <span class="keyword">of</span> buffer pool</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">58</span> <span class="keyword">InnoDB</span>: highest supported <span class="keyword">file</span> <span class="keyword">format</span> <span class="keyword">is</span> Barracuda.</span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">55</span>:<span class="number">59</span>  <span class="keyword">InnoDB</span>: Waiting <span class="keyword">for</span> the background threads <span class="keyword">to</span> <span class="keyword">start</span></span><br><span class="line"><span class="number">151114</span> <span class="number">23</span>:<span class="number">56</span>:<span class="number">00</span> Percona XtraDB (<span class="keyword">http</span>://www.percona.com) <span class="number">5.5</span><span class="number">.41</span>-MariaDB-<span class="number">37.0</span> started;</span> log sequence number 2610000435</span><br><span class="line">151114 23:56:00 [Note] Plugin 'FEEDBACK' is disabled.</span><br><span class="line">151114 23:56:00 [Note] Server socket created on IP: '<span class="operator">0.<span class="number">0.0</span><span class="number">.0</span><span class="string">'.</span><br><span class="line">151114 23:56:00 [Note] Event Scheduler: Loaded 1 event</span><br><span class="line">151114 23:56:00 [Note] mysqld: ready for connections.</span><br><span class="line">Version: '</span><span class="number">5.5</span><span class="number">.42</span>-MariaDB-<span class="number">1</span>~precise-<span class="keyword">log</span><span class="string">'  socket: '</span>/<span class="keyword">var</span>/run/mysqld/mysqld.sock<span class="string">'  port: 3306  mariadb.org binary distribution</span></span></span><br></pre></td></tr></table></figure>
-<p>希望可以帮到你，Best wishes</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-ios-latest-error-when-upload-new-version" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/30/ios-latest-error-when-upload-new-version/" class="article-date">
-  	<time datetime="2015-10-29T18:44:12.000Z" itemprop="datePublished">2015-10-30</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/30/ios-latest-error-when-upload-new-version/">ios-latest-error-when-upload-new-version</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>fuck，感觉每次提交app到appStore都会遇见新的问题，今天果然也不例外！<br>错误代码为ERROR ITMS－90049<br><img src="http://img.blog.csdn.net/20151022191627756" alt="Aaron Swartz"></p>
-<p>解决问题方式：</p>
-<ol>
-<li>在xcode左下角搜索info.plist 找到第三方的info.plist文件，如友盟中腾讯Api文件夹下的info.plist文件；</li>
-<li>找到Bundle version字段 ，添加项目的build号</li>
-<li><strong>添加</strong>Bundle identifier 字段，并对应添加项目的BundleId号；</li>
-<li>找到Bundle versions string, short字段 添加项目的版本号</li>
-<li>然后进行提交。</li>
-</ol>
-<p>感谢原作者 附上原文地址：<br><a href="http://blog.csdn.net/u013950854/article/details/49337605" target="_blank" rel="external">http://blog.csdn.net/u013950854/article/details/49337605</a></p>
-<p>Best wishes</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/经验/">经验</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-ios-dynamic-blur-for-custom-navigation" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/24/ios-dynamic-blur-for-custom-navigation/" class="article-date">
-  	<time datetime="2015-10-24T08:15:32.000Z" itemprop="datePublished">2015-10-24</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/24/ios-dynamic-blur-for-custom-navigation/">ios-dynamic-blur-for-custom-navigation</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>好久没写博客了，今天抽个空写了一个在项目中用到的一个功能。<br>主要需求是列表头部有一个cover图，然后在cover的上方的<strong>导航栏实现实时模糊</strong>，我写了一个<a href="https://github.com/howeguo/CustomDynamicBlurNavigation">demo放在了github上</a>。</p>
-<p><img src="https://raw.githubusercontent.com/howeguo/CustomDynamicBlurNavigation/master/1.gif" alt="Aaron Swartz"><br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blur/">blur</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小技巧/">小技巧</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/10/24/ios-dynamic-blur-for-custom-navigation/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-ios-webview-call-nativeCode-or-native-call-jsCode" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/" class="article-date">
-  	<time datetime="2015-09-02T17:12:18.000Z" itemprop="datePublished">2015-09-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/">ios-webview-call-nativeCode-or-native-call-jsCode</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>UIWebView中 通过js去调用客户端的代码，客户端回调js代码。<br>最近因为项目中有一些页面使用H5实现(不得不说给客户端减少了不小压力啊😂😂)，但是有webview与客户端的交互，在使用过程当中遇到的问题做了一些总结。</p>
-<p><strong>我们模拟两个场景</strong><br>在webview中点击某一个用户的头像通过客户端NativeCode实现进入该用户的资料页<br> 网页代码<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span> = "<span class="attribute">tataufo:</span>//<span class="attribute">userprofile</span>"&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"avatarurl"</span>&gt;</span><span class="tag">&lt;/<span class="title">img</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="actionscript"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reloadKey</span><span class="params">(key)</span></span>&#123;</span><br><span class="line">    <span class="comment">//reload html</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p> 1.当用户点击头像的时候，会发送请求 tataufo://userprofile 这是跟客户端之前约定好的一个格式，不需要回调<br> tataufo 是个AppScheme，userprofile你可以认为你提供给网页的接口，当然你可以传递参数<br> 格式如下：tataufo://userprofile#{‘userid’:3}(这里使用的是json形式的参数)</p>
-<p> 2.当webview需要调用Native的share，会发送请求 tataufo://share#{‘callback’:’reloadKey’} ,客户端处理完之后会回调reloadKey这个函数</p>
-<p>实现如下：<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webView/">webView</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-ios-draw-gradient-colors" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/08/30/ios-draw-gradient-colors/" class="article-date">
-  	<time datetime="2015-08-30T13:52:21.000Z" itemprop="datePublished">2015-08-30</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/30/ios-draw-gradient-colors/">ios-draw-gradient-colors</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>UIView 实现颜色的渐变的两种方式</p>
-<p><strong>1.inserSubLayers</strong></p>
-<pre><code><span class="built_in">CAGradientLayer</span> *gradientLayer = [<span class="built_in">CAGradientLayer</span> layer];  <span class="comment">// 设置渐变效果</span>
-gradientLayer<span class="variable">.bounds</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
-gradientLayer<span class="variable">.borderWidth</span> = <span class="number">0</span>;
-
-gradientLayer<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
-gradientLayer<span class="variable">.colors</span> = [<span class="built_in">NSArray</span> arrayWithObjects:
-                        (<span class="keyword">id</span>)[[<span class="built_in">UIColor</span> redColor] <span class="built_in">CGColor</span>],
-                        (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>, <span class="literal">nil</span>];
-<span class="comment">//垂直渐变</span>
-gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">1.0</span>, <span class="number">0.5</span>);
-gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0.0</span>);
-
-<span class="comment">//水平渐变</span>
-gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, <span class="number">0.5</span>);
-gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1.0</span>);
-
-[<span class="keyword">self</span><span class="variable">.layer</span> insertSublayer:gradientLayer atIndex:<span class="number">0</span>];
-</code></pre><p><strong>2.通过drawRect</strong><br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小知识/">小知识</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2015/08/30/ios-draw-gradient-colors/#more">more >></a>
-        </p>
       
       <div class="clearfix"></div>
     </div>
