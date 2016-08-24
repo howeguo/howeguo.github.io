@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-24T17:23:21.000Z</updated>
+  <updated>2016-08-24T17:24:07.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yoursite.com/2016/08/25/django-deplop-by-virtualenv-gunicorn-nginx-supervisor/"/>
     <id>http://yoursite.com/2016/08/25/django-deplop-by-virtualenv-gunicorn-nginx-supervisor/</id>
     <published>2016-08-24T16:23:18.000Z</published>
-    <updated>2016-08-24T17:23:21.000Z</updated>
+    <updated>2016-08-24T17:24:07.000Z</updated>
     <content type="html"><![CDATA[<p>今天尝试了一下在一台机器上去安装不同版本的python、django<br>发现原来linux上有个类似模拟虚拟环境的东西啊virtualenv<br>就尝试自己在这个虚拟环境里搭建了一套自django1.9.2 python2.7 然后用gunicorn做web服务器、supervisor去管理进程、nginx去做外部转发和访问，这期间参考了国外和国内的一些大牛写的文章，在这里首先表示感谢<br>我确实是按照这个步骤完成了一套这样的服务</p>
 <p>第一步：安装虚拟环境的库<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install virtualenv</span><br><span class="line"></span><br><span class="line">Downloading/unpacking virtualenv</span><br><span class="line">  Downloading virtualenv-<span class="number">15.0</span><span class="number">.3</span>-py2.py3-none-any.whl (<span class="number">3.5</span>MB): <span class="number">3.5</span>MB downloaded</span><br><span class="line">Installing collected packages: virtualenv</span><br><span class="line">Successfully installed virtualenv</span><br><span class="line">Cleaning up...</span><br></pre></td></tr></table></figure></p>
 <p>第二步：创建虚拟环境<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">virtualenv bugenv</span><br><span class="line">New python executable <span class="keyword">in</span> <span class="regexp">/Users/</span>tataufo<span class="regexp">/todaysay_env/</span>bin/python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br></pre></td></tr></table></figure></p>
