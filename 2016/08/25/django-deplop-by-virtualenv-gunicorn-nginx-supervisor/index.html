@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>django deplop by  virtualenv + gunicorn + nginx + supervisor | Howeguo Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天尝试了一下在一台机器上去安装不同版本的python、django发现原来linux上有个类似模拟虚拟环境的东西啊virtualenv就尝试自己在这个虚拟环境里搭建了一套自django1.9.2 python2.7 然后用gunicorn做web服务器、supervisor去管理进程、nginx去做外部转发和访问，这期间参考了国外和国内的一些大牛写的文章，在这里首先表示感谢我确实是按照这个步骤完">
+<meta property="og:type" content="article">
+<meta property="og:title" content="django deplop by  virtualenv + gunicorn + nginx + supervisor">
+<meta property="og:url" content="http://yoursite.com/2016/08/25/django-deplop-by-virtualenv-gunicorn-nginx-supervisor/index.html">
+<meta property="og:site_name" content="Howeguo Blog">
+<meta property="og:description" content="今天尝试了一下在一台机器上去安装不同版本的python、django发现原来linux上有个类似模拟虚拟环境的东西啊virtualenv就尝试自己在这个虚拟环境里搭建了一套自django1.9.2 python2.7 然后用gunicorn做web服务器、supervisor去管理进程、nginx去做外部转发和访问，这期间参考了国外和国内的一些大牛写的文章，在这里首先表示感谢我确实是按照这个步骤完">
+<meta property="og:updated_time" content="2016-08-24T17:23:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="django deplop by  virtualenv + gunicorn + nginx + supervisor">
+<meta name="twitter:description" content="今天尝试了一下在一台机器上去安装不同版本的python、django发现原来linux上有个类似模拟虚拟环境的东西啊virtualenv就尝试自己在这个虚拟环境里搭建了一套自django1.9.2 python2.7 然后用gunicorn做web服务器、supervisor去管理进程、nginx去做外部转发和访问，这期间参考了国外和国内的一些大牛写的文章，在这里首先表示感谢我确实是按照这个步骤完">
+  
+    <link rel="alternative" href="/atom.xml" title="Howeguo Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://obpcj9xyz.bkt.clouddn.com/avatar/F5775D66F06B0C5A147249A784A9DB1F.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">howekuo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">nothing else</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/假文艺">假文艺</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/howeguo" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Observer/" style="font-size: 10px;">Observer</a> <a href="/tags/Product/" style="font-size: 10px;">Product</a> <a href="/tags/ReactiveCocoa/" style="font-size: 16.67px;">ReactiveCocoa</a> <a href="/tags/UIButton/" style="font-size: 10px;">UIButton</a> <a href="/tags/UIKit/" style="font-size: 13.33px;">UIKit</a> <a href="/tags/UITextField/" style="font-size: 10px;">UITextField</a> <a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/cocoapods/" style="font-size: 10px;">cocoapods</a> <a href="/tags/django/" style="font-size: 13.33px;">django</a> <a href="/tags/emoji/" style="font-size: 10px;">emoji</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/iBeacon/" style="font-size: 10px;">iBeacon</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/reflog/" style="font-size: 10px;">reflog</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/virtualenv/" style="font-size: 10px;">virtualenv</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">iOS、python、php、product、Guitar</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">howekuo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://obpcj9xyz.bkt.clouddn.com/avatar/F5775D66F06B0C5A147249A784A9DB1F.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">howekuo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">nothing else</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/假文艺">假文艺</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/howeguo" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-django-deplop-by-virtualenv-gunicorn-nginx-supervisor" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/25/django-deplop-by-virtualenv-gunicorn-nginx-supervisor/" class="article-date">
+  	<time datetime="2016-08-24T16:23:18.000Z" itemprop="datePublished">2016-08-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      django deplop by  virtualenv + gunicorn + nginx + supervisor
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/django/">django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gunicorn/">gunicorn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/supervisor/">supervisor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtualenv/">virtualenv</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天尝试了一下在一台机器上去安装不同版本的python、django<br>发现原来linux上有个类似模拟虚拟环境的东西啊virtualenv<br>就尝试自己在这个虚拟环境里搭建了一套自django1.9.2 python2.7 然后用gunicorn做web服务器、supervisor去管理进程、nginx去做外部转发和访问，这期间参考了国外和国内的一些大牛写的文章，在这里首先表示感谢<br>我确实是按照这个步骤完成了一套这样的服务</p>
+<p>第一步：安装虚拟环境的库<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install virtualenv</span><br><span class="line"></span><br><span class="line">Downloading/unpacking virtualenv</span><br><span class="line">  Downloading virtualenv-<span class="number">15.0</span><span class="number">.3</span>-py2.py3-none-any.whl (<span class="number">3.5</span>MB): <span class="number">3.5</span>MB downloaded</span><br><span class="line">Installing collected packages: virtualenv</span><br><span class="line">Successfully installed virtualenv</span><br><span class="line">Cleaning up...</span><br></pre></td></tr></table></figure></p>
+<p>第二步：创建虚拟环境<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">virtualenv bugenv</span><br><span class="line">New python executable <span class="keyword">in</span> <span class="regexp">/Users/</span>tataufo<span class="regexp">/todaysay_env/</span>bin/python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br></pre></td></tr></table></figure></p>
+<p>第三步：进入虚拟环境<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root<span class="variable">@recall</span><span class="symbol">:/home/www</span><span class="comment"># cd bugenv/</span></span><br><span class="line">root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span><span class="comment"># source bin/activate</span></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span> <span class="comment">#激活环境，这个每次在重新登陆服务器的时候都需要激活</span></span><br></pre></td></tr></table></figure></p>
+<p>第三步：安装django和gunicorn</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pip <span class="keyword">install</span> django==<span class="number">1.9</span>.<span class="number">2</span></span><br><span class="line">sudo pip <span class="keyword">install</span> gunicorn</span><br></pre></td></tr></table></figure>
+<p>第四步：创建django项目和django app</p>
+<p>django-admin.py startproject bugproject<br>python manages.py startapp bugapp</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">复制</span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span><span class="comment"># ls</span></span><br><span class="line">bin <span class="keyword">include</span> lib local</span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span><span class="comment"># mkdir djcode</span></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span><span class="comment"># cd djcode/</span></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode</span><span class="comment"># django-admin.py startproject bugproject</span></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode</span><span class="comment"># cd bugproject/</span></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode/bugproject</span><span class="comment"># python manage.py startapp bugapp</span></span><br></pre></td></tr></table></figure>
+<p>第五步：设置django 的settings.py文件<br>添加app，最后结果如下<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">INSTALLED_APPS</span> = (</span><br><span class="line">    <span class="symbol">'django</span>.contrib.admin',</span><br><span class="line">    <span class="symbol">'django</span>.contrib.auth',</span><br><span class="line">    <span class="symbol">'django</span>.contrib.contenttypes',</span><br><span class="line">    <span class="symbol">'django</span>.contrib.sessions',</span><br><span class="line">    <span class="symbol">'django</span>.contrib.messages',</span><br><span class="line">    <span class="symbol">'django</span>.contrib.staticfiles',</span><br><span class="line">    # add app</span><br><span class="line">    <span class="symbol">'bugapp'</span>,</span><br><span class="line">    <span class="symbol">'gunicorn'</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>第六步：运行gunicorn<br><a id="more"></a></p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode/bugproject</span><span class="comment"># pwd</span></span><br><span class="line">/home/www/bugenv/djcode/bugproject</span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode/bugproject</span><span class="comment"># gunicorn bugproject.wsgi:application -b 127.0.0.1:11000</span></span><br></pre></td></tr></table></figure>
+<p>第七步：使用supervisor去管理gunicorn的运行<br>先创建一个脚本去启动django服务，就叫gunicorn_start<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line">NAME=<span class="string">"bugproject"</span>                                  <span class="comment"># Name of the application</span></span><br><span class="line">DJANGODIR=/home/www/bugenv/djcode/bugproject             <span class="comment"># Django project directory</span></span><br><span class="line">SOCKFILE=/home/www/bugenv/djcode/run/gunicorn.sock  <span class="comment"># we will communicte using this unix socket</span></span><br><span class="line">USER=root                                        <span class="comment"># the user to run as</span></span><br><span class="line">GROUP=root                                     <span class="comment"># the group to run as</span></span><br><span class="line">NUM_WORKERS=<span class="number">4</span>                                    <span class="comment"># how many worker processes should Gunicorn spawn</span></span><br><span class="line">DJANGO_SETTINGS_MODULE=bugproject.settings             <span class="comment"># which settings file should Django use</span></span><br><span class="line">DJANGO_WSGI_MODULE=bugproject.wsgi                     <span class="comment"># WSGI module name</span></span><br><span class="line"></span><br><span class="line">PORT=<span class="number">11000</span></span><br><span class="line">SERVER_NAME=<span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Starting <span class="variable">$NAME</span> as `whoami`"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Activate the virtual environment</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$DJANGODIR</span></span><br><span class="line"><span class="built_in">source</span> ../bin/activate</span><br><span class="line"><span class="built_in">export</span> DJANGO_SETTINGS_MODULE=<span class="variable">$DJANGO_SETTINGS_MODULE</span></span><br><span class="line"><span class="built_in">export</span> PYTHONPATH=<span class="variable">$DJANGODIR</span>:<span class="variable">$PYTHONPATH</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create the run directory if it doesn't exist</span></span><br><span class="line">RUNDIR=$(dirname <span class="variable">$SOCKFILE</span>)</span><br><span class="line"><span class="built_in">test</span> <span class="operator">-d</span> <span class="variable">$RUNDIR</span> || mkdir -p <span class="variable">$RUNDIR</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Start your Django Unicorn</span></span><br><span class="line"><span class="comment"># Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)</span></span><br><span class="line"><span class="built_in">exec</span> ../bin/gunicorn <span class="variable">$&#123;DJANGO_WSGI_MODULE&#125;</span>:application \</span><br><span class="line">  --name <span class="variable">$NAME</span> \</span><br><span class="line">  --workers <span class="variable">$NUM_WORKERS</span> \</span><br><span class="line">  --user=<span class="variable">$USER</span> --group=<span class="variable">$GROUP</span> \</span><br><span class="line">  --bind=<span class="variable">$SERVER_NAME</span>:<span class="variable">$PORT</span> \</span><br><span class="line">  --log-level=debug \</span><br><span class="line">  --log-file=-</span><br><span class="line">~</span><br></pre></td></tr></table></figure></p>
+<p>以后就用这个脚本去运行<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod u+x bin/gunicorn_start</span><br><span class="line">$ . gunicorn_start</span><br><span class="line"></span><br><span class="line">Starting bugproject as  hello</span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10724</span>] [INFO] Starting gunicorn <span class="number">18.0</span></span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10724</span>] [DEBUG] Arbiter booted</span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10724</span>] [INFO] Listening at: unix:/home/www/bugenv/djcode/run/gunicorn.sock (<span class="number">10724</span>)</span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10724</span>] [INFO] Using worker: sync</span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10735</span>] [INFO] Booting worker with pid: <span class="number">10735</span></span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10736</span>] [INFO] Booting worker with pid: <span class="number">10736</span></span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10737</span>] [INFO] Booting worker with pid: <span class="number">10737</span></span><br><span class="line"></span><br><span class="line">^C (CONTROL-C to kill Gunicorn)</span><br><span class="line"></span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">48</span> [<span class="number">10736</span>] [INFO] <span class="function">Worker <span class="title">exiting</span> <span class="params">(pid: <span class="number">10736</span>)</span></span><br><span class="line">2016-06-09 14:21:48 [10735] [INFO] Worker <span class="title">exiting</span> <span class="params">(pid: <span class="number">10735</span>)</span></span><br><span class="line">2016-06-09 14:21:48 [10724] [INFO] Handling signal: <span class="keyword">int</span></span><br><span class="line">2016-06-09 14:21:48 [10737] [INFO] Worker <span class="title">exiting</span> <span class="params">(pid: <span class="number">10737</span>)</span></span><br><span class="line">2016-06-09 14:21:48 [10724] [INFO] Shutting down: Master</span></span><br></pre></td></tr></table></figure></p>
+<p>第八步：安装supervisor</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo aptitude <span class="keyword">install</span> supervisor</span><br></pre></td></tr></table></figure>
+<p>Supervisor可以管理多个服务，因此你可以为不同的服务创建不同的配置文件<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> /etc/supervisor/<span class="keyword">conf</span>.<span class="literal">d</span></span><br><span class="line">vim hello.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure></p>
+<p>文件内容：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[program:hello]</span><br><span class="line">command = /home/www/bugenv/djcode/gunicorn_start                    ; Command <span class="keyword">to</span> start app</span><br><span class="line">user = hello                                                          ; User <span class="keyword">to</span> <span class="command">run</span> <span class="keyword">as</span></span><br><span class="line">stdout_logfile = /home/www/bugenv/djcode/logs/gunicorn_supervisor.<span class="command">log</span>   ; Where <span class="keyword">to</span> <span class="command">write</span> <span class="command">log</span> messages</span><br><span class="line">redirect_stderr = <span class="constant">true</span>                                                ; Save stderr <span class="keyword">in</span> <span class="keyword">the</span> same <span class="command">log</span></span><br><span class="line">environment=LANG=en_US.UTF-<span class="number">8</span>,LC_ALL=en_US.UTF-<span class="number">8</span>                       ; Set UTF-<span class="number">8</span> <span class="keyword">as</span> default encoding</span><br></pre></td></tr></table></figure>
+<p>创建日志文件</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello<span class="annotation">@django</span>:~$ mkdir -p <span class="regexp">/home/</span>www<span class="regexp">/bugenv/</span>djcode<span class="regexp">/logs/</span></span><br><span class="line">hello<span class="annotation">@django</span>:~$ touch <span class="regexp">/home/</span>www<span class="regexp">/bugenv/</span>djcode<span class="regexp">/logs/</span>gunicorn_supervisor.log</span><br></pre></td></tr></table></figure>
+<p>测试supervisorctl<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo supervisorctl reread</span><br><span class="line"><span class="label">hello:</span> available</span><br><span class="line">$ sudo supervisorctl update</span><br><span class="line"><span class="label">hello:</span> added process group</span><br></pre></td></tr></table></figure></p>
+<p>supervisor重启、查看状态、停止操作<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ sudo supervisorctl status hello                       </span><br><span class="line">hello                            RUNNING    pid <span class="number">18020</span>, uptime <span class="number">0</span>:<span class="number">00</span>:<span class="number">50</span></span><br><span class="line">$ sudo supervisorctl stop hello  </span><br><span class="line"><span class="label">hello:</span> stopped</span><br><span class="line">$ sudo supervisorctl start hello                        </span><br><span class="line"><span class="label">hello:</span> started</span><br><span class="line">$ sudo supervisorctl restart hello</span><br><span class="line"><span class="label">hello:</span> stopped</span><br><span class="line"><span class="label">hello:</span> started</span><br></pre></td></tr></table></figure></p>
+<p>第九步：安装nginx</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo install nginx</span><br><span class="line"><span class="variable">$ </span>sudo service nginx start</span><br></pre></td></tr></table></figure>
+<p>配置nginx</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"></span><br><span class="line">upstream hello_app_server </span><span class="expression">&#123;</span><br><span class="line">  <span class="begin-block"># fail</span>_<span class="variable">timeout</span>=0 <span class="variable">means</span> <span class="variable">we</span> <span class="variable">always</span> <span class="variable">retry</span> <span class="variable">an</span> <span class="variable">upstream</span> <span class="variable">even</span> <span class="variable"><span class="keyword">if</span></span> <span class="variable">it</span> <span class="variable">failed</span></span><br><span class="line">  <span class="begin-block"># to return a good HTTP response </span>(<span class="variable">in</span> <span class="variable">case</span> <span class="variable">the</span> <span class="variable">Unicorn</span> <span class="variable">master</span> <span class="variable">nukes</span> <span class="variable">a</span></span><br><span class="line">  <span class="begin-block"># single worker for timing out</span>)<span class="variable">.</span></span><br><span class="line"></span><br><span class="line">  <span class="variable">server</span> <span class="variable">unix</span>:<span class="end-block">/home</span><span class="end-block">/www</span><span class="end-block">/bugenv</span><span class="end-block">/djcode</span><span class="end-block">/run</span><span class="end-block">/gunicorn.sock fail</span>_<span class="variable">timeout</span>=0;</span><br><span class="line">&#125;</span><span class="xml"></span><br><span class="line"></span><br><span class="line">server </span><span class="expression">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="variable">listen</span>   80;</span><br><span class="line">    <span class="variable">server</span>_<span class="variable">name</span> <span class="variable">example.com</span>;</span><br><span class="line"></span><br><span class="line">    <span class="variable">client</span>_<span class="variable">max</span>_<span class="variable">body</span>_<span class="variable">size</span> 4<span class="variable">G</span>;</span><br><span class="line"></span><br><span class="line">    <span class="variable">access</span>_<span class="variable">log</span> <span class="end-block">/home</span><span class="end-block">/www</span><span class="end-block">/bugenv</span><span class="end-block">/djcode</span><span class="end-block">/logs</span><span class="end-block">/nginx-access.log</span>;</span><br><span class="line">    <span class="variable">error</span>_<span class="variable">log</span> <span class="end-block">/home</span><span class="end-block">/www</span><span class="end-block">/bugenv</span><span class="end-block">/djcode</span><span class="end-block">/logs</span><span class="end-block">/nginx-error.log</span>;</span><br><span class="line"></span><br><span class="line">    <span class="variable">location</span> <span class="end-block">/static</span><span class="end-block">/ </span>&#123;</span><br><span class="line">        <span class="variable">alias</span>   <span class="end-block">/home</span><span class="end-block">/www</span><span class="end-block">/bugenv</span><span class="end-block">/djcode</span><span class="end-block">/static</span>/;</span><br><span class="line">    &#125;</span><span class="xml"></span><br><span class="line"></span><br><span class="line">    location /media/ </span><span class="expression">&#123;</span><br><span class="line">        <span class="variable">alias</span>   <span class="end-block">/home</span><span class="end-block">/www</span><span class="end-block">/bugenv</span><span class="end-block">/djcode</span><span class="end-block">/media</span>/;</span><br><span class="line">    &#125;</span><span class="xml"></span><br><span class="line"></span><br><span class="line">    location / </span><span class="expression">&#123;</span><br><span class="line">        <span class="begin-block"># an HTTP header important enough to have its own Wikipedia entry</span>:</span><br><span class="line">        <span class="begin-block">#   http</span>:/<span class="end-block">/en.wikipedia.org</span><span class="end-block">/wiki</span><span class="end-block">/X-Forwarded-For</span></span><br><span class="line">        <span class="variable">proxy</span>_<span class="variable">set</span>_<span class="variable">header</span> <span class="variable">X-Forwarded-For</span> $<span class="variable">proxy</span>_<span class="variable">add</span>_<span class="variable">x</span>_<span class="variable">forwarded</span>_<span class="variable">for</span>;</span><br><span class="line"></span><br><span class="line">        <span class="begin-block"># enable this <span class="keyword">if</span> and only <span class="keyword">if</span> you use HTTPS</span>, <span class="variable">this</span> <span class="variable">helps</span> <span class="variable">Rack</span></span><br><span class="line">        <span class="begin-block"># set the proper protocol for doing redirects</span>:</span><br><span class="line">        <span class="begin-block"># proxy</span>_<span class="variable">set</span>_<span class="variable">header</span> <span class="variable">X-Forwarded-Proto</span> <span class="variable">https</span>;</span><br><span class="line"></span><br><span class="line">        <span class="begin-block"># pass the Host</span>: <span class="variable">header</span> <span class="variable">from</span> <span class="variable">the</span> <span class="variable">client</span> <span class="variable">right</span> <span class="variable">along</span> <span class="variable">so</span> <span class="variable">redirects</span></span><br><span class="line">        <span class="begin-block"># can be set properly within the Rack application</span></span><br><span class="line">        <span class="variable">proxy</span>_<span class="variable">set</span>_<span class="variable">header</span> <span class="variable">Host</span> $<span class="variable">http</span>_<span class="variable">host</span>;</span><br><span class="line"></span><br><span class="line">        <span class="begin-block"># we don</span>'<span class="variable">t</span> <span class="variable">want</span> <span class="variable">nginx</span> <span class="variable">trying</span> <span class="variable">to</span> <span class="variable">do</span> <span class="variable">something</span> <span class="variable">clever</span> <span class="variable">with</span></span><br><span class="line">        <span class="begin-block"># redirects</span>, <span class="variable">we</span> <span class="variable">set</span> <span class="variable">the</span> <span class="variable">Host</span>: <span class="variable">header</span> <span class="variable">above</span> <span class="variable">already.</span></span><br><span class="line">        <span class="variable">proxy</span>_<span class="variable">redirect</span> <span class="variable">off</span>;</span><br><span class="line"></span><br><span class="line">        <span class="begin-block"># set </span><span class="string">"proxy_buffering off"</span> *<span class="variable">only</span>* <span class="variable">for</span> <span class="variable">Rainbows</span>! <span class="variable">when</span> <span class="variable">doing</span></span><br><span class="line">        <span class="begin-block"># Comet</span><span class="end-block">/long-poll stuff.  It</span>'<span class="variable">s</span> <span class="variable">also</span> <span class="variable">safe</span> <span class="variable">to</span> <span class="variable">set</span> <span class="variable"><span class="keyword">if</span></span> <span class="variable">you</span>'<span class="variable">re</span></span><br><span class="line">        <span class="begin-block"># using only serving fast clients with Unicorn </span>+ <span class="variable">nginx.</span></span><br><span class="line">        <span class="begin-block"># Otherwise you </span>_<span class="variable">want</span>_ <span class="variable">nginx</span> <span class="variable">to</span> <span class="variable">buffer</span> <span class="variable">responses</span> <span class="variable">to</span> <span class="variable">slow</span></span><br><span class="line">        <span class="begin-block"># clients</span>, <span class="variable">really.</span></span><br><span class="line">        <span class="begin-block"># proxy</span>_<span class="variable">buffering</span> <span class="variable">off</span>;</span><br><span class="line"></span><br><span class="line">        <span class="begin-block"># Try to serve static files from nginx</span>, <span class="variable">no</span> <span class="variable">point</span> <span class="variable">in</span> <span class="variable">making</span> <span class="variable">an</span></span><br><span class="line">        <span class="begin-block"># </span>*<span class="variable">application</span>* <span class="variable">server</span> <span class="variable">like</span> <span class="variable">Unicorn</span><span class="end-block">/Rainbows</span>! <span class="variable">serve</span> <span class="variable">static</span> <span class="variable">files.</span></span><br><span class="line">        <span class="variable"><span class="keyword">if</span></span> (!<span class="variable">-f</span> $<span class="variable">request</span>_<span class="variable">filename</span>) &#123;</span><br><span class="line">            <span class="variable">proxy</span>_<span class="variable">pass</span> <span class="variable">http</span>:/<span class="end-block">/hello</span>_<span class="variable">app</span>_<span class="variable">server</span>;</span><br><span class="line">            <span class="variable">break</span>;</span><br><span class="line">        &#125;</span><span class="xml"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # Error pages</span><br><span class="line">    error_page 500 502 503 504 /500.html;</span><br><span class="line">    location = /500.html </span><span class="expression">&#123;</span><br><span class="line">        <span class="variable">root</span> <span class="end-block">/home</span><span class="end-block">/www</span><span class="end-block">/bugenv</span><span class="end-block">/djcode</span><span class="end-block">/static</span>/;</span><br><span class="line">    &#125;</span><span class="xml"></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>重启<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>nginx  -c /etc/nginx/nginx.conf <span class="comment">#设置加载配置文件</span></span><br><span class="line"><span class="variable">$ </span>sudo service nginx restart</span><br></pre></td></tr></table></figure></p>
+<p>最后附上如何卸载各个服务(这里就不翻译了)：</p>
+<p>Uninstalling the Django application</p>
+<p>If time comes to remove the application, follow these steps.</p>
+<p>Remove the virtual server from Nginx sites-enabled folder:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm <span class="regexp">/etc/</span>nginx<span class="regexp">/sites-enabled/</span>hello_django</span><br></pre></td></tr></table></figure></p>
+<p>Restart Nginx:<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo service nginx restart</span><br></pre></td></tr></table></figure></p>
+<p>If you never plan to use this application again, you can remove its config file also from the sites-available directory<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm <span class="regexp">/etc/</span>nginx<span class="regexp">/sites-available/</span>hello_django</span><br></pre></td></tr></table></figure></p>
+<p>Stop the application with Supervisor:<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo supervisorctl stop hello</span><br></pre></td></tr></table></figure></p>
+<p>Remove the application from Supervisor’s control scripts directory:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="keyword">rm</span> /etc/supervisor/<span class="keyword">conf</span>.<span class="keyword">d</span>/hello.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure></p>
+<p>If you never plan to use this application again, you can now remove its entire directory from webapps:</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>sudo rm -r /webapps/hello_django</span><br></pre></td></tr></table></figure>
+<p>感谢该文章作者：<br><a href="http://michal.karzynski.pl/blog/2013/06/09/django-nginx-gunicorn-virtualenv-supervisor/" target="_blank" rel="external">http://michal.karzynski.pl/blog/2013/06/09/django-nginx-gunicorn-virtualenv-supervisor/</a></p>
+<p>希望可以帮到你，Best wishes</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/24/mysql-django-support-emoji-utf8mb4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">mysql-django-support-emoji(utf8mb4)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="django-deplop-by-virtualenv-gunicorn-nginx-supervisor" data-title="django deplop by  virtualenv + gunicorn + nginx + supervisor" data-url="http://yoursite.com/2016/08/25/django-deplop-by-virtualenv-gunicorn-nginx-supervisor/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"howeguo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Howeguo
+    	</div>
+      	<div class="footer-right">
+      		Thanks&nbsp<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

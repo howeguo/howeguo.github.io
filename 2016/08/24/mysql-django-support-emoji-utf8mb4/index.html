@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mysql-django-support-emoji(utf8mb4) | Howeguo Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天在做mysql数据存储的时候就遇见了大家可能都会遇见的问题(emoji存储)这里主要是涉及到utf8mb4的设置
+mysql 5.5以上才支持字符集第一步：数据库版本检查:
+1select version() #查看mysql版本
+第二步：修改mysql配置文件 my.conf(windows上my.ini), 修改/添加如下配置为：123456[client]default-characte">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql-django-support-emoji(utf8mb4)">
+<meta property="og:url" content="http://yoursite.com/2016/08/24/mysql-django-support-emoji-utf8mb4/index.html">
+<meta property="og:site_name" content="Howeguo Blog">
+<meta property="og:description" content="今天在做mysql数据存储的时候就遇见了大家可能都会遇见的问题(emoji存储)这里主要是涉及到utf8mb4的设置
+mysql 5.5以上才支持字符集第一步：数据库版本检查:
+1select version() #查看mysql版本
+第二步：修改mysql配置文件 my.conf(windows上my.ini), 修改/添加如下配置为：123456[client]default-characte">
+<meta property="og:updated_time" content="2016-08-24T16:18:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql-django-support-emoji(utf8mb4)">
+<meta name="twitter:description" content="今天在做mysql数据存储的时候就遇见了大家可能都会遇见的问题(emoji存储)这里主要是涉及到utf8mb4的设置
+mysql 5.5以上才支持字符集第一步：数据库版本检查:
+1select version() #查看mysql版本
+第二步：修改mysql配置文件 my.conf(windows上my.ini), 修改/添加如下配置为：123456[client]default-characte">
+  
+    <link rel="alternative" href="/atom.xml" title="Howeguo Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://obpcj9xyz.bkt.clouddn.com/avatar/F5775D66F06B0C5A147249A784A9DB1F.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">howekuo</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">nothing else</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/假文艺">假文艺</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/howeguo" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Observer/" style="font-size: 10px;">Observer</a> <a href="/tags/Product/" style="font-size: 10px;">Product</a> <a href="/tags/ReactiveCocoa/" style="font-size: 16.67px;">ReactiveCocoa</a> <a href="/tags/UIButton/" style="font-size: 10px;">UIButton</a> <a href="/tags/UIKit/" style="font-size: 13.33px;">UIKit</a> <a href="/tags/UITextField/" style="font-size: 10px;">UITextField</a> <a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/cocoapods/" style="font-size: 10px;">cocoapods</a> <a href="/tags/django/" style="font-size: 13.33px;">django</a> <a href="/tags/emoji/" style="font-size: 10px;">emoji</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/iBeacon/" style="font-size: 10px;">iBeacon</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/reflog/" style="font-size: 10px;">reflog</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/virtualenv/" style="font-size: 10px;">virtualenv</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">iOS、python、php、product、Guitar</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">howekuo</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://obpcj9xyz.bkt.clouddn.com/avatar/F5775D66F06B0C5A147249A784A9DB1F.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">howekuo</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">nothing else</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/假文艺">假文艺</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/howeguo" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-mysql-django-support-emoji-utf8mb4" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/24/mysql-django-support-emoji-utf8mb4/" class="article-date">
+  	<time datetime="2016-08-24T15:58:28.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mysql-django-support-emoji(utf8mb4)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/django/">django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/emoji/">emoji</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天在做mysql数据存储的时候就遇见了大家可能都会遇见的问题(emoji存储)<br>这里主要是涉及到utf8mb4的设置</p>
+<p>mysql 5.5以上才支持字符集<br>第一步：数据库版本检查:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select <span class="function"><span class="title">version</span><span class="params">()</span></span> #查看mysql版本</span><br></pre></td></tr></table></figure>
+<p>第二步：修改mysql配置文件 my.conf(windows上my.ini), 修改/添加如下配置为：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-<span class="operator"><span class="keyword">set</span>=utf8mb4</span><br><span class="line">[mysql]</span><br><span class="line"><span class="keyword">default</span>-<span class="built_in">character</span>-<span class="keyword">set</span>=utf8mb4</span><br><span class="line">[mysqld]</span><br><span class="line"><span class="built_in">character</span>-<span class="keyword">set</span>-<span class="keyword">server</span>=utf8mb4</span></span><br></pre></td></tr></table></figure></p>
+<p>第三步：重启mysql<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$service</span> mysql restart</span><br></pre></td></tr></table></figure></p>
+<p>第四步:<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW VARIABLES WHERE Variable_name LIKE 'character\_set\_%' OR Variable_name LIKE 'collation%';</span><br><span class="line">+--------------------------+--------------------+</span><br><span class="line">|<span class="string"> Variable_name            </span>|<span class="string"> Value              </span>|</span><br><span class="line">+--------------------------+--------------------+</span><br><span class="line">|<span class="string"> character_set_client    </span>|<span class="string"> utf8mb4            </span>|</span><br><span class="line">|<span class="string"> character_set_connection </span>|<span class="string"> utf8mb4            </span>|</span><br><span class="line">|<span class="string"> character_set_database  </span>|<span class="string"> utf8mb4            </span>|</span><br><span class="line">|<span class="string"> character_set_filesystem </span>|<span class="string"> binary            </span>|</span><br><span class="line">|<span class="string"> character_set_results    </span>|<span class="string"> utf8mb4            </span>|</span><br><span class="line">|<span class="string"> character_set_server    </span>|<span class="string"> utf8mb4            </span>|</span><br><span class="line">|<span class="string"> character_set_system    </span>|<span class="string"> utf8              </span>|</span><br><span class="line">|<span class="string"> collation_connection    </span>|<span class="string"> utf8mb4_unicode_ci </span>|</span><br><span class="line">|<span class="string"> collation_database      </span>|<span class="string"> utf8mb4_unicode_ci </span>|</span><br><span class="line">|<span class="string"> collation_server        </span>|<span class="string"> utf8mb4_unicode_ci </span>|</span><br><span class="line">+--------------------------+--------------------+</span><br><span class="line"> rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p> 最后，因为我是跟django一起配合用的，所以 django的settings.py文件里也要做相应的配置<br> <figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> DATABASES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'ENGINE'</span>:<span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">        ...</span><br><span class="line">        <span class="string">'OPTIONS'</span>: &#123;<span class="string">'charset'</span>: <span class="string">'utf8mb4'</span>&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>希望可帮到你，Best wishes</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/25/django-deplop-by-virtualenv-gunicorn-nginx-supervisor/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          django deplop by  virtualenv + gunicorn + nginx + supervisor
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/23/first-product/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">first-product</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="mysql-django-support-emoji-utf8mb4" data-title="mysql-django-support-emoji(utf8mb4)" data-url="http://yoursite.com/2016/08/24/mysql-django-support-emoji-utf8mb4/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"howeguo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Howeguo
+    	</div>
+      	<div class="footer-right">
+      		Thanks&nbsp<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
