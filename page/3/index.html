@@ -107,7 +107,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Observer/" style="font-size: 10px;">Observer</a> <a href="/tags/Product/" style="font-size: 10px;">Product</a> <a href="/tags/ReactiveCocoa/" style="font-size: 16.67px;">ReactiveCocoa</a> <a href="/tags/UIButton/" style="font-size: 10px;">UIButton</a> <a href="/tags/UIKit/" style="font-size: 13.33px;">UIKit</a> <a href="/tags/UITextField/" style="font-size: 10px;">UITextField</a> <a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/cocoapods/" style="font-size: 10px;">cocoapods</a> <a href="/tags/django/" style="font-size: 13.33px;">django</a> <a href="/tags/emoji/" style="font-size: 10px;">emoji</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/iBeacon/" style="font-size: 10px;">iBeacon</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/reflog/" style="font-size: 10px;">reflog</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/virtualenv/" style="font-size: 10px;">virtualenv</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
+						<a href="/tags/Observer/" style="font-size: 10px;">Observer</a> <a href="/tags/Product/" style="font-size: 10px;">Product</a> <a href="/tags/ReactiveCocoa/" style="font-size: 16.67px;">ReactiveCocoa</a> <a href="/tags/UIButton/" style="font-size: 10px;">UIButton</a> <a href="/tags/UIKit/" style="font-size: 13.33px;">UIKit</a> <a href="/tags/UITextField/" style="font-size: 10px;">UITextField</a> <a href="/tags/blur/" style="font-size: 10px;">blur</a> <a href="/tags/cocoapods/" style="font-size: 10px;">cocoapods</a> <a href="/tags/django/" style="font-size: 13.33px;">django</a> <a href="/tags/emoji/" style="font-size: 10px;">emoji</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/gunicorn/" style="font-size: 10px;">gunicorn</a> <a href="/tags/iBeacon/" style="font-size: 10px;">iBeacon</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/load-balance/" style="font-size: 10px;">load balance</a> <a href="/tags/mysql/" style="font-size: 13.33px;">mysql</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/reflog/" style="font-size: 10px;">reflog</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/supervisor/" style="font-size: 10px;">supervisor</a> <a href="/tags/tag/" style="font-size: 10px;">tag</a> <a href="/tags/tip/" style="font-size: 10px;">tip</a> <a href="/tags/virtualenv/" style="font-size: 10px;">virtualenv</a> <a href="/tags/webView/" style="font-size: 10px;">webView</a> <a href="/tags/假文艺/" style="font-size: 10px;">假文艺</a> <a href="/tags/小技巧/" style="font-size: 10px;">小技巧</a> <a href="/tags/小知识/" style="font-size: 10px;">小知识</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/经验/" style="font-size: 10px;">经验</a>
 					</div>
 				</section>
 				
@@ -170,6 +170,124 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-ios-UIButton-Highlight-issue-in-UITableView" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/" class="article-date">
+  	<time datetime="2015-08-24T15:59:50.000Z" itemprop="datePublished">2015-08-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/">iOS7/8 UITableView/UIScrollView上UIButton不能立即响应高亮的原因及解决办法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，这是因为iOS系统会默认会延迟150ms的时间去检查当前该事件是否能够出发UITableView的滑动，如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。</p>
+<p><strong>1、将UIButton所有属于UIScrollView的父视图的delaysContentTouches属性设置成为NO。</strong><br><strong>2、继承UIScrollView或UITableView，并重写- (BOOL)touchesShouldCancelInContentView:(UIView*)view方法，让其响应拖动方法</strong></p>
+<p>废话不多说，直接上代码 以下是UITableView的实现<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-first-post" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/24/first-post/" class="article-date">
+  	<time datetime="2015-08-24T15:54:00.000Z" itemprop="datePublished">2015-08-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/24/first-post/">第一篇文章</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>很多时候，自己做过的事情都没有记录下来，回头遇见相同的问题的时候，还是需要去Google，这个是一件非常痛苦的事情，其实写博客，不仅仅是对自己的经验的总结和积累，更是当你遇见的问题，别人也遇见的时候，你的经验的分享就会对别人起到非常大的帮助！更重要是<br>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/假文艺/">假文艺</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/24/first-post/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   

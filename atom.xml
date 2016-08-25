@@ -4,7 +4,7 @@
   
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-24T17:34:31.000Z</updated>
+  <updated>2016-08-25T16:56:28.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,12 +15,77 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[nginx-config-setting-load-balance]]></title>
+    <link href="http://yoursite.com/2016/08/26/nginx-config-setting-load-balance/"/>
+    <id>http://yoursite.com/2016/08/26/nginx-config-setting-load-balance/</id>
+    <published>2016-08-25T16:45:34.000Z</published>
+    <updated>2016-08-25T16:56:28.000Z</updated>
+    <content type="html"><![CDATA[<p>之前也用过nginx的负载均衡，但是一直都没时间去记录一下，今天又实际操作了一次，就抽个时间简单写一下吧<br>我的/ect/nginx/nginx.conf是我的配置文件</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vim</span> /ect/nginx/nginx.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+<p>配置文件都一样，我就直接说重点部分了<br>weight是设置权重<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">upstream todaysay&#123;</span><br><span class="line">         server <span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">11001</span> weight=<span class="number">4</span>;</span><br><span class="line">         server <span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">11002</span> weight=<span class="number">3</span>;</span><br><span class="line">         server <span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">11003</span> weight=<span class="number">2</span>;</span><br><span class="line">         server <span class="number">127.0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">11004</span> weight=<span class="number">1</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> server &#123;</span><br><span class="line">         listen <span class="number">11000</span>;</span><br><span class="line">         #access_log on;</span><br><span class="line"></span><br><span class="line">         location / &#123;</span><br><span class="line">                 #proxy_redirect on;</span><br><span class="line">                 proxy_pass http://todaysay;</span><br><span class="line">                 proxy_set_header   Host             <span class="variable">$host</span>:<span class="variable">$server</span>_port;</span><br><span class="line">                 proxy_set_header   X-Real-IP        <span class="variable">$remote</span>_addr;</span><br><span class="line">                 proxy_set_header   X-Forwarded-For  <span class="variable">$proxy</span>_add_x_forwarded_for;</span><br><span class="line">                 proxy_set_header X-Scheme <span class="variable">$scheme</span>;</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>保存退出，先检查一下文件是否正确<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ginx -t -c /etc/nginx/nginx.<span class="keyword">conf</span></span><br><span class="line">nginx: the configuration <span class="keyword">file</span> /etc/nginx/nginx.<span class="keyword">conf</span> <span class="keyword">syntax</span> is ok</span><br><span class="line">nginx: configuration <span class="keyword">file</span> /etc/nginx/nginx.<span class="keyword">conf</span> <span class="keyword">test</span> is successful</span><br></pre></td></tr></table></figure></p>
+<p>一般nginx是80端口，可以先杀掉nginx</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fuser -k <span class="number">80</span>/tcp</span><br></pre></td></tr></table></figure>
+<p>加载配置文件</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ginx  -c <span class="regexp">/etc/</span>nginx<span class="regexp">/nginx.conf</span></span><br></pre></td></tr></table></figure>
+<p>重启服务</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+<p>检查状态<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$    service nginx status</span><br><span class="line"> * nginx <span class="keyword">is</span> <span class="property">running</span></span><br></pre></td></tr></table></figure></p>
+<p>到这里你就可以用11000端口nginx，nginx会自动分配到你指定的某个端口上来处理请求</p>
+<p>希望可以帮到你，Best wishes</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>之前也用过nginx的负载均衡，但是一直都没时间去记录一下，今天又实际操作了一次，就抽个时间简单写一下吧<br>我的/ect/nginx/nginx.conf是我的配置文件</p>
+<figure class="highlight vim"><table><tr><td c]]>
+    </summary>
+    
+      <category term="load balance" scheme="http://yoursite.com/tags/load-balance/"/>
+    
+      <category term="nginx" scheme="http://yoursite.com/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[login-into-linux-server-without-password]]></title>
+    <link href="http://yoursite.com/2016/08/25/login-into-linux-server-without-password/"/>
+    <id>http://yoursite.com/2016/08/25/login-into-linux-server-without-password/</id>
+    <published>2016-08-25T15:09:27.000Z</published>
+    <updated>2016-08-25T15:13:35.000Z</updated>
+    <content type="html"><![CDATA[<p>ssh 无密码登录要使用公钥与私钥。linux下可以用用ssh-keygen生成公钥/私钥对，下面我以CentOS为例。</p>
+<p>有机器A(192.168.1.155)，B(192.168.1.181)。现想A通过ssh免密码登录到B。</p>
+<p>1.在A机下生成公钥/私钥对。<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[chenlb<span class="variable">@A</span> ~]<span class="variable">$ </span>ssh-keygen -t rsa -<span class="constant">P </span><span class="string">''</span></span><br></pre></td></tr></table></figure></p>
+<p>-P表示密码，-P ‘’ 就表示空密码，也可以不用-P参数，这样就要三车回车，用-P就一次回车。<br>它在/home/chenlb下生成.ssh目录，.ssh下有id_rsa和id_rsa.pub。</p>
+<p>2.把A机下的id_rsa.pub复制到B机下，在B机的.ssh/authorized_keys文件里，我用scp复制。<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[chenlb<span class="variable">@A</span> ~]<span class="variable">$ </span>scp .ssh/id_rsa.pub chenlb<span class="variable">@192</span>.<span class="number">168.1</span>.<span class="number">181</span><span class="symbol">:/home/chenlb/id_rsa</span>.pub</span><br><span class="line">chenlb<span class="variable">@192</span>.<span class="number">168.1</span>.<span class="number">181</span><span class="string">'s password:</span><br><span class="line">id_rsa.pub                                    100%  223     0.2KB/s   00:00</span></span><br></pre></td></tr></table></figure></p>
+<p>由于还没有免密码登录的，所以要输入密码。</p>
+<p>3.B机把从A机复制的id_rsa.pub添加到.ssh/authorzied_keys文件里。<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chenlb<span class="variable">@B</span> ~]<span class="variable">$ </span>cat id_rsa.pub <span class="prompt">&gt;&gt; </span>.ssh/authorized_keys</span><br><span class="line">[chenlb<span class="variable">@B</span> ~]<span class="variable">$ </span>chmod <span class="number">600</span> .ssh/authorized_keys</span><br></pre></td></tr></table></figure></p>
+<p>authorized_keys的权限要是600。</p>
+<p>4.A机登录B机。<br><figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">[<span class="keyword">chenlb@A</span> ~]$ ssh <span class="number">192.168</span>.1.181</span><br><span class="line">The authenticity of host <span class="variable">'192.168.1.181</span> <span class="list">(<span class="keyword">192.168.1.181</span>)</span>' can<span class="variable">'t</span> be established.</span><br><span class="line">RSA key fingerprint is <span class="number">00</span>:a6:a8:87:eb:c7:40:10:39:cc:a0:eb:50:d9:6a:5b.</span><br><span class="line">Are you sure you want to continue connecting <span class="list">(<span class="keyword">yes/no</span>)</span>? yes</span><br><span class="line">Warning: Permanently added <span class="variable">'192.168.1.181</span>' <span class="list">(<span class="keyword">RSA</span>)</span> to the list of known hosts.</span><br><span class="line">Last login: Thu Jul  <span class="number">3</span> <span class="number">09</span>:53:18 <span class="number">2008</span> from chenlb</span><br><span class="line"><span class="list">[<span class="keyword">chenlb@B</span> ~]$</span></span></span><br></pre></td></tr></table></figure></p>
+<p>第一次登录是时要你输入yes。</p>
+<p>现在A机可以无密码登录B机了。</p>
+<p>小结：登录的机子可有私钥，被登录的机子要有登录机子的公钥。这个公钥/私钥对一般在私钥宿主机产生。上面是用rsa算法的公钥/私钥对，当然也可以用dsa(对应的文件是id_dsa，id_dsa.pub)</p>
+<p>想让A，B机无密码互登录，那B机以上面同样的方式配置即可。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>ssh 无密码登录要使用公钥与私钥。linux下可以用用ssh-keygen生成公钥/私钥对，下面我以CentOS为例。</p>
+<p>有机器A(192.168.1.155)，B(192.168.1.181)。现想A通过ssh免密码登录到B。</p>
+<p>1.在A机下生成]]>
+    </summary>
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+      <category term="ssh" scheme="http://yoursite.com/tags/ssh/"/>
+    
+      <category term="tip" scheme="http://yoursite.com/tags/tip/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[django deplop by  virtualenv + gunicorn + nginx + supervisor]]></title>
     <link href="http://yoursite.com/2016/08/25/django-deplop-by-virtualenv-gunicorn-nginx-supervisor/"/>
     <id>http://yoursite.com/2016/08/25/django-deplop-by-virtualenv-gunicorn-nginx-supervisor/</id>
     <published>2016-08-24T16:23:18.000Z</published>
-    <updated>2016-08-24T17:34:31.000Z</updated>
-    <content type="html"><![CDATA[<p>今天尝试了一下在一台机器上去安装不同版本的python、django<br>发现原来linux上有个类似模拟虚拟环境的东西啊virtualenv<br>就尝试自己在这个虚拟环境里搭建了一套自django1.9.2 python2.7 然后用gunicorn做web服务器、supervisor去管理进程、nginx去做外部转发和访问，这期间参考了国外和国内的一些大牛写的文章，在这里首先表示感谢<br>我确实是按照这个步骤完成了一套这样的服务</p>
+    <updated>2016-08-25T17:01:12.000Z</updated>
+    <content type="html"><![CDATA[<p>今天尝试了一下在一台机器上去安装不同版本的python、django<br>发现原来linux上有个类似模拟虚拟环境的东西啊virtualenv<br>就尝试自己在这个虚拟环境里搭建了一套自django1.9.2 python2.7 然后用gunicorn做web服务器、supervisor去管理进程、nginx去做外部转发和访问，这期间参考了国外和国内的一些大牛写的文章，在这里首先表示感谢<br>我也确实按照这个步骤自己完成了一套这样的服务</p>
 <p>第一步：安装虚拟环境的库<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install virtualenv</span><br><span class="line"></span><br><span class="line">Downloading/unpacking virtualenv</span><br><span class="line">  Downloading virtualenv-<span class="number">15.0</span><span class="number">.3</span>-py2.py3-none-any.whl (<span class="number">3.5</span>MB): <span class="number">3.5</span>MB downloaded</span><br><span class="line">Installing collected packages: virtualenv</span><br><span class="line">Successfully installed virtualenv</span><br><span class="line">Cleaning up...</span><br></pre></td></tr></table></figure></p>
 <p>第二步：创建虚拟环境<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">virtualenv bugenv</span><br><span class="line">New python executable <span class="keyword">in</span> <span class="regexp">/Users/</span>tataufo<span class="regexp">/todaysay_env/</span>bin/python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br></pre></td></tr></table></figure></p>
 <p>第三步：进入虚拟环境<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root<span class="variable">@recall</span><span class="symbol">:/home/www</span><span class="comment"># cd bugenv/</span></span><br><span class="line">root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span><span class="comment"># source bin/activate</span></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span> <span class="comment">#激活环境，这个每次在重新登陆服务器的时候都需要激活</span></span><br></pre></td></tr></table></figure></p>
@@ -31,6 +96,8 @@
 <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">复制</span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span><span class="comment"># ls</span></span><br><span class="line">bin <span class="keyword">include</span> lib local</span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span><span class="comment"># mkdir djcode</span></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span><span class="comment"># cd djcode/</span></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode</span><span class="comment"># django-admin.py startproject bugproject</span></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode</span><span class="comment"># cd bugproject/</span></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode/bugproject</span><span class="comment"># python manage.py startapp bugapp</span></span><br></pre></td></tr></table></figure>
 <p>第五步：设置django 的settings.py文件<br>添加app，最后结果如下<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">INSTALLED_APPS</span> = (</span><br><span class="line">    <span class="symbol">'django</span>.contrib.admin',</span><br><span class="line">    <span class="symbol">'django</span>.contrib.auth',</span><br><span class="line">    <span class="symbol">'django</span>.contrib.contenttypes',</span><br><span class="line">    <span class="symbol">'django</span>.contrib.sessions',</span><br><span class="line">    <span class="symbol">'django</span>.contrib.messages',</span><br><span class="line">    <span class="symbol">'django</span>.contrib.staticfiles',</span><br><span class="line">    # add app</span><br><span class="line">    <span class="symbol">'bugapp'</span>,</span><br><span class="line">    <span class="symbol">'gunicorn'</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
 <p>第六步：运行gunicorn<br><a id="more"></a><br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode/bugproject</span><span class="comment"># pwd</span></span><br><span class="line">/home/www/bugenv/djcode/bugproject</span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode/bugproject</span><span class="comment"># gunicorn bugproject.wsgi:application -b 127.0.0.1:11000</span></span><br></pre></td></tr></table></figure></p>
+<p>在这里说下，如果你想同时启动多个端口和设置允许访问的IP可以如下<br>更多设置参考 <a href="http://docs.gunicorn.org/en/stable/settings.html" target="_blank" rel="external">http://docs.gunicorn.org/en/stable/settings.html</a></p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode/bugproject</span><span class="comment"># gunicorn bugproject.wsgi:application -b 127.0.0.1:11000 -b 127.0.0.1:11001 -b 127.0.0.1:11002 -b 127.0.0.1:11003</span></span><br><span class="line"></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv/djcode/bugproject</span><span class="comment"># gunicorn bugproject.wsgi:application --forwarded-allow-ips '10.166.80.90:8000, 10.65.100.20:9000'</span></span><br></pre></td></tr></table></figure>
 <p>第七步：使用supervisor去管理gunicorn的运行<br>先创建一个脚本去启动django服务，就叫gunicorn_start<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="shebang">#!/bin/bash</span><br><span class="line"></span></span><br><span class="line">NAME=<span class="string">"bugproject"</span>                                  <span class="comment"># Name of the application</span></span><br><span class="line">DJANGODIR=/home/www/bugenv/djcode/bugproject             <span class="comment"># Django project directory</span></span><br><span class="line">SOCKFILE=/home/www/bugenv/djcode/run/gunicorn.sock  <span class="comment"># we will communicte using this unix socket</span></span><br><span class="line">USER=root                                        <span class="comment"># the user to run as</span></span><br><span class="line">GROUP=root                                     <span class="comment"># the group to run as</span></span><br><span class="line">NUM_WORKERS=<span class="number">4</span>                                    <span class="comment"># how many worker processes should Gunicorn spawn</span></span><br><span class="line">DJANGO_SETTINGS_MODULE=bugproject.settings             <span class="comment"># which settings file should Django use</span></span><br><span class="line">DJANGO_WSGI_MODULE=bugproject.wsgi                     <span class="comment"># WSGI module name</span></span><br><span class="line"></span><br><span class="line">PORT=<span class="number">11000</span></span><br><span class="line">SERVER_NAME=<span class="number">0.0</span>.<span class="number">0.0</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Starting <span class="variable">$NAME</span> as `whoami`"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Activate the virtual environment</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$DJANGODIR</span></span><br><span class="line"><span class="built_in">source</span> ../bin/activate</span><br><span class="line"><span class="built_in">export</span> DJANGO_SETTINGS_MODULE=<span class="variable">$DJANGO_SETTINGS_MODULE</span></span><br><span class="line"><span class="built_in">export</span> PYTHONPATH=<span class="variable">$DJANGODIR</span>:<span class="variable">$PYTHONPATH</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create the run directory if it doesn't exist</span></span><br><span class="line">RUNDIR=$(dirname <span class="variable">$SOCKFILE</span>)</span><br><span class="line"><span class="built_in">test</span> <span class="operator">-d</span> <span class="variable">$RUNDIR</span> || mkdir -p <span class="variable">$RUNDIR</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Start your Django Unicorn</span></span><br><span class="line"><span class="comment"># Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)</span></span><br><span class="line"><span class="built_in">exec</span> ../bin/gunicorn <span class="variable">$&#123;DJANGO_WSGI_MODULE&#125;</span>:application \</span><br><span class="line">  --name <span class="variable">$NAME</span> \</span><br><span class="line">  --workers <span class="variable">$NUM_WORKERS</span> \</span><br><span class="line">  --user=<span class="variable">$USER</span> --group=<span class="variable">$GROUP</span> \</span><br><span class="line">  --bind=<span class="variable">$SERVER_NAME</span>:<span class="variable">$PORT</span> \</span><br><span class="line">  --log-level=debug \</span><br><span class="line">  --log-file=-</span><br><span class="line">~</span><br></pre></td></tr></table></figure></p>
 <p>以后就用这个脚本去运行<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chmod u+x bin/gunicorn_start</span><br><span class="line">$ . gunicorn_start</span><br><span class="line"></span><br><span class="line">Starting bugproject as  hello</span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10724</span>] [INFO] Starting gunicorn <span class="number">18.0</span></span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10724</span>] [DEBUG] Arbiter booted</span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10724</span>] [INFO] Listening at: unix:/home/www/bugenv/djcode/run/gunicorn.sock (<span class="number">10724</span>)</span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10724</span>] [INFO] Using worker: sync</span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10735</span>] [INFO] Booting worker with pid: <span class="number">10735</span></span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10736</span>] [INFO] Booting worker with pid: <span class="number">10736</span></span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">45</span> [<span class="number">10737</span>] [INFO] Booting worker with pid: <span class="number">10737</span></span><br><span class="line"></span><br><span class="line">^C (CONTROL-C to kill Gunicorn)</span><br><span class="line"></span><br><span class="line"><span class="number">2016</span>-<span class="number">06</span>-<span class="number">09</span> <span class="number">14</span>:<span class="number">21</span>:<span class="number">48</span> [<span class="number">10736</span>] [INFO] <span class="function">Worker <span class="title">exiting</span> <span class="params">(pid: <span class="number">10736</span>)</span></span><br><span class="line">2016-06-09 14:21:48 [10735] [INFO] Worker <span class="title">exiting</span> <span class="params">(pid: <span class="number">10735</span>)</span></span><br><span class="line">2016-06-09 14:21:48 [10724] [INFO] Handling signal: <span class="keyword">int</span></span><br><span class="line">2016-06-09 14:21:48 [10737] [INFO] Worker <span class="title">exiting</span> <span class="params">(pid: <span class="number">10737</span>)</span></span><br><span class="line">2016-06-09 14:21:48 [10724] [INFO] Shutting down: Master</span></span><br></pre></td></tr></table></figure></p>
 <p>第八步：安装supervisor</p>
@@ -61,7 +128,7 @@
 <p>希望可以帮到你，Best wishes</p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>今天尝试了一下在一台机器上去安装不同版本的python、django<br>发现原来linux上有个类似模拟虚拟环境的东西啊virtualenv<br>就尝试自己在这个虚拟环境里搭建了一套自django1.9.2 python2.7 然后用gunicorn做web服务器、supervisor去管理进程、nginx去做外部转发和访问，这期间参考了国外和国内的一些大牛写的文章，在这里首先表示感谢<br>我确实是按照这个步骤完成了一套这样的服务</p>
+    <![CDATA[<p>今天尝试了一下在一台机器上去安装不同版本的python、django<br>发现原来linux上有个类似模拟虚拟环境的东西啊virtualenv<br>就尝试自己在这个虚拟环境里搭建了一套自django1.9.2 python2.7 然后用gunicorn做web服务器、supervisor去管理进程、nginx去做外部转发和访问，这期间参考了国外和国内的一些大牛写的文章，在这里首先表示感谢<br>我也确实按照这个步骤自己完成了一套这样的服务</p>
 <p>第一步：安装虚拟环境的库<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install virtualenv</span><br><span class="line"></span><br><span class="line">Downloading/unpacking virtualenv</span><br><span class="line">  Downloading virtualenv-<span class="number">15.0</span><span class="number">.3</span>-py2.py3-none-any.whl (<span class="number">3.5</span>MB): <span class="number">3.5</span>MB downloaded</span><br><span class="line">Installing collected packages: virtualenv</span><br><span class="line">Successfully installed virtualenv</span><br><span class="line">Cleaning up...</span><br></pre></td></tr></table></figure></p>
 <p>第二步：创建虚拟环境<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">virtualenv bugenv</span><br><span class="line">New python executable <span class="keyword">in</span> <span class="regexp">/Users/</span>tataufo<span class="regexp">/todaysay_env/</span>bin/python</span><br><span class="line">Installing setuptools, pip, wheel...done.</span><br></pre></td></tr></table></figure></p>
 <p>第三步：进入虚拟环境<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root<span class="variable">@recall</span><span class="symbol">:/home/www</span><span class="comment"># cd bugenv/</span></span><br><span class="line">root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span><span class="comment"># source bin/activate</span></span><br><span class="line">(bugenv)root<span class="variable">@recall</span><span class="symbol">:/home/www/bugenv</span> <span class="comment">#激活环境，这个每次在重新登陆服务器的时候都需要激活</span></span><br></pre></td></tr></table></figure></p>
@@ -790,108 +857,6 @@ CFRelease(addressBook);//new
     </summary>
     
       <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[iOS7/8 UITableView/UIScrollView上UIButton不能立即响应高亮的原因及解决办法]]></title>
-    <link href="http://yoursite.com/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/"/>
-    <id>http://yoursite.com/2015/08/24/ios-UIButton-Highlight-issue-in-UITableView/</id>
-    <published>2015-08-24T15:59:50.000Z</published>
-    <updated>2015-08-30T15:25:44.000Z</updated>
-    <content type="html"><![CDATA[<p>如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，这是因为iOS系统会默认会延迟150ms的时间去检查当前该事件是否能够出发UITableView的滑动，如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。</p>
-<p><strong>1、将UIButton所有属于UIScrollView的父视图的delaysContentTouches属性设置成为NO。</strong><br><strong>2、继承UIScrollView或UITableView，并重写- (BOOL)touchesShouldCancelInContentView:(UIView*)view方法，让其响应拖动方法</strong></p>
-<p>废话不多说，直接上代码 以下是UITableView的实现<br><a id="more"></a></p>
-<pre><code><span class="preprocessor">#import <span class="title">&lt;UIKit/UIKit.h&gt;</span></span>
-<span class="class"><span class="keyword">@interface</span> <span class="title">TUNoDelayHighlightTableView</span> : <span class="title">UITableView</span></span>
-<span class="keyword">@end</span>
-
-<span class="preprocessor">#import <span class="title">"TUNoDelayHighlightTableView.h"</span></span>
-
-<span class="class"><span class="keyword">@implementation</span> <span class="title">TUNoDelayHighlightTableView</span></span>
-
-- (<span class="keyword">id</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder
-{
-    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithCoder:aDecoder];
-    <span class="keyword">if</span> (<span class="keyword">self</span>)
-    {
-        [<span class="keyword">self</span> reWriteSetting];
-    }
-    <span class="keyword">return</span> <span class="keyword">self</span>;
-}
-
-- (<span class="keyword">id</span>) initWithFrame:(<span class="built_in">CGRect</span>)frame style:(<span class="built_in">UITableViewStyle</span>)style
-{
-    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame style:style]) {
-        [<span class="keyword">self</span> reWriteSetting];
-    }
-       <span class="keyword">return</span> <span class="keyword">self</span>;
-}
-
-- (<span class="keyword">id</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame
-{
-    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame]) {
-            [<span class="keyword">self</span> reWriteSetting];
-    }
-    <span class="keyword">return</span> <span class="keyword">self</span>;
-}
-
-- (<span class="keyword">void</span>) reWriteSetting
-{
-    <span class="keyword">self</span><span class="variable">.delaysContentTouches</span> = <span class="literal">NO</span>;
-    <span class="keyword">for</span> (<span class="keyword">id</span> view <span class="keyword">in</span> <span class="keyword">self</span><span class="variable">.subviews</span>)
-    {
-        <span class="comment">// looking for a UITableViewWrapperView</span>
-        <span class="keyword">if</span> ([<span class="built_in">NSStringFromClass</span>([view class]) isEqualToString:<span class="string">@"UITableViewWrapperView"</span>])
-        {
-            <span class="comment">// this test is necessary for safety and because a "UITableViewWrapperView" is NOT a UIScrollView in iOS7</span>
-            <span class="keyword">if</span>([view isKindOfClass:[<span class="built_in">UIScrollView</span> class]])
-            {
-                <span class="comment">// turn OFF delaysContentTouches in the hidden subview</span>
-                <span class="built_in">UIScrollView</span> *scroll = (<span class="built_in">UIScrollView</span> *) view;
-                scroll<span class="variable">.delaysContentTouches</span> = <span class="literal">NO</span>;
-            }
-            <span class="keyword">break</span>;
-        }
-    }
-
-}
-- (<span class="built_in">BOOL</span>)touchesShouldCancelInContentView:(<span class="built_in">UIView</span> *)view
-{
-    <span class="keyword">if</span> ([view isKindOfClass:[<span class="built_in">UIButton</span> class]] || [view isKindOfClass:[<span class="built_in">UIImageView</span> class]])
-    {
-        <span class="keyword">return</span> <span class="literal">YES</span>;
-    }
-    <span class="keyword">return</span> [<span class="keyword">super</span> touchesShouldCancelInContentView:view];
-}
-<span class="keyword">@end</span>
-</code></pre><p>我在项目中遇到了这些问题并已解决，希望可以帮到你，Best wishes</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>如果UIButton比较常见的作为UITableViewCell里的子类，当你在点击它时，它默认不会立马显示高亮，这是因为iOS系统会默认会延迟150ms的时间去检查当前该事件是否能够出发UITableView的滑动，如果 NO，UIScrollView会立马将接收到的手势分发到子视图上，如果YES,默认是不显示高亮的。</p>
-<p><strong>1、将UIButton所有属于UIScrollView的父视图的delaysContentTouches属性设置成为NO。</strong><br><strong>2、继承UIScrollView或UITableView，并重写- (BOOL)touchesShouldCancelInContentView:(UIView*)view方法，让其响应拖动方法</strong></p>
-<p>废话不多说，直接上代码 以下是UITableView的实现<br>]]>
-    
-    </summary>
-    
-      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[第一篇文章]]></title>
-    <link href="http://yoursite.com/2015/08/24/first-post/"/>
-    <id>http://yoursite.com/2015/08/24/first-post/</id>
-    <published>2015-08-24T15:54:00.000Z</published>
-    <updated>2015-08-24T17:08:34.000Z</updated>
-    <content type="html"><![CDATA[<p>很多时候，自己做过的事情都没有记录下来，回头遇见相同的问题的时候，还是需要去Google，这个是一件非常痛苦的事情，其实写博客，不仅仅是对自己的经验的总结和积累，更是当你遇见的问题，别人也遇见的时候，你的经验的分享就会对别人起到非常大的帮助！更重要是<br><a id="more"></a><br>很早之前就说要写博客，但是一直给自己找了无数的借口，最终还是说服自己，毕竟也老大不小，至今单身，暂不总(疯)结(狂)就老了，也得给我的后人留下点什么😂！<br>我也想看看到底自己可以坚持到什么时候！好了，今天就到这吧，我先睡觉😫。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>很多时候，自己做过的事情都没有记录下来，回头遇见相同的问题的时候，还是需要去Google，这个是一件非常痛苦的事情，其实写博客，不仅仅是对自己的经验的总结和积累，更是当你遇见的问题，别人也遇见的时候，你的经验的分享就会对别人起到非常大的帮助！更重要是<br>]]>
-    
-    </summary>
-    
-      <category term="假文艺" scheme="http://yoursite.com/tags/%E5%81%87%E6%96%87%E8%89%BA/"/>
     
   </entry>
   
