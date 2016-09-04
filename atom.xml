@@ -78,7 +78,7 @@
     <link href="http://yoursite.com/2016/08/28/firsttime-try-vue-js/"/>
     <id>http://yoursite.com/2016/08/28/firsttime-try-vue-js/</id>
     <published>2016-08-28T03:21:46.000Z</published>
-    <updated>2016-09-04T03:21:37.000Z</updated>
+    <updated>2016-09-04T03:24:27.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近一直听别人在说vue.js，也简单了解了一下，单页面效果跟移动端的体验很像，所以今天尝试用一下，废话不多说<br>第一步安装<br>在用 Vue.js 构建大型应用时推荐使用 NPM 安装，NPM 能很好地和诸如 Webpack 或 Browserify 的 CommonJS 模块打包器配合使用。Vue.js 也提供配套工具来开发单文件组件。</p>
 <figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 最新稳定版本</span></span><br><span class="line">$ <span class="built_in">npm</span> install vue</span><br><span class="line"><span class="comment"># 最新稳定 CSP 兼容版本</span></span><br><span class="line">$ <span class="built_in">npm</span> install vue<span class="property">@csp</span></span><br></pre></td></tr></table></figure>

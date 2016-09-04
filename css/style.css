@@ -234,7 +234,8 @@ a {
 }
 #container .left-col {
   background: #fff;
-  width: 300px;
+  border-right: 1px solid #eee;
+  width: 299px;
   position: fixed;
   opacity: 1;
   -webkit-transition: all 0.2s ease-in;
@@ -259,7 +260,7 @@ a {
   position: absolute;
   right: 0;
   min-height: 100%;
-  background: #eaeaea;
+  background: #fff;
   left: 300px;
   width: auto;
 }
@@ -314,7 +315,7 @@ a {
   #container .article-info-index.article-info {
     padding-top: 10px;
     margin: 0;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #eee;
   }
   #container .article-info-post.article-info {
     margin: 0;
@@ -857,7 +858,7 @@ a {
 .article {
   margin: 30px;
   position: relative;
-  border: 1px solid #ddd;
+  border: 1px solid #eee;
   background: #fff;
   -webkit-transition: all 0.2s ease-in;
 }
@@ -957,7 +958,7 @@ a {
 .article-info-index.article-info {
   padding-top: 20px;
   margin: 30px 30px 0 30px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #eee;
 }
 .article-info-post.article-info {
   padding: 0;
