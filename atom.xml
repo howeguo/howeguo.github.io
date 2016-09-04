@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-25T16:56:28.000Z</updated>
+  <updated>2016-09-03T02:58:26.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,90 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>install-reddit</title>
+    <link href="http://yoursite.com/2016/09/03/install-reddit/"/>
+    <id>http://yoursite.com/2016/09/03/install-reddit/</id>
+    <published>2016-09-03T02:56:13.000Z</published>
+    <updated>2016-09-03T02:58:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>文章排名算法reddit<br>第一步安装<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http<span class="variable">s:</span>//raw.github.<span class="keyword">com</span>/reddit/reddit/master/install-reddit.<span class="keyword">sh</span></span><br><span class="line">chmod +<span class="keyword">x</span> install-reddit.<span class="keyword">sh</span></span><br><span class="line">sudo ./install-reddit.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;文章排名算法reddit&lt;br&gt;第一步安装&lt;br&gt;&lt;figure class=&quot;highlight vim&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;lin
+    
+    </summary>
+    
+    
+      <category term="reddit" scheme="http://yoursite.com/tags/reddit/"/>
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>first-time-try-electron</title>
+    <link href="http://yoursite.com/2016/08/28/first-time-try-electron/"/>
+    <id>http://yoursite.com/2016/08/28/first-time-try-electron/</id>
+    <published>2016-08-28T03:38:56.000Z</published>
+    <updated>2016-08-28T06:50:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天突然想起来 electron，就花了点时间试了一下<br>第一步先安装：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> electron</span><br></pre></td></tr></table></figure></p>
+<p>安装后，创建一个文件夹 your project<br>然后创建3个文件<br>main.js、package.json、index.html<br>目录结构如下<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">your projetc</span><br><span class="line">  -<span class="ruby"> main.js</span><br><span class="line"></span>  -<span class="ruby"> package.json</span><br><span class="line"></span>  -<span class="ruby"> index.html</span></span><br></pre></td></tr></table></figure></p>
+<p>配置package.json</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">name</span>": <span class="value"><span class="string">"your app"</span></span>,</span><br><span class="line">  "<span class="attribute">version</span>": <span class="value"><span class="string">"1.0.0"</span></span>,</span><br><span class="line">  "<span class="attribute">description</span>": <span class="value"><span class="string">"A minimal Electron application"</span></span>,</span><br><span class="line">  "<span class="attribute">main</span>": <span class="value"><span class="string">"main.js"</span></span>,</span><br><span class="line">  "<span class="attribute">scripts</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">start</span>": <span class="value"><span class="string">"electron ."</span></span><br><span class="line">  </span>&#125;</span>,</span><br><span class="line">  "<span class="attribute">repository</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">type</span>": <span class="value"><span class="string">"git"</span></span>,</span><br><span class="line">    "<span class="attribute">url</span>": <span class="value"><span class="string">"git+https://github.com/electron/electron-quick-start.git"</span></span><br><span class="line">  </span>&#125;</span>,</span><br><span class="line">  "<span class="attribute">keywords</span>": <span class="value">[</span><br><span class="line">    <span class="string">"Electron"</span>,</span><br><span class="line">    <span class="string">"quick"</span>,</span><br><span class="line">    <span class="string">"start"</span>,</span><br><span class="line">    <span class="string">"tutorial"</span></span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">author</span>": <span class="value"><span class="string">"GitHub"</span></span>,</span><br><span class="line">  "<span class="attribute">license</span>": <span class="value"><span class="string">"CC0-1.0"</span></span>,</span><br><span class="line">  "<span class="attribute">bugs</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">url</span>": <span class="value"><span class="string">"https://github.com/electron/electron-quick-start/issues"</span></span><br><span class="line">  </span>&#125;</span>,</span><br><span class="line">  "<span class="attribute">homepage</span>": <span class="value"><span class="string">"https://github.com/electron/electron-quick-start#readme"</span></span>,</span><br><span class="line">  "<span class="attribute">devDependencies</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">electron-prebuilt</span>": <span class="value"><span class="string">"^1.2.0"</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+<p>配置 main.js</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">const &#123;app, BrowserWindow&#125; = require('electron')</span><br><span class="line"></span><br><span class="line">// Keep a global reference <span class="keyword">of</span> the window object, if you don't, the window will</span><br><span class="line">// be <span class="keyword">closed</span> automatically when the JavaScript object <span class="keyword">is</span> garbage collected.</span><br><span class="line">let win</span><br><span class="line"></span><br><span class="line">function createWindow () &#123;</span><br><span class="line">  // Create the browser window.</span><br><span class="line">  win = new BrowserWindow(&#123;width: 800, height: 600&#125;)</span><br><span class="line"></span><br><span class="line">  // and load the index.html <span class="keyword">of</span> the app.</span><br><span class="line">  win.loadURL(`file://$&#123;__dirname&#125;/index.html`)</span><br><span class="line"></span><br><span class="line">  // <span class="keyword">Open</span> the DevTools.</span><br><span class="line">  win.webContents.openDevTools()</span><br><span class="line"></span><br><span class="line">  // Emitted when the window <span class="keyword">is</span> <span class="keyword">closed</span>.</span><br><span class="line">  win.on('<span class="keyword">closed</span>', () =&gt; &#123;</span><br><span class="line">    // Dereference the window object, usually you would store windows</span><br><span class="line">    // in an array if your app supports multi windows, this <span class="keyword">is</span> the time</span><br><span class="line">    // when you should delete the corresponding element.</span><br><span class="line">    win = null</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// This method will be called when Electron has finished</span><br><span class="line">// initialization and <span class="keyword">is</span> ready to create browser windows.</span><br><span class="line">// Some APIs can only be used after this event occurs.</span><br><span class="line">app.on('ready', createWindow)</span><br><span class="line"></span><br><span class="line">// Quit when all windows <span class="keyword">are</span> <span class="keyword">closed</span>.</span><br><span class="line">app.on('window-all-<span class="keyword">closed</span>', () =&gt; &#123;</span><br><span class="line">  // On macOS it <span class="keyword">is</span> common for applications and their menu bar</span><br><span class="line">  // to stay active until the user quits explicitly with Cmd + Q</span><br><span class="line">  if (process.platform !== 'darwin') &#123;</span><br><span class="line">    app.quit()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.on('activate', () =&gt; &#123;</span><br><span class="line">  // On macOS it's common to re-create a window in the app when the</span><br><span class="line">  // dock icon <span class="keyword">is</span> clicked and there <span class="keyword">are</span> no other windows <span class="keyword">open</span>.</span><br><span class="line">  if (win === null) &#123;</span><br><span class="line">    createWindow()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// In this file you can include the rest <span class="keyword">of</span> your app's specific main process</span><br><span class="line">// code. You can also put them in separate files and require them here.</span><br></pre></td></tr></table></figure>
+<p>最后 编辑一下index.html</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="doctype">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">title</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="title">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Hello World!<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></span><br><span class="line">    We are using node <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.node)</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>,</span><br><span class="line">    Chrome <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.chrome)</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>,</span><br><span class="line">    and Electron <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"><span class="built_in">document</span>.write(process.versions.electron)</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>.</span><br><span class="line">  <span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>最后的最后<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">npm</span> start</span><br></pre></td></tr></table></figure></p>
+<p>就会自动弹出窗口</p>
+<p>希望可帮到你，Best wishes</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天突然想起来 electron，就花了点时间试了一下&lt;br&gt;第一步先安装：&lt;br&gt;&lt;figure class=&quot;highlight cmake&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;
+    
+    </summary>
+    
+    
+      <category term="electron" scheme="http://yoursite.com/tags/electron/"/>
+    
+      <category term="桌面应用" scheme="http://yoursite.com/tags/%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8/"/>
+    
+      <category term="跨平台" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>firsttime-try-vue.js</title>
+    <link href="http://yoursite.com/2016/08/28/firsttime-try-vue-js/"/>
+    <id>http://yoursite.com/2016/08/28/firsttime-try-vue-js/</id>
+    <published>2016-08-28T03:21:46.000Z</published>
+    <updated>2016-09-04T03:21:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近一直听别人在说vue.js，也简单了解了一下，单页面效果跟移动端的体验很像，所以今天尝试用一下，废话不多说<br>第一步安装<br>在用 Vue.js 构建大型应用时推荐使用 NPM 安装，NPM 能很好地和诸如 Webpack 或 Browserify 的 CommonJS 模块打包器配合使用。Vue.js 也提供配套工具来开发单文件组件。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 最新稳定版本</span></span><br><span class="line">$ <span class="built_in">npm</span> install vue</span><br><span class="line"><span class="comment"># 最新稳定 CSP 兼容版本</span></span><br><span class="line">$ <span class="built_in">npm</span> install vue<span class="property">@csp</span></span><br></pre></td></tr></table></figure>
+<p>命令行工具</p>
+<p>Vue.js 提供一个官方命令行工具，可用于快速搭建大型单页应用。该工具提供开箱即用的构建工具配置，带来现代化的前端开发流程。只需一分钟即可启动带热重载、保存时静态检查以及可用于生产环境的构建配置的项目：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局安装 vue-cli</span></span><br><span class="line"><span class="variable">$ </span>npm install -g vue-cli</span><br><span class="line"><span class="comment"># 创建一个基于 "webpack" 模板的新项目</span></span><br><span class="line"><span class="variable">$ </span>vue init webpack my-project</span><br><span class="line"><span class="comment"># 安装依赖，走你</span></span><br><span class="line"><span class="variable">$ </span>cd my-project</span><br><span class="line"><span class="variable">$ </span>npm install</span><br><span class="line"><span class="variable">$ </span>npm run dev</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近一直听别人在说vue.js，也简单了解了一下，单页面效果跟移动端的体验很像，所以今天尝试用一下，废话不多说&lt;br&gt;第一步安装&lt;br&gt;在用 Vue.js 构建大型应用时推荐使用 NPM 安装，NPM 能很好地和诸如 Webpack 或 Browserify 的 Commo
+    
+    </summary>
+    
+    
+      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+    
+      <category term="vue.js" scheme="http://yoursite.com/tags/vue-js/"/>
+    
+  </entry>
   
   <entry>
     <title>nginx-config-setting-load-balance</title>
@@ -608,350 +692,6 @@
       <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
     
       <category term="小技巧" scheme="http://yoursite.com/tags/%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ios-webview-call-nativeCode-or-native-call-jsCode</title>
-    <link href="http://yoursite.com/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/"/>
-    <id>http://yoursite.com/2015/09/03/ios-webview-call-nativeCode-or-native-call-jsCode/</id>
-    <published>2015-09-02T17:12:18.000Z</published>
-    <updated>2015-09-02T17:56:41.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>UIWebView中 通过js去调用客户端的代码，客户端回调js代码。<br>最近因为项目中有一些页面使用H5实现(不得不说给客户端减少了不小压力啊😂😂)，但是有webview与客户端的交互，在使用过程当中遇到的问题做了一些总结。</p>
-<p><strong>我们模拟两个场景</strong><br>在webview中点击某一个用户的头像通过客户端NativeCode实现进入该用户的资料页<br> 网页代码<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span> = "<span class="attribute">tataufo:</span>//<span class="attribute">userprofile</span>"&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">img</span> <span class="attribute">src</span>=<span class="value">"avatarurl"</span>&gt;</span><span class="tag">&lt;/<span class="title">img</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="actionscript"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reloadKey</span><span class="params">(key)</span></span>&#123;</span><br><span class="line">    <span class="comment">//reload html</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p> 1.当用户点击头像的时候，会发送请求 tataufo://userprofile 这是跟客户端之前约定好的一个格式，不需要回调<br> tataufo 是个AppScheme，userprofile你可以认为你提供给网页的接口，当然你可以传递参数<br> 格式如下：tataufo://userprofile#{‘userid’:3}(这里使用的是json形式的参数)</p>
-<p> 2.当webview需要调用Native的share，会发送请求 tataufo://share#{‘callback’:’reloadKey’} ,客户端处理完之后会回调reloadKey这个函数</p>
-<p>实现如下：<br><a id="more"></a><br> 我们可以在WebView的代理<br> <figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">-<span class="params">(<span class="variable">BOOL</span>)</span>webView:<span class="params">(<span class="variable">UIWebView</span> *)</span>webView shouldStartLoadWithRequest:<span class="params">(<span class="variable">NSURLRequest</span> *)</span>request navigationType:<span class="params">(<span class="variable">UIWebViewNavigationType</span>)</span>navigationType</span></span><br></pre></td></tr></table></figure></p>
-<p> 拦截到所有的请求,并且可以控制要不要继续加载</p>
-<pre><code>-(<span class="built_in">BOOL</span>)webView:(<span class="built_in">UIWebView</span> *)webView shouldStartLoadWithRequest:(<span class="built_in">NSURLRequest</span> *)request navigationType:(<span class="built_in">UIWebViewNavigationType</span>)navigationType
-{
-  <span class="built_in">NSURL</span> *url=[request URL];
-  <span class="keyword">if</span> (url) {
-
-      <span class="keyword">return</span> <span class="literal">NO</span>;
-    }<span class="keyword">else</span>{
-          <span class="built_in">NSString</span> *myAppScheme = <span class="string">@"tataufo"</span>;
-          <span class="keyword">if</span> (![request<span class="variable">.URL</span><span class="variable">.scheme</span> isEqualToString:myAppScheme]) {
-              <span class="keyword">return</span> <span class="literal">YES</span>;
-          }
-          <span class="built_in">NSArray</span> *turnTypes = @[<span class="string">@"profile"</span>,<span class="string">@"share"</span>]
-          <span class="built_in">NSString</span> *actionType = request<span class="variable">.URL</span><span class="variable">.host</span>;
-          <span class="keyword">if</span> ([turnTypes containsObject:actionType]) {
-              <span class="built_in">NSString</span> *jsonDictString = [<span class="keyword">self</span> decodeString:request<span class="variable">.URL</span><span class="variable">.fragment</span>];
-              [request<span class="variable">.URL</span><span class="variable">.fragment</span> stringByReplacingPercentEscapesUsingEncoding:<span class="built_in">NSASCIIStringEncoding</span>];
-              DDLogDebug(jsonDictString);
-              <span class="built_in">NSDictionary</span> *resultDic = [jsonDictString objectFromJSO<span class="built_in">NString</span>];
-              [<span class="keyword">self</span> processTurnType:actionType params:resultDic];
-              <span class="keyword">return</span> <span class="literal">NO</span>;
-          }
-        }
-  }
-  <span class="keyword">return</span> <span class="literal">YES</span>;
-}
-
--(<span class="built_in">NSString</span> *)decodeString:(<span class="built_in">NSString</span>*)encodedString
-{
-    <span class="comment">//NSString *decodedString = [encodedString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding ];</span>
-
-    <span class="built_in">NSString</span> *decodedString  = (<span class="built_in">NSString</span> *)<span class="built_in">CFURLCreateStringByReplacingPercentEscapesUsingEncoding</span>(<span class="literal">NULL</span>,
-                                                                                                                     (__bridge <span class="built_in">CFStringRef</span>)encodedString,
-                                                                                                                     <span class="built_in">CFSTR</span>(<span class="string">""</span>),
-                                                                                                                     <span class="built_in">CFStringConvertNSStringEncodingToEncoding</span>(<span class="built_in">NSUTF8StringEncoding</span>));
-    <span class="keyword">return</span> decodedString;
-}
-
-
-<span class="comment">// 目前已有的类型actionType</span>
-- (<span class="keyword">void</span>) processTurnType:(<span class="built_in">NSString</span> *) type params:(<span class="built_in">NSDictionary</span> *) dict
-{
-    <span class="keyword">if</span> ([type isEqualToString:<span class="string">@"profile"</span>]){
-        <span class="keyword">if</span> (dict<span class="variable">.count</span> == <span class="number">0</span>) {
-            <span class="keyword">return</span>;
-        }
-        <span class="built_in">NSInteger</span> userid = [[dict objectForKey:<span class="string">@"userid"</span>]integerValue];
-        TUPersonalCenterSelfViewController *personCenter = [[TUPersonalCenterSelfViewController alloc] init];
-        personCenter<span class="variable">.userid</span> = userid;
-        [<span class="keyword">self</span><span class="variable">.navigationController</span> pushViewController:personCenter animated:<span class="literal">YES</span>];
-    }<span class="keyword">else</span> <span class="keyword">if</span> ([type isEqualToString:<span class="string">@"share"</span>]){
-        <span class="keyword">if</span> (dict<span class="variable">.count</span> == <span class="number">0</span>) {
-            <span class="keyword">return</span>;
-        }
-        <span class="built_in">NSString</span> *callback = [dict objectForKey:<span class="string">@"callback"</span>];
-        [[TUNetworkManager sharedInstance] shareSuccess:^(<span class="built_in">NSMutableDictionary</span> *dict) {
-            <span class="built_in">NSString</span> *key = [dict objectForKey:<span class="string">@"key"</span>];
-            <span class="built_in">NSString</span> *jsFunction = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@('%@')"</span>,callback,key];
-            <span class="comment">//执行网页已经存在的js函数</span>
-            [yourWebview stringByEvaluatingJavaScriptFromString:jsFunction];
-        } failure:^(<span class="built_in">NSError</span> *error) {
-
-        }];
-    }
-}
-</code></pre><p>希望可帮到你，Best wishes</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;UIWebView中 通过js去调用客户端的代码，客户端回调js代码。&lt;br&gt;最近因为项目中有一些页面使用H5实现(不得不说给客户端减少了不小压力啊😂😂)，但是有webview与客户端的交互，在使用过程当中遇到的问题做了一些总结。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;我们模拟两个场景&lt;/strong&gt;&lt;br&gt;在webview中点击某一个用户的头像通过客户端NativeCode实现进入该用户的资料页&lt;br&gt; 网页代码&lt;br&gt; &lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;href&lt;/span&gt; = &quot;&lt;span class=&quot;attribute&quot;&gt;tataufo:&lt;/span&gt;//&lt;span class=&quot;attribute&quot;&gt;userprofile&lt;/span&gt;&quot;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;attribute&quot;&gt;src&lt;/span&gt;=&lt;span class=&quot;value&quot;&gt;&quot;avatarurl&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;img&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;a&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;actionscript&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;reloadKey&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(key)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//reload html&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;title&quot;&gt;script&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt; 1.当用户点击头像的时候，会发送请求 tataufo://userprofile 这是跟客户端之前约定好的一个格式，不需要回调&lt;br&gt; tataufo 是个AppScheme，userprofile你可以认为你提供给网页的接口，当然你可以传递参数&lt;br&gt; 格式如下：tataufo://userprofile#{‘userid’:3}(这里使用的是json形式的参数)&lt;/p&gt;
-&lt;p&gt; 2.当webview需要调用Native的share，会发送请求 tataufo://share#{‘callback’:’reloadKey’} ,客户端处理完之后会回调reloadKey这个函数&lt;/p&gt;
-&lt;p&gt;实现如下：&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
-    
-      <category term="webView" scheme="http://yoursite.com/tags/webView/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ios-draw-gradient-colors</title>
-    <link href="http://yoursite.com/2015/08/30/ios-draw-gradient-colors/"/>
-    <id>http://yoursite.com/2015/08/30/ios-draw-gradient-colors/</id>
-    <published>2015-08-30T13:52:21.000Z</published>
-    <updated>2015-10-24T09:30:43.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>UIView 实现颜色的渐变的两种方式</p>
-<p><strong>1.inserSubLayers</strong></p>
-<pre><code><span class="built_in">CAGradientLayer</span> *gradientLayer = [<span class="built_in">CAGradientLayer</span> layer];  <span class="comment">// 设置渐变效果</span>
-gradientLayer<span class="variable">.bounds</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
-gradientLayer<span class="variable">.borderWidth</span> = <span class="number">0</span>;
-
-gradientLayer<span class="variable">.frame</span> = <span class="keyword">self</span><span class="variable">.bounds</span>;
-gradientLayer<span class="variable">.colors</span> = [<span class="built_in">NSArray</span> arrayWithObjects:
-                        (<span class="keyword">id</span>)[[<span class="built_in">UIColor</span> redColor] <span class="built_in">CGColor</span>],
-                        (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> blueColor]<span class="variable">.CGColor</span>, <span class="literal">nil</span>];
-<span class="comment">//垂直渐变</span>
-gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">1.0</span>, <span class="number">0.5</span>);
-gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0.0</span>);
-
-<span class="comment">//水平渐变</span>
-gradientLayer<span class="variable">.startPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, <span class="number">0.5</span>);
-gradientLayer<span class="variable">.endPoint</span> = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1.0</span>);
-
-[<span class="keyword">self</span><span class="variable">.layer</span> insertSublayer:gradientLayer atIndex:<span class="number">0</span>];
-</code></pre><p><strong>2.通过drawRect</strong><br><a id="more"></a></p>
-<pre><code>- (<span class="keyword">void</span>)drawRect:(<span class="built_in">CGRect</span>)rect {
-<span class="built_in">CGContextRef</span> context = <span class="built_in">UIGraphicsGetCurrentContext</span>();
-<span class="built_in">CGContextSaveGState</span>(context);
-<span class="built_in">CGContextRestoreGState</span>(context);
-<span class="built_in">CGContextClip</span>(context);
-
-<span class="built_in">CGColorSpaceRef</span> colorSpace = <span class="built_in">CGColorSpaceCreateDeviceRGB</span>();
-
-<span class="keyword">int</span> numComponents = <span class="number">5</span>;    
-<span class="built_in">NSArray</span> *gradientColors = @[[<span class="built_in">UIColor</span> redColor],[<span class="built_in">UIColor</span> orangeColor],[<span class="built_in">UIColor</span> blueColor],    [<span class="built_in">UIColor</span> greenColor],[<span class="built_in">UIColor</span> purpleColor]];
-<span class="built_in">CGFloat</span> colors[[gradientColors count] * numComponents];
-<span class="keyword">const</span> <span class="built_in">CGFloat</span> *components[[gradientColors count]];
-<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; [gradientColors count]; i++) {
-    components[i] = <span class="built_in">CGColorGetComponents</span>(((<span class="built_in">UIColor</span> *)[gradientColors objectAtIndex:i])<span class="variable">.CGColor</span>);
-    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; numComponents; j++) {
-        colors[i * numComponents + j] = components[i][j];
-    }
-}
-<span class="built_in">CGGradientRef</span> gradient = <span class="built_in">CGGradientCreateWithColorComponents</span> (colorSpace, colors, <span class="literal">NULL</span>, [gradientColors count]);
-<span class="built_in">CGPoint</span> startPoint;
-<span class="built_in">CGPoint</span> endPoint;
-<span class="comment">//水平渐变</span>
-startPoint = <span class="built_in">CGPointMake</span>(rect<span class="variable">.origin</span><span class="variable">.x</span>, <span class="number">0</span>);
-endPoint = <span class="built_in">CGPointMake</span>(rect<span class="variable">.size</span><span class="variable">.width</span>, <span class="number">0</span>);
-<span class="comment">//垂直渐变</span>
-startPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, rect<span class="variable">.origin</span><span class="variable">.y</span>);
-endPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.0</span>, rect<span class="variable">.size</span><span class="variable">.hight</span>);
-<span class="built_in">CGContextDrawLinearGradient</span>(context, gradient, startPoint, endPoint, <span class="number">0</span>);
-<span class="built_in">CGColorSpaceRelease</span>(colorSpace);
-<span class="built_in">CGGradientRelease</span>(gradient);
-}
-</code></pre><p>希望可以在你需要的时候帮到你，Best wishes！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;UIView 实现颜色的渐变的两种方式&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1.inserSubLayers&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&lt;span class=&quot;built_in&quot;&gt;CAGradientLayer&lt;/span&gt; *gradientLayer = [&lt;span class=&quot;built_in&quot;&gt;CAGradientLayer&lt;/span&gt; layer];  &lt;span class=&quot;comment&quot;&gt;// 设置渐变效果&lt;/span&gt;
-gradientLayer&lt;span class=&quot;variable&quot;&gt;.bounds&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bounds&lt;/span&gt;;
-gradientLayer&lt;span class=&quot;variable&quot;&gt;.borderWidth&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;
-
-gradientLayer&lt;span class=&quot;variable&quot;&gt;.frame&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.bounds&lt;/span&gt;;
-gradientLayer&lt;span class=&quot;variable&quot;&gt;.colors&lt;/span&gt; = [&lt;span class=&quot;built_in&quot;&gt;NSArray&lt;/span&gt; arrayWithObjects:
-                        (&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;)[[&lt;span class=&quot;built_in&quot;&gt;UIColor&lt;/span&gt; redColor] &lt;span class=&quot;built_in&quot;&gt;CGColor&lt;/span&gt;],
-                        (&lt;span class=&quot;keyword&quot;&gt;id&lt;/span&gt;)[&lt;span class=&quot;built_in&quot;&gt;UIColor&lt;/span&gt; blueColor]&lt;span class=&quot;variable&quot;&gt;.CGColor&lt;/span&gt;, &lt;span class=&quot;literal&quot;&gt;nil&lt;/span&gt;];
-&lt;span class=&quot;comment&quot;&gt;//垂直渐变&lt;/span&gt;
-gradientLayer&lt;span class=&quot;variable&quot;&gt;.startPoint&lt;/span&gt; = &lt;span class=&quot;built_in&quot;&gt;CGPointMake&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;1.0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;);
-gradientLayer&lt;span class=&quot;variable&quot;&gt;.endPoint&lt;/span&gt; = &lt;span class=&quot;built_in&quot;&gt;CGPointMake&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0.0&lt;/span&gt;);
-
-&lt;span class=&quot;comment&quot;&gt;//水平渐变&lt;/span&gt;
-gradientLayer&lt;span class=&quot;variable&quot;&gt;.startPoint&lt;/span&gt; = &lt;span class=&quot;built_in&quot;&gt;CGPointMake&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;0.0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;);
-gradientLayer&lt;span class=&quot;variable&quot;&gt;.endPoint&lt;/span&gt; = &lt;span class=&quot;built_in&quot;&gt;CGPointMake&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;0.5&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;1.0&lt;/span&gt;);
-
-[&lt;span class=&quot;keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;variable&quot;&gt;.layer&lt;/span&gt; insertSublayer:gradientLayer atIndex:&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;];
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;2.通过drawRect&lt;/strong&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
-    
-      <category term="小知识" scheme="http://yoursite.com/tags/%E5%B0%8F%E7%9F%A5%E8%AF%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ios-read-userContacts</title>
-    <link href="http://yoursite.com/2015/08/28/ios-read-userContacts/"/>
-    <id>http://yoursite.com/2015/08/28/ios-read-userContacts/</id>
-    <published>2015-08-28T15:32:55.000Z</published>
-    <updated>2015-09-02T16:31:30.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>读取用户通讯录的联系人信息</p>
-<p>最近项目中用到上传用户通讯录的功能，做的过程中也遇到了一些问题，包括授权、中英文首字母排序、中英文输入字母搜索匹配等。<br>这里读取包括读取联系人的邮箱、公司、职位、备注、家乡。</p>
-<p>中英文排序和搜索如何实现，我写了一个<a href="https://github.com/howeguo/ChineseOrderAndSearchByPinyin" target="_blank" rel="external">demo放在了github上</a>。</p>
-<p><strong>1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在系统设置里修改。</strong></p>
-<p><strong>2.做的过程中还发现其实如果你的读取通讯录的功能做在app内部的网页里，是可以不经用户授权直接跨过系统权限读取，也是可以成功的，H5页面跟app客户端进行交互，调用Native code(网页跟客户端的交互，如果有时间也是想单独总结出一篇，总之就是精力不够啊😂)</strong></p>
-<p>前面好像讲了一堆废话，好吧，还是直接上代码吧。<br><a id="more"></a></p>
-<pre><code>self.dataArrayDic = <span class="comment">[NSMutableArray arrayWithCapacity:0]</span>;
-ABAddressBookRef addressBook ;
-
-addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
-dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)                                                     {
-    dispatch_semaphore_signal(sema);
-});
-dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-//取得本地所有联系人记录
-CFArrayRef results = ABAddressBookCopyArrayOfAllPeople(addressBook);
-for(int i = 0; i &lt; CFArrayGetCount(results); i++)
-{
-    NSMutableDictionary *dicInfoLocal = <span class="comment">[NSMutableDictionary dictionaryWithCapacity:0]</span>;
-    ABRecordRef <span class="keyword">person</span> = CFArrayGetValueAtIndex(results, i);
-    ABMultiValueRef tmlphone =  ABRecordCopyValue(<span class="keyword">person</span>, kABPersonPhoneProperty);
-    NSArray *telphone = (__bridge NSArray*)ABMultiValueCopyArrayOfAllValues(tmlphone);
-    if (telphone == nil) {
-        telphone = @<span class="comment">[]</span>;
-    }
-    <span class="comment">[dicInfoLocal setObject:telphone forKey:@"telephone"]</span>;
-    CFRelease(tmlphone);
-
-    NSString *last = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonLastNameProperty);
-    if (last == nil) {
-        last = @<span class="string">" "</span>;
-    }
-    <span class="comment">[dicInfoLocal setObject:last forKey:@"last"]</span>;
-
-    //读取firstname
-    NSString *first = (__bridge NSString*)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonFirstNameProperty);
-    if (first == nil || <span class="comment">[first isEqualToString:@""]</span>) {
-        first = @<span class="string">" "</span>;
-    }
-    if (<span class="comment">[first isEqualToString:@" "]</span> &amp;&amp; <span class="comment">[last isEqualToString:@" "]</span> ) {
-        if (telphone.count &gt; 0) {
-            first = telphone<span class="comment">[0]</span>;
-        }
-    }
-    <span class="comment">[dicInfoLocal setObject:first forKey:@"first"]</span>;
-
-    NSString *nickname = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonNicknameProperty);
-    if (nickname == nil) {
-        nickname = @<span class="string">""</span>;
-    }
-    NSMutableDictionary *extra = <span class="comment">[NSMutableDictionary dictionary]</span>;
-    <span class="comment">[extra setObject:nickname forKey:@"nickname"]</span>;
-
-    NSString *middlename = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonMiddleNamePhoneticProperty);
-    if (middlename == nil) {
-        middlename = @<span class="string">""</span>;
-    }
-    <span class="comment">[extra setObject:middlename forKey:@"middlename"]</span>;
-
-    NSString *organization = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonOrganizationProperty);
-    if (organization == nil) {
-        organization = @<span class="string">""</span>;
-    }
-    <span class="comment">[extra setObject:organization forKey:@"organization"]</span>;
-
-    NSString *jobTitle = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonJobTitleProperty);
-    if (jobTitle == nil) {
-        jobTitle = @<span class="string">""</span>;
-    }
-    <span class="comment">[extra setObject:jobTitle forKey:@"jobTitle"]</span>;
-
-    <span class="comment">[dicInfoLocal setObject:extra forKey:@"extra"]</span>;
-
-    NSString *department = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonDepartmentProperty);
-    if (department == nil) {
-        department = @<span class="string">""</span>;
-    }
-    <span class="comment">[extra setObject:department forKey:@"department"]</span>;
-
-    ABMultiValueRef emailTmp =  ABRecordCopyValue(<span class="keyword">person</span>, kABPersonEmailProperty);
-    NSArray *emails = (__bridge NSArray*)ABMultiValueCopyArrayOfAllValues(emailTmp);
-    if (emails == nil) {
-        emails = @<span class="comment">[]</span>;
-    }
-    CFRelease(emailTmp);
-
-    <span class="comment">[extra setObject:emails forKey:@"email"]</span>;
-
-    NSString *birthday = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonBirthdayProperty);
-    if (birthday == nil) {
-        birthday = @<span class="string">""</span>;
-    }
-    <span class="comment">[extra setObject:birthday forKey:@"birthday"]</span>;
-
-    NSString *note = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonNoteProperty);
-    if (note == nil) {
-        note = @<span class="string">""</span>;
-    }
-    <span class="comment">[extra setObject:note forKey:@"note"]</span>;
-
-    NSString *personCreationDate = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonCreationDateProperty);
-    if (personCreationDate == nil) {
-        personCreationDate = @<span class="string">""</span>;
-    }
-    <span class="comment">[extra setObject:personCreationDate forKey:@"personCreationDate"]</span>;
-
-    NSString *personModifyDate = (__bridge NSString *)ABRecordCopyValue(<span class="keyword">person</span>, kABPersonModificationDateProperty);
-    if (personModifyDate == nil) {
-        personModifyDate = @<span class="string">""</span>;
-    }
-    <span class="comment">[extra setObject:personModifyDate forKey:@"personModifyDate"]</span>;
-
-    ABMultiValueRef streetTmp =  ABRecordCopyValue(<span class="keyword">person</span>, kABPersonAddressProperty);
-    NSArray *street = (__bridge NSArray*)ABMultiValueCopyArrayOfAllValues(streetTmp);
-    if (street == nil) {
-        street = @<span class="comment">[]</span>;
-    }
-    CFRelease(streetTmp);
-
-    <span class="comment">[extra setObject:street forKey:@"street"]</span>;
-
-    if (<span class="comment">[first isEqualToString:@" "]</span> == NO || <span class="comment">[last isEqualToString:@" "]</span> || (telphone.count &gt; 0)) {
-        <span class="comment">[self.dataArrayDic addObject:dicInfoLocal]</span>;
-    }
-}
-CFRelease(results);//new
-CFRelease(addressBook);//new
-</code></pre><p>  希望帮到你，Best wishes！</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;读取用户通讯录的联系人信息&lt;/p&gt;
-&lt;p&gt;最近项目中用到上传用户通讯录的功能，做的过程中也遇到了一些问题，包括授权、中英文首字母排序、中英文输入字母搜索匹配等。&lt;br&gt;这里读取包括读取联系人的邮箱、公司、职位、备注、家乡。&lt;/p&gt;
-&lt;p&gt;中英文排序和搜索如何实现，我写了一个&lt;a href=&quot;https://github.com/howeguo/ChineseOrderAndSearchByPinyin&quot;&gt;demo放在了github上&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1.iOS6之后读取用户通讯录是必须经过用户授权的，只会授权一次，不管你是允许还是不允许，以后想要在更改用户通讯录的权限，都只能在系统设置里修改。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2.做的过程中还发现其实如果你的读取通讯录的功能做在app内部的网页里，是可以不经用户授权直接跨过系统权限读取，也是可以成功的，H5页面跟app客户端进行交互，调用Native code(网页跟客户端的交互，如果有时间也是想单独总结出一篇，总之就是精力不够啊😂)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;前面好像讲了一堆废话，好吧，还是直接上代码吧。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="http://yoursite.com/tags/iOS/"/>
     
   </entry>
   
